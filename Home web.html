@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection Home · Arquitectura Sensible & Domótica Avanzada</title>
+    <!-- Google Font: Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET Y BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        /* ===== VARIABLES CSS (PALETA HOME - CALIDEZ TECNOLÓGICA) ===== */
+        :root {
+            --bg-primary: #080606;
+            --bg-secondary: #0c0a08;
+            --bg-card: rgba(14, 12, 10, 0.88);
+            --bg-card-hover: rgba(20, 18, 14, 0.94);
+            --bg-tool: rgba(16, 14, 10, 0.5);
+            --bg-about: rgba(14, 12, 10, 0.7);
+            --bg-sidebar: rgba(8, 6, 6, 0.96);
+            --bg-sidebar-hover: rgba(212, 160, 96, 0.06);
+            --border-color: #3a322a;
+            --border-light: #2a241e;
+            --border-sidebar: #5a4a3a;
+            --text-primary: #d8d0c0;
+            --text-secondary: #c0b8a8;
+            --text-muted: #8a7a6a;
+            --text-title: #d8d0c0;
+            --text-gold: #d4a060;
+            /* Acentos - Calidez + Tecnología */
+            --accent-1: #d4a060; /* Oro cálido */
+            --accent-2: #4a9eff; /* Azul tecnológico */
+            --accent-3: #34d399; /* Verde menta */
+            --accent-4: #f59e0b; /* Ámbar */
+            --accent-light: #e8c87a;
+            --accent-glow: rgba(212, 160, 96, 0.08);
+            --shadow-card: 0 12px 30px rgba(0,0,0,0.6);
+            --shadow-sidebar: 4px 0 40px rgba(212, 160, 96, 0.04);
+            --gradient-hero: linear-gradient(135deg, rgba(8, 6, 6, 0.7) 0%, rgba(12, 10, 8, 0.5) 100%);
+            --gradient-border: linear-gradient(90deg, #d4a060, #4a9eff, #34d399, #f59e0b);
+            --bg-radial: radial-gradient(ellipse at 20% 30%, rgba(212, 160, 96, 0.04) 0%, transparent 60%),
+                          radial-gradient(ellipse at 80% 70%, rgba(74, 158, 255, 0.03) 0%, transparent 50%),
+                          linear-gradient(180deg, #080606 0%, #0c0a08 100%);
+            --video-opacity: 0.5;
+            --video-filter: saturate(1.05) contrast(1.1) brightness(0.8);
+            --scrollbar-thumb: linear-gradient(180deg, #d4a060, #4a9eff);
+            --footer-bg: #080606;
+            --footer-text: #8a7a6a;
+            --badge-bg: rgba(212, 160, 96, 0.08);
+        }
+
+        /* ===== MODO CLARO (Periódico cálido) ===== */
+        body.light-mode {
+            --bg-primary: #f5f0e8;
+            --bg-secondary: #ece5dc;
+            --bg-card: rgba(255, 252, 248, 0.92);
+            --bg-card-hover: rgba(255, 252, 248, 0.98);
+            --bg-tool: rgba(245, 240, 232, 0.75);
+            --bg-about: rgba(248, 242, 235, 0.85);
+            --bg-sidebar: rgba(245, 240, 234, 0.96);
+            --bg-sidebar-hover: rgba(212, 160, 96, 0.05);
+            --border-color: #d0c8b8;
+            --border-light: #e0d8c8;
+            --border-sidebar: #c0b0a0;
+            --text-primary: #2c2420;
+            --text-secondary: #3d342c;
+            --text-muted: #7a6a5a;
+            --text-title: #2c2420;
+            --text-gold: #8a7050;
+            --accent-1: #b8963a;
+            --accent-2: #3a7abd;
+            --accent-3: #059669;
+            --accent-4: #d97706;
+            --accent-light: #c9a84c;
+            --accent-glow: rgba(212, 160, 96, 0.05);
+            --shadow-card: 0 12px 30px rgba(0,0,0,0.05);
+            --shadow-sidebar: 4px 0 40px rgba(0,0,0,0.04);
+            --gradient-hero: linear-gradient(135deg, rgba(245, 240, 234, 0.75) 0%, rgba(235, 228, 220, 0.6) 100%);
+            --gradient-border: linear-gradient(90deg, #b8963a, #3a7abd, #059669, #d97706);
+            --bg-radial: radial-gradient(ellipse at 20% 30%, rgba(212, 160, 96, 0.03) 0%, transparent 60%),
+                          radial-gradient(ellipse at 80% 70%, rgba(74, 158, 255, 0.02) 0%, transparent 50%),
+                          linear-gradient(180deg, #f5f0e8 0%, #ece5dc 100%);
+            --video-opacity: 0.15;
+            --video-filter: saturate(0.9) contrast(1.1) brightness(1.0);
+            --scrollbar-thumb: linear-gradient(180deg, #b8963a, #3a7abd);
+            --footer-bg: #ece5dc;
+            --footer-text: #7a6a5a;
+            --badge-bg: rgba(212, 160, 96, 0.04);
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: var(--bg-primary);
+            background-image: var(--bg-radial);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }
+
+        /* ===== ANIMACIONES ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 40px rgba(212, 160, 96, 0.1), inset 0 0 20px rgba(212, 160, 96, 0.03); }
+            100% { box-shadow: 0 0 80px rgba(212, 160, 96, 0.2), inset 0 0 40px rgba(212, 160, 96, 0.08); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+            50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+        }
+        @keyframes warmPulse {
+            0%, 100% { text-shadow: 0 0 10px rgba(212, 160, 96, 0.2), 0 0 20px rgba(212, 160, 96, 0.05); }
+            50% { text-shadow: 0 0 20px rgba(212, 160, 96, 0.4), 0 0 40px rgba(212, 160, 96, 0.1); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== BOTÓN MODO CLARO/OSCURO ===== */
+        .theme-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 300;
+            background: var(--bg-card);
+            border: 1px solid var(--border-sidebar);
+            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--accent-1);
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+        .theme-toggle:hover {
+            transform: scale(1.12) rotate(15deg);
+            box-shadow: 0 4px 35px var(--accent-glow);
+        }
+
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        #preloader.hide {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+        #preloader .loader-logo {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(145deg, #1a1410, #2a2018);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 60px var(--accent-glow);
+            animation: pulseGlow 1.6s infinite alternate;
+        }
+        #preloader .loader-logo svg { width: 85px; height: 85px; }
+        .loader-text {
+            margin-top: 28px;
+            font-size: 1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #8a7a6a;
+            font-weight: 600;
+        }
+        .loader-bar {
+            margin-top: 20px;
+            width: 200px;
+            height: 3px;
+            background: #1a1812;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .loader-bar .fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #d4a060, #4a9eff, #34d399, #f59e0b);
+            border-radius: 10px;
+            animation: loadFill 2s ease forwards;
+        }
+        @keyframes loadFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        #main-content.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 72px;
+            height: 100vh;
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(16px);
+            border-right: 2px solid var(--border-sidebar);
+            box-shadow: var(--shadow-sidebar);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.8rem 0;
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        background 0.5s ease,
+                        border-color 0.5s ease,
+                        box-shadow 0.5s ease;
+            overflow: hidden;
+        }
+        .sidebar:hover { width: 220px; }
+        .sidebar .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            padding: 0.5rem 0.8rem;
+            width: 100%;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border-sidebar);
+            margin-bottom: 0.5rem;
+        }
+        .sidebar .sidebar-logo i {
+            font-size: 1.8rem;
+            color: var(--accent-1);
+            filter: drop-shadow(0 0 12px #d4a060);
+            min-width: 36px;
+            text-align: center;
+            animation: float 4s ease-in-out infinite;
+        }
+        .sidebar .sidebar-logo span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .sidebar:hover .sidebar-logo span { opacity: 1; }
+        .sidebar .sidebar-divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-sidebar), transparent);
+            margin: 0.2rem 0;
+        }
+        .sidebar a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+            white-space: nowrap;
+            width: 100%;
+            border-left: 3px solid transparent;
+        }
+        .sidebar a i {
+            font-size: 1.1rem;
+            color: var(--accent-2);
+            min-width: 36px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .sidebar a span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            font-size: 0.55rem;
+        }
+        .sidebar:hover a span { opacity: 1; }
+        .sidebar a:hover {
+            background: var(--bg-sidebar-hover);
+            color: var(--text-gold);
+            border-left-color: var(--accent-1);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateX(4px);
+        }
+        .sidebar a:hover i { color: var(--accent-1); transform: scale(1.1); }
+        .sidebar .sidebar-section-label {
+            font-size: 0.45rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding: 0.4rem 0.8rem;
+            width: 100%;
+            white-space: nowrap;
+            border-top: 1px solid var(--border-sidebar);
+            margin-top: 0.2rem;
+            padding-top: 0.6rem;
+        }
+        .sidebar .sidebar-section-label span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .sidebar:hover .sidebar-section-label span { opacity: 1; }
+
+        /* ===== MAIN WRAPPER ===== */
+        .main-wrapper {
+            margin-left: 72px;
+            transition: margin-left 0.35s ease;
+        }
+
+        /* ===== HERO HOME CON VIDEO (MÁS CLARO) ===== */
+        .hero-home {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 4px solid var(--border-sidebar);
+            background: var(--bg-secondary);
+            transition: border-color 0.5s ease, background 0.5s ease;
+        }
+        .hero-home .bg-video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+            z-index: 1;
+            filter: var(--video-filter);
+            transition: opacity 0.5s ease, filter 0.5s ease;
+        }
+        .hero-home .bg-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--gradient-hero);
+            z-index: 2;
+            transition: background 0.5s ease;
+        }
+        .hero-home .bg-particles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-home .bg-particles span {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: particleFloat 14s infinite linear;
+        }
+        .hero-home .bg-particles span:nth-child(1) { background: #d4a060; left: 10%; animation-delay: 0s; }
+        .hero-home .bg-particles span:nth-child(2) { background: #4a9eff; left: 25%; animation-delay: 2s; width: 7px; height: 7px; }
+        .hero-home .bg-particles span:nth-child(3) { background: #34d399; left: 40%; animation-delay: 4s; }
+        .hero-home .bg-particles span:nth-child(4) { background: #f59e0b; left: 55%; animation-delay: 1s; width: 3px; height: 3px; }
+        .hero-home .bg-particles span:nth-child(5) { background: #d4a060; left: 70%; animation-delay: 3s; }
+        .hero-home .bg-particles span:nth-child(6) { background: #4a9eff; left: 85%; animation-delay: 5s; width: 6px; height: 6px; }
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.25; }
+            90% { opacity: 0.25; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+        .hero-home .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease forwards;
+        }
+        .hero-home .hero-content .badge {
+            display: inline-block;
+            background: var(--badge-bg);
+            border: 1px solid var(--border-sidebar);
+            border-radius: 40px;
+            padding: 0.3rem 2rem;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--text-gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+            animation: fadeInUp 1.4s ease forwards;
+            opacity: 0;
+        }
+        .hero-home .hero-content .badge i { margin-right: 8px; color: var(--accent-1); }
+        .hero-home .hero-content h1 {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            text-shadow: 0 0 40px rgba(212, 160, 96, 0.15), 0 0 100px rgba(48, 26, 40, 0.15);
+            letter-spacing: 8px;
+            line-height: 1.1;
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+            animation: fadeInUp 1.6s ease forwards;
+            opacity: 0;
+        }
+        .hero-home .hero-content h1 span {
+            background: linear-gradient(135deg, #d4a060, #4a9eff, #34d399, #f59e0b, #d4a060);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 10s ease infinite;
+        }
+        .hero-home .hero-content .slogan {
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: var(--text-primary);
+            border-top: 2px solid var(--border-sidebar);
+            padding-top: 20px;
+            margin-top: 16px;
+            font-weight: 400;
+            text-transform: uppercase;
+            transition: color 0.5s ease, border-color 0.5s ease;
+            animation: fadeInUp 1.8s ease forwards;
+            opacity: 0;
+        }
+        .hero-home .hero-content .sub-slogan {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-weight: 300;
+            line-height: 1.6;
+            animation: fadeInUp 2s ease forwards;
+            opacity: 0;
+        }
+        .hero-home .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: bounceDown 2s infinite;
+            transition: color 0.5s ease;
+        }
+        .hero-home .scroll-indicator i {
+            font-size: 1.2rem;
+            color: var(--accent-1);
+            animation: warmPulse 3s ease infinite;
+        }
+
+        /* ===== BOTÓN CTA ===== */
+        .cta-home {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+        .cta-home:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 0 60px var(--accent-glow);
+        }
+
+        /* ===== SECCIONES ===== */
+        .section-title {
+            text-align: center;
+            padding: 3rem 1rem 0.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-title);
+            letter-spacing: 6px;
+            text-shadow: 0 0 30px var(--accent-glow);
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+        }
+        .section-title i { color: var(--accent-1); margin-right: 12px; transition: color 0.5s ease; }
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-top: 4px;
+            font-weight: 300;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== VISIÓN ===== */
+        .vision-section {
+            padding: 2rem 2rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .vision-text {
+            font-size: 0.85rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 1rem auto;
+            text-align: center;
+            transition: color 0.5s ease;
+        }
+        .vision-text strong { color: var(--accent-1); }
+
+        /* ===== PROBLEMA ===== */
+        .problem-section {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            padding: 3rem 2rem;
+            backdrop-filter: blur(4px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .problem-item {
+            background: var(--bg-about);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+            backdrop-filter: blur(4px);
+        }
+        .problem-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+        .problem-item i {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            transition: color 0.5s ease;
+        }
+        .problem-item:nth-child(1) i { color: var(--accent-2); }
+        .problem-item:nth-child(2) i { color: var(--accent-3); }
+        .problem-item:nth-child(3) i { color: var(--accent-4); }
+        .problem-item h4 {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--text-title);
+            font-weight: 700;
+            transition: color 0.5s ease;
+        }
+        .problem-item p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== LÍNEAS DE INNOVACIÓN ===== */
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2.5rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .innovation-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            padding: 2rem 1.8rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-card);
+            transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        background 0.5s ease,
+                        border-color 0.5s ease,
+                        box-shadow 0.5s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .innovation-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: var(--gradient-border);
+            background-size: 300% 100%;
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .innovation-card:hover::before {
+            opacity: 1;
+            animation: shimmer 3s ease infinite;
+        }
+        .innovation-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-1);
+            box-shadow: 0 20px 45px var(--accent-glow);
+        }
+        .innovation-card .icon {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            display: inline-block;
+            transition: all 0.5s ease;
+        }
+        .innovation-card:nth-child(1) .icon { color: var(--accent-1); }
+        .innovation-card:nth-child(2) .icon { color: var(--accent-2); }
+        .innovation-card:nth-child(3) .icon { color: var(--accent-3); }
+        .innovation-card:nth-child(4) .icon { color: var(--accent-4); }
+        .innovation-card:hover .icon { transform: scale(1.1) rotate(-5deg); }
+        .innovation-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-title);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            transition: color 0.5s ease;
+        }
+        .innovation-card p {
+            font-size: 0.82rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            color: var(--text-secondary);
+            transition: color 0.5s ease;
+        }
+        .innovation-card .tag {
+            display: inline-block;
+            background: var(--bg-tool);
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.55rem;
+            color: var(--text-gold);
+            border: 1px solid var(--border-color);
+            margin-top: 14px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            transition: color 0.5s ease, border-color 0.5s ease, background 0.5s ease;
+        }
+        .innovation-card .tag i { margin-right: 4px; }
+
+        /* ===== INTEGRACIÓN CON MATRIZ ===== */
+        .matrix-section {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            padding: 3rem 2rem;
+            backdrop-filter: blur(4px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .matrix-item {
+            background: var(--bg-about);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+            backdrop-filter: blur(4px);
+        }
+        .matrix-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+        .matrix-item i {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            transition: all 0.4s ease;
+        }
+        .matrix-item:nth-child(1) i { color: var(--accent-1); }
+        .matrix-item:nth-child(2) i { color: var(--accent-2); }
+        .matrix-item:nth-child(3) i { color: var(--accent-3); }
+        .matrix-item:nth-child(4) i { color: var(--accent-4); }
+        .matrix-item:hover i { transform: scale(1.15) rotate(-5deg); }
+        .matrix-item h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--text-title);
+            font-weight: 700;
+            transition: color 0.5s ease;
+        }
+        .matrix-item p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== DISPOSITIVOS ===== */
+        .devices-section {
+            padding: 3rem 2rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .device-item {
+            background: var(--bg-about);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+            backdrop-filter: blur(4px);
+        }
+        .device-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+        .device-item i {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            transition: all 0.4s ease;
+        }
+        .device-item:nth-child(1) i { color: var(--accent-1); }
+        .device-item:nth-child(2) i { color: var(--accent-2); }
+        .device-item:nth-child(3) i { color: var(--accent-3); }
+        .device-item:nth-child(4) i { color: var(--accent-4); }
+        .device-item:nth-child(5) i { color: var(--accent-1); }
+        .device-item:nth-child(6) i { color: var(--accent-2); }
+        .device-item:hover i { transform: scale(1.15) rotate(-5deg); }
+        .device-item h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--text-title);
+            font-weight: 700;
+            transition: color 0.5s ease;
+        }
+        .device-item p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-minimal {
+            border-top: 2px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+        }
+        .footer-minimal .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-minimal .footer-inner .brand-foot {
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .footer-minimal .footer-inner a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.55rem;
+            letter-spacing: 1.5px;
+        }
+        .footer-minimal .footer-inner a:hover { color: var(--accent-1); transform: scale(1.05); }
+        .footer-minimal .footer-inner .sep {
+            color: var(--border-color);
+            font-size: 0.4rem;
+            transition: color 0.5s ease;
+        }
+        .footer-minimal .copyright {
+            margin-top: 0.6rem;
+            opacity: 0.5;
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* ===== SELECTOR INTERACTIVO ===== */
+        .mode-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        .mode-btn {
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-tool);
+            color: var(--text-muted);
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .mode-btn:hover {
+            border-color: var(--accent-1);
+            color: var(--text-gold);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+        .mode-btn.active {
+            border-color: var(--accent-1);
+            background: var(--accent-glow);
+            color: var(--text-gold);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .sidebar { width: 56px; }
+            .sidebar:hover { width: 56px; }
+            .sidebar a span,
+            .sidebar .sidebar-logo span,
+            .sidebar .sidebar-section-label span { display: none !important; }
+            .sidebar .sidebar-logo i { font-size: 1.4rem; min-width: 28px; }
+            .sidebar a i { font-size: 1rem; min-width: 28px; }
+            .sidebar a { padding: 0.35rem 0.4rem; justify-content: center; }
+            .sidebar .sidebar-logo { justify-content: center; padding: 0.3rem 0; }
+            .sidebar .sidebar-divider { width: 60%; }
+            .sidebar .sidebar-section-label { display: none; }
+            .main-wrapper { margin-left: 56px; }
+            .hero-home .hero-content h1 { font-size: 2.8rem; letter-spacing: 4px; }
+            .innovation-grid { padding: 1.5rem 1rem; gap: 1.2rem; }
+            .devices-grid { gap: 1rem; }
+            .footer-minimal .footer-inner { gap: 0.8rem 1.5rem; }
+            .theme-toggle { width: 46px; height: 46px; font-size: 1.2rem; bottom: 16px; right: 16px; }
+        }
+        @media (max-width: 480px) {
+            .sidebar { width: 48px; }
+            .main-wrapper { margin-left: 48px; }
+            .sidebar .sidebar-logo i { font-size: 1.2rem; min-width: 24px; }
+            .sidebar a i { font-size: 0.85rem; min-width: 24px; }
+            .sidebar a { padding: 0.25rem 0.2rem; }
+            .hero-home .hero-content h1 { font-size: 2.2rem; letter-spacing: 4px; }
+            .hero-home .hero-content .slogan { font-size: 0.9rem; letter-spacing: 4px; }
+            .section-title { font-size: 1.5rem; letter-spacing: 4px; }
+            .innovation-grid { grid-template-columns: 1fr; }
+            .problem-grid { grid-template-columns: 1fr; }
+            .matrix-grid { grid-template-columns: 1fr; }
+            .devices-grid { grid-template-columns: 1fr 1fr; }
+            .mode-selector { gap: 0.5rem; }
+            .mode-btn { padding: 0.4rem 1rem; font-size: 0.5rem; }
+            .footer-minimal .footer-inner { flex-direction: column; gap: 0.3rem; }
+            .footer-minimal .footer-inner .sep { display: none; }
+            .theme-toggle { width: 42px; height: 42px; font-size: 1rem; bottom: 12px; right: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader-logo">
+            <svg viewBox="0 0 200 200" fill="none">
+                <rect width="200" height="200" rx="40" fill="#0a0808"/>
+                <path d="M100 30 L130 80 L185 90 L145 135 L155 190 L100 165 L45 190 L55 135 L15 90 L70 80 L100 30" fill="#d4a060" opacity="0.9"/>
+                <text x="100" y="132" font-family="Cinzel" font-size="34" fill="#e0d6c8" text-anchor="middle" font-weight="700">🏠</text>
+            </svg>
+        </div>
+        <div class="loader-text">Hogar inteligente</div>
+        <div class="loader-bar"><div class="fill"></div></div>
+    </div>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <div id="main-content">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="sidebar" id="sidebarNav">
+            <div class="sidebar-logo">
+                <i class="fas fa-home-lg"></i>
+                <span>Home</span>
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section-label"><span>Herramientas</span></div>
+            <a href="#"><i class="fas fa-id-card"></i><span>ID</span></a>
+            <a href="#"><i class="fas fa-tools"></i><span>FIX</span></a>
+            <a href="#"><i class="fas fa-cloud-upload-alt"></i><span>NEST</span></a>
+            <a href="#"><i class="fas fa-credit-card"></i><span>PAY</span></a>
+            <a href="#"><i class="fas fa-star"></i><span>POINTS</span></a>
+            <a href="#"><i class="fas fa-truck"></i><span>GO</span></a>
+            <a href="#"><i class="fas fa-mobile-alt"></i><span>APP</span></a>
+            <a href="#"><i class="fas fa-comment-dots"></i><span>IA</span></a>
+            <a href="#"><i class="fas fa-briefcase"></i><span>BUSINESS</span></a>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section-label"><span>Pilares</span></div>
+            <a href="index.html"><i class="fas fa-home"></i><span>Web</span></a>
+            <a href="Labs web.html"><i class="fas fa-flask"></i><span>Labs</span></a>
+            <a href="Pixel web.html"><i class="fas fa-paint-brush"></i><span>Pixel</span></a>
+            <a href="Life web.html"><i class="fas fa-heartbeat"></i><span>Life</span></a>
+            <a href="Commerce web.html"><i class="fas fa-cart-plus"></i><span>Commerce</span></a>
+            <a href="Home web.html"><i class="fas fa-home-lg"></i><span>Home</span></a>
+            <a href="Motors web.html"><i class="fas fa-car"></i><span>Motors</span></a>
+            <a href="Space web.html"><i class="fas fa-rocket"></i><span>Space</span></a>
+        </nav>
+
+        <!-- ===== WRAPPER PRINCIPAL ===== -->
+        <div class="main-wrapper">
+
+            <!-- ===== HERO HOME CON VIDEO (MÁS CLARO) ===== -->
+            <header class="hero-home">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="imagenes y videos/header home.mp4" type="video/mp4">
+                </video>
+                <div class="bg-overlay"></div>
+                <div class="bg-particles">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span>
+                </div>
+                <div class="hero-content">
+                    <div class="badge"><i class="fas fa-home-lg"></i> Connection Home</div>
+                    <h1>CONNECTION <span>HOME</span></h1>
+                    <div class="slogan">CONSTRUYE TUS IDEAS</div>
+                    <div class="sub-slogan">Entornos inteligentes que se adaptan a tus hábitos, salud y necesidades energéticas</div>
+                    <a href="#" class="cta-home"><i class="fas fa-home"></i> PRE-REGÍSTRATE PARA LA PRIMERA CASA INTELIGENTE CUSQUEÑA</a>
+                </div>
+                <div class="scroll-indicator">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>SCROLL</span>
+                </div>
+            </header>
+
+            <!-- ===== VISIÓN ===== -->
+            <h2 class="section-title animate-on-scroll"><i class="fas fa-eye"></i> Visión & Propósito</h2>
+            <div class="vision-section">
+                <p class="vision-text animate-on-scroll">
+                    <strong>CONNECTION HOME</strong> representa la evolución del hábitat humano. Nuestra visión para 2030 es democratizar el acceso a la domótica (automatización del hogar) e integrar arquitectura sostenible con tecnología de punta. No solo construimos infraestructuras; diseñamos <strong>"Entornos Inteligentes"</strong> que se adaptan automáticamente a los hábitos, salud y necesidades energéticas de sus habitantes.
+                </p>
+                <p class="vision-text animate-on-scroll">
+                    Operamos bajo el concepto de <strong>Arquitectura Sensible</strong>: espacios que, mediante sensores y algoritmos de IA, gestionan su propia eficiencia, seguridad y confort, reduciendo drásticamente la huella de carbono y maximizando la calidad de vida del usuario.
+                </p>
+            </div>
+
+            <!-- ===== PROBLEMA ===== -->
+            <section class="problem-section">
+                <h2 class="section-title animate-on-scroll" style="padding-top:0.5rem;"><i class="fas fa-exclamation-triangle"></i> El "Hogar Estático" vs. "Hogar Vivo"</h2>
+                <div class="problem-grid" style="margin-top:1.5rem;">
+                    <div class="problem-item animate-on-scroll">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Ineficiencia Energética</h4>
+                        <p>La mayoría de hogares desperdician hasta un 40% de energía en iluminación y climatización inútil. Nuestros sistemas optimizan cada vatio.</p>
+                    </div>
+                    <div class="problem-item animate-on-scroll">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Inseguridad Reactiva</h4>
+                        <p>Los sistemas de seguridad actuales solo notifican cuando el evento ya ha ocurrido. Nuestra IA predice y previene incidentes.</p>
+                    </div>
+                    <div class="problem-item animate-on-scroll">
+                        <i class="fas fa-cogs"></i>
+                        <h4>Desconexión Tecnológica</h4>
+                        <p>La domótica hoy es un lujo costoso, fragmentado y difícil de configurar. Centralizamos el control en la AVI APP, haciéndola invisible y autónoma.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== LÍNEAS DE INNOVACIÓN ===== -->
+            <h2 class="section-title animate-on-scroll"><i class="fas fa-rocket"></i> Líneas de Innovación</h2>
+            <p class="section-subtitle animate-on-scroll">La "Casa Viva"</p>
+            <section class="innovation-grid">
+                <div class="innovation-card animate-on-scroll">
+                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Gestión Energética Autónoma</h3>
+                    <p>Smart Grid Local que prioriza fuentes renovables y optimiza consumo en horas valle. Si la casa detecta que no hay nadie, gestiona luz y clima automáticamente.</p>
+                    <span class="tag"><i class="fas fa-leaf"></i> Sostenibilidad</span>
+                </div>
+                <div class="innovation-card animate-on-scroll">
+                    <div class="icon"><i class="fas fa-eye"></i></div>
+                    <h3>Seguridad Predictiva por IA</h3>
+                    <p>Visión artificial que "entiende" el entorno. Diferencia entre mascotas, residentes e intrusiones reales. Alertas de baja latencia al Centro de Mando AVI.</p>
+                    <span class="tag"><i class="fas fa-camera"></i> AVI NEST</span>
+                </div>
+                <div class="innovation-card animate-on-scroll">
+                    <div class="icon"><i class="fas fa-cubes"></i></div>
+                    <h3>Construcción Modular Sostenible</h3>
+                    <p>Materiales con memoria térmica y alta resistencia sísmica optimizados para el clima andino. Diseño bioclimático inteligente que reduce calefacción artificial.</p>
+                    <span class="tag"><i class="fas fa-mountain"></i> Andean Bio-Tech</span>
+                </div>
+                <div class="innovation-card animate-on-scroll">
+                    <div class="icon"><i class="fas fa-brain"></i></div>
+                    <h3>El Cerebro en AVI IA</h3>
+                    <p>La casa no tiene interruptores. Una interfaz conversacional: "AVI, prepara la casa para dormir" activa cortinas, ajusta temperatura y activa alarma perimetral.</p>
+                    <span class="tag"><i class="fas fa-comment-dots"></i> EVI IA</span>
+                </div>
+            </section>
+
+            <!-- ===== INTEGRACIÓN CON MATRIZ ===== -->
+            <section class="matrix-section">
+                <h2 class="section-title animate-on-scroll" style="padding-top:0.5rem;"><i class="fas fa-link"></i> Integración con el Ecosistema AVI</h2>
+                <p class="section-subtitle animate-on-scroll">La verdadera potencia no está en los ladrillos, sino en el software</p>
+                <div class="matrix-grid" style="margin-top:1.5rem;">
+                    <div class="matrix-item animate-on-scroll">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h4>AVI NEST · Gemelo Digital</h4>
+                        <p>Cada hogar tiene su copia virtual en la nube. Planos, manuales de sensores, garantías e historial de mantenimiento disponibles de por vida.</p>
+                    </div>
+                    <div class="matrix-item animate-on-scroll">
+                        <i class="fas fa-brain"></i>
+                        <h4>AVI IA · El Cerebro</h4>
+                        <p>La casa no tiene interruptores. Control conversacional: "AVI, prepara la casa para dormir" activa cortinas, temperatura y alarma.</p>
+                    </div>
+                    <div class="matrix-item animate-on-scroll">
+                        <i class="fas fa-credit-card"></i>
+                        <h4>AVI PAY · Facturación Invisible</h4>
+                        <p>Las casas AVI gestionan sus propios servicios. Monitoreo de consumo y pago automático de recibos antes de que venzan.</p>
+                    </div>
+                    <div class="matrix-item animate-on-scroll">
+                        <i class="fas fa-star"></i>
+                        <h4>AVI POINTS · Economía Circular</h4>
+                        <p>Los hogares con mayor ahorro energético son recompensados con puntos canjeables en PIXEL y LIFE.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== DISPOSITIVOS ===== -->
+            <section class="devices-section">
+                <h2 class="section-title animate-on-scroll" style="padding-top:0.5rem;"><i class="fas fa-cogs"></i> Dispositivos Inteligentes</h2>
+                <p class="section-subtitle animate-on-scroll">Tecnología que transforma tu hogar</p>
+                <div class="devices-grid">
+                    <div class="device-item animate-on-scroll">
+                        <i class="fas fa-microchip"></i>
+                        <h4>Hub Central</h4>
+                        <p>Unidad de control que integra todos los dispositivos del hogar. Compatible con los principales protocolos de domótica.</p>
+                    </div>
+                    <div class="device-item animate-on-scroll">
+                        <i class="fas fa-camera"></i>
+                        <h4>Cámaras de Seguridad</h4>
+                        <p>Visión computacional, detección de movimiento, reconocimiento facial y almacenamiento en la nube.</p>
+                    </div>
+                    <div class="device-item animate-on-scroll">
+                        <i class="fas fa-thermometer-half"></i>
+                        <h4>Termostatos Inteligentes</h4>
+                        <p>Aprendizaje automático de hábitos, control remoto y ahorro energético de hasta un 30%.</p>
+                    </div>
+                    <div class="device-item animate-on-scroll">
+                        <i class="fas fa-lock"></i>
+                        <h4>Cerraduras Inteligentes</h4>
+                        <p>Apertura con huella digital, código, tarjeta o control remoto. Gestión de accesos temporales.</p>
+                    </div>
+                    <div class="device-item animate-on-scroll">
+                        <i class="fas fa-tint"></i>
+                        <h4>Medidores de Agua</h4>
+                        <p>Monitoreo de consumo, detección de fugas y riego automatizado para jardines.</p>
+                    </div>
+                    <div class="device-item animate-on-scroll">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Medidores de Energía</h4>
+                        <p>Análisis de consumo en tiempo real, optimización y alertas de uso excesivo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== HOJA DE RUTA ===== -->
+            <section style="background:var(--bg-secondary); border-top:2px solid var(--border-color); padding:3rem 2rem 4rem; transition:background 0.5s ease, border-color 0.5s ease;">
+                <h2 class="section-title animate-on-scroll" style="padding-top:0.5rem;"><i class="fas fa-route"></i> Hoja de Ruta 2030</h2>
+                <p class="section-subtitle animate-on-scroll">Construyendo el futuro paso a paso</p>
+                <div class="matrix-grid" style="margin-top:1.5rem;">
+                    <div class="matrix-item animate-on-scroll" style="border-left: 4px solid var(--accent-1);">
+                        <i class="fas fa-plug"></i>
+                        <h4>Fase 1 · Plug & Play</h4>
+                        <p>Kits de domótica (iluminación, cerraduras, sensores) que cualquier usuario puede instalar en su casa actual para empezar la experiencia AVI.</p>
+                    </div>
+                    <div class="matrix-item animate-on-scroll" style="border-left: 4px solid var(--accent-2);">
+                        <i class="fas fa-building"></i>
+                        <h4>Fase 2 · Proyectos Piloto</h4>
+                        <p>Alianzas con constructoras locales para instalar el estándar "AVI Smart Home" desde los cimientos en nuevos proyectos inmobiliarios en Cusco.</p>
+                    </div>
+                    <div class="matrix-item animate-on-scroll" style="border-left: 4px solid var(--accent-3);">
+                        <i class="fas fa-city"></i>
+                        <h4>Fase 3 · Visión 2030</h4>
+                        <p>Construcción de complejos residenciales 100% automatizados y auto-sostenibles, independientes de las redes eléctricas convencionales.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== FOOTER ===== -->
+            <footer class="footer-minimal">
+                <div class="footer-inner">
+                    <span class="brand-foot">Connection Home</span>
+                    <span class="sep">|</span>
+                    <span style="color:var(--footer-text); font-size:0.55rem; transition:color 0.5s ease;">Arquitectura Sensible · Domótica Avanzada</span>
+                    <span class="sep">|</span>
+                    <a href="#"><i class="fas fa-envelope"></i> home@aviconnection.pe</a>
+                    <span class="sep">|</span>
+                    <a href="#"><i class="fas fa-map-pin"></i> Cusco, Perú</a>
+                </div>
+                <div class="copyright">
+                    Visión 2030 · Smart Grid · IA Predictiva · Gemelo Digital · since 2025
+                </div>
+            </footer>
+
+        </div><!-- /main-wrapper -->
+    </div><!-- /main-content -->
+
+    <!-- ===== BOTÓN CAMBIO DE TEMA ===== -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
+            let startTime = Date.now();
+
+            function reveal() {
+                const elapsed = Date.now() - startTime;
+                const remaining = Math.max(0, 2200 - elapsed);
+                setTimeout(() => {
+                    preloader.classList.add('hide');
+                    mainContent.classList.add('show');
+                    setTimeout(() => { preloader.style.display = 'none'; }, 900);
+                }, remaining);
+            }
+
+            if (document.readyState === 'complete') {
+                reveal();
+            } else {
+                window.addEventListener('load', reveal);
+            }
+
+            // ===== ANIMACIONES AL SCROLL =====
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            animateElements.forEach(el => observer.observe(el));
+
+            // ===== CAMBIO DE TEMA =====
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+
+            let currentTheme = localStorage.getItem('avi-theme-home') || 'dark';
+            applyTheme(currentTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+                applyTheme(newTheme);
+                localStorage.setItem('avi-theme-home', newTheme);
+            });
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    document.body.classList.remove('light-mode');
+                    themeIcon.className = 'fas fa-moon';
+                }
+            }
+
+        })();
+    </script>
+</body>
+</html>

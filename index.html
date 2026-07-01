@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>AVI CONNECTION · Ecosistema Corporativo</title>
+  <!-- Google Font: Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== RESET Y BASE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* ===== VARIABLES CSS ===== */
+    :root {
+      --bg-primary: #0b0a0c;
+      --bg-secondary: #0a0708;
+      --bg-card: rgba(18, 11, 16, 0.85);
+      --bg-card-hover: rgba(26, 16, 22, 0.9);
+      --bg-tool: rgba(16, 10, 14, 0.5);
+      --bg-about: rgba(18, 11, 16, 0.7);
+      --bg-sidebar: rgba(10, 6, 10, 0.95);
+      --bg-sidebar-hover: rgba(180, 70, 100, 0.15);
+      --border-color: #3d2230;
+      --border-light: #2d1a24;
+      --border-sidebar: #6f2c47;
+      --text-primary: #e4d9d0;
+      --text-secondary: #d5c8bf;
+      --text-muted: #a8848f;
+      --text-title: #eccec0;
+      --text-gold: #dbaabc;
+      --accent: #b34e6e;
+      --accent-light: #c45f7a;
+      --accent-glow: rgba(180, 70, 100, 0.3);
+      --shadow-card: 0 12px 30px rgba(0,0,0,0.6);
+      --shadow-sidebar: 4px 0 40px rgba(160, 50, 80, 0.2);
+      --gradient-hero: linear-gradient(135deg, rgba(10, 6, 10, 0.75) 0%, rgba(30, 12, 24, 0.6) 100%);
+      --gradient-border: linear-gradient(90deg, #6f2c47, #b34a6b, #6f2c47);
+      --bg-radial: radial-gradient(ellipse at 20% 50%, rgba(90, 20, 50, 0.4) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 50%, rgba(30, 20, 60, 0.3) 0%, transparent 60%),
+                    linear-gradient(180deg, #0a0708 0%, #120d10 100%);
+      --video-opacity: 0.6;
+      --video-filter: saturate(0.9) contrast(1.05) brightness(0.8);
+      --scrollbar-thumb: linear-gradient(180deg, #6f2c47, #c45f7a);
+      --footer-bg: #0a0708;
+      --footer-text: #7a6a72;
+      --badge-bg: rgba(180, 70, 100, 0.15);
+    }
+
+    body.light-mode {
+      --bg-primary: #f2ebe1;
+      --bg-secondary: #e8dfd4;
+      --bg-card: rgba(255, 250, 242, 0.92);
+      --bg-card-hover: rgba(255, 250, 242, 0.98);
+      --bg-tool: rgba(248, 240, 230, 0.75);
+      --bg-about: rgba(248, 240, 230, 0.85);
+      --bg-sidebar: rgba(245, 238, 228, 0.96);
+      --bg-sidebar-hover: rgba(180, 70, 100, 0.08);
+      --border-color: #d0c0b0;
+      --border-light: #e0d4c4;
+      --border-sidebar: #b8a090;
+      --text-primary: #2c241c;
+      --text-secondary: #3d342c;
+      --text-muted: #6a6258;
+      --text-title: #2c241c;
+      --text-gold: #8a6a5a;
+      --accent: #b34e6e;
+      --accent-light: #b34e6e;
+      --accent-glow: rgba(180, 70, 100, 0.12);
+      --shadow-card: 0 12px 30px rgba(0,0,0,0.06);
+      --shadow-sidebar: 4px 0 40px rgba(0,0,0,0.05);
+      --gradient-hero: linear-gradient(135deg, rgba(242, 235, 225, 0.75) 0%, rgba(232, 223, 212, 0.6) 100%);
+      --gradient-border: linear-gradient(90deg, #c0a898, #b34e6e, #c0a898);
+      --bg-radial: radial-gradient(ellipse at 20% 50%, rgba(180, 70, 100, 0.04) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 50%, rgba(180, 70, 100, 0.03) 0%, transparent 60%),
+                    linear-gradient(180deg, #f2ebe1 0%, #e8dfd4 100%);
+      --video-opacity: 0.35;
+      --video-filter: saturate(0.85) contrast(1.1) brightness(0.95);
+      --scrollbar-thumb: linear-gradient(180deg, #c0a898, #b34e6e);
+      --footer-bg: #e8dfd4;
+      --footer-text: #6a6258;
+      --badge-bg: rgba(180, 70, 100, 0.08);
+    }
+
+    body {
+      font-family: 'Cinzel', serif;
+      background: var(--bg-primary);
+      background-image: var(--bg-radial);
+      min-height: 100vh;
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+    ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }
+
+    /* ================================================================
+       PRELOADER - CENTRADO Y MEJORADO
+       ================================================================ */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a0708;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    #preloader.hide {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+
+    .preloader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      padding: 1rem;
+      width: 100%;
+      max-width: 500px;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .preloader-logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 35px;
+      background: linear-gradient(145deg, #1a0f14, #2d1822);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px rgba(180, 70, 100, 0.15), inset 0 0 40px rgba(180, 70, 100, 0.05);
+      border: 1px solid rgba(180, 70, 100, 0.08);
+      padding: 25px;
+      animation: logoGlow 2s ease-in-out infinite alternate;
+      transition: box-shadow 0.5s ease;
+    }
+    .preloader-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: drop-shadow(0 0 30px rgba(180, 70, 100, 0.1));
+    }
+    @keyframes logoGlow {
+      0% { box-shadow: 0 0 40px rgba(180, 70, 100, 0.08), inset 0 0 20px rgba(180, 70, 100, 0.02); }
+      100% { box-shadow: 0 0 80px rgba(180, 70, 100, 0.25), inset 0 0 40px rgba(180, 70, 100, 0.06); }
+    }
+
+    .preloader-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #f0e6e0;
+      letter-spacing: 6px;
+      text-shadow: 0 0 40px rgba(180, 70, 100, 0.05);
+      margin-top: 24px;
+      line-height: 1.2;
+    }
+    .preloader-title span {
+      background: linear-gradient(135deg, #c45f7a, #b34e6e, #e88aaa, #c45f7a);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 6s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .preloader-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 8px;
+      color: #a8848f;
+      font-weight: 300;
+      text-transform: uppercase;
+      margin-top: 8px;
+      animation: fadeText 1.8s ease-in-out infinite alternate;
+    }
+    @keyframes fadeText {
+      0% { opacity: 0.3; letter-spacing: 6px; }
+      100% { opacity: 1; letter-spacing: 10px; }
+    }
+
+    .preloader-bar {
+      margin-top: 32px;
+      width: 220px;
+      height: 3px;
+      background: #2a1a22;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(180, 70, 100, 0.03);
+      position: relative;
+    }
+    .preloader-bar .fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #8f3f5a, #c45f7a, #b34a6b, #e88aaa);
+      background-size: 300% 100%;
+      border-radius: 10px;
+      animation: loadFill 2.4s ease forwards, barShimmer 2s ease infinite 2.4s;
+      box-shadow: 0 0 20px rgba(180, 70, 100, 0.15);
+    }
+    @keyframes loadFill {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    @keyframes barShimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .preloader-percentage {
+      font-size: 0.6rem;
+      color: #a8848f;
+      letter-spacing: 3px;
+      margin-top: 10px;
+      font-weight: 300;
+      opacity: 0.7;
+      transition: opacity 0.5s ease;
+    }
+
+    /* ===== BOTÓN MODO CLARO/OSCURO ===== */
+    .theme-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      background: var(--bg-card);
+      border: 1px solid var(--border-sidebar);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--accent-light);
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      backdrop-filter: blur(8px);
+    }
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 30px var(--accent-glow);
+    }
+    .theme-toggle i { transition: 0.3s; }
+
+    /* ===== MAIN CONTENT ===== */
+    #main-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    #main-content.show {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ================================================================
+       SIDEBAR IZQUIERDO
+       ================================================================ */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 72px;
+      height: 100vh;
+      background: var(--bg-sidebar);
+      backdrop-filter: blur(16px);
+      border-right: 2px solid var(--border-sidebar);
+      box-shadow: var(--shadow-sidebar);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.8rem 0;
+      transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  background 0.5s ease, 
+                  border-color 0.5s ease,
+                  box-shadow 0.5s ease;
+      overflow: hidden;
+    }
+    .sidebar:hover { width: 240px; }
+    .sidebar .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-primary);
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      padding: 0.5rem 0.8rem;
+      width: 100%;
+      white-space: nowrap;
+      border-bottom: 1px solid var(--border-sidebar);
+      margin-bottom: 0.5rem;
+      transition: color 0.5s ease, border-color 0.5s ease;
+    }
+    .sidebar .sidebar-logo .sidebar-logo-img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      border-radius: 8px;
+      min-width: 32px;
+      filter: brightness(1.1);
+      transition: all 0.3s ease;
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+    body.light-mode .sidebar .sidebar-logo .sidebar-logo-img {
+      filter: brightness(1);
+    }
+    @keyframes logoFloat {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0px); }
+    }
+    .sidebar .sidebar-logo span {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .sidebar:hover .sidebar-logo span { opacity: 1; }
+    .sidebar .sidebar-divider {
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-sidebar), transparent);
+      margin: 0.2rem 0;
+      transition: background 0.5s ease;
+    }
+    .sidebar a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 10px;
+      transition: 0.25s, color 0.5s ease, background 0.3s ease;
+      font-family: 'Cinzel', serif;
+      white-space: nowrap;
+      width: 100%;
+      border-left: 3px solid transparent;
+    }
+    .sidebar a i {
+      font-size: 1.1rem;
+      color: var(--accent-light);
+      min-width: 36px;
+      text-align: center;
+      transition: 0.25s, color 0.5s ease;
+    }
+    .sidebar a span {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      font-size: 0.55rem;
+    }
+    .sidebar:hover a span { opacity: 1; }
+    .sidebar a:hover {
+      background: var(--bg-sidebar-hover);
+      color: var(--text-gold);
+      border-left-color: var(--accent-light);
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+    .sidebar a:hover i { color: #e88aaa; }
+
+    .sidebar .sidebar-section-label {
+      font-size: 0.45rem;
+      letter-spacing: 3px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      width: 100%;
+      white-space: nowrap;
+      border-top: 1px solid var(--border-sidebar);
+      margin-top: 0.2rem;
+      padding-top: 0.6rem;
+      transition: color 0.5s ease, border-color 0.5s ease;
+    }
+    .sidebar .sidebar-section-label span {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .sidebar:hover .sidebar-section-label span { opacity: 1; }
+
+    .sidebar a.tool-locked {
+      opacity: 0.5;
+      cursor: pointer;
+      position: relative;
+    }
+    .sidebar a.tool-locked .lock-badge {
+      font-size: 0.4rem;
+      background: var(--accent-light);
+      color: #fff;
+      padding: 0.05rem 0.4rem;
+      border-radius: 20px;
+      margin-left: 4px;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .sidebar:hover a.tool-locked .lock-badge { opacity: 1; }
+    .sidebar a.tool-locked:hover {
+      opacity: 0.9;
+      border-left-color: #d4af37;
+    }
+    .sidebar a.tool-locked .lock-icon {
+      font-size: 0.5rem;
+      color: #d4af37;
+      margin-left: 4px;
+    }
+
+    /* ===== MAIN WRAPPER ===== */
+    .main-wrapper {
+      margin-left: 72px;
+      transition: margin-left 0.35s ease;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .header-hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom: 4px solid var(--border-sidebar);
+      background: var(--bg-secondary);
+      transition: border-color 0.5s ease, background 0.5s ease;
+    }
+    .header-hero .bg-video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: var(--video-opacity);
+      z-index: 1;
+      filter: var(--video-filter);
+      transition: opacity 0.5s ease, filter 0.5s ease;
+    }
+    .header-hero .bg-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: var(--gradient-hero);
+      z-index: 2;
+      transition: background 0.5s ease;
+    }
+    .header-hero .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: 2rem;
+      max-width: 900px;
+    }
+    .header-hero .hero-content .badge {
+      display: inline-block;
+      background: var(--badge-bg);
+      border: 1px solid var(--border-sidebar);
+      border-radius: 40px;
+      padding: 0.3rem 1.8rem;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: var(--text-gold);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      transition: border-color 0.5s ease, background 0.5s ease, color 0.5s ease;
+    }
+    .header-hero .hero-content h1 {
+      font-size: clamp(3rem, 12vw, 6rem);
+      font-weight: 900;
+      color: var(--text-primary);
+      text-shadow: 0 0 40px rgba(153, 44, 78, 0.3), 0 0 100px rgba(48, 26, 40, 0.2);
+      letter-spacing: 10px;
+      line-height: 1.1;
+      transition: color 0.5s ease, text-shadow 0.5s ease;
+    }
+    .header-hero .hero-content h1 small {
+      display: block;
+      font-size: 0.2em;
+      font-weight: 400;
+      letter-spacing: 8px;
+      color: var(--text-muted);
+      text-shadow: 0 0 30px rgba(99, 45, 68, 0.1);
+      margin-top: 2px;
+    }
+    .header-hero .hero-content .slogan {
+      font-size: 1.3rem;
+      letter-spacing: 8px;
+      color: var(--text-primary);
+      border-top: 2px solid var(--border-sidebar);
+      padding-top: 20px;
+      margin-top: 16px;
+      font-weight: 400;
+      text-transform: uppercase;
+      transition: color 0.5s ease, border-color 0.5s ease;
+    }
+    .header-hero .hero-content .sub-slogan {
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-weight: 300;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+      transition: color 0.5s ease;
+    }
+    .header-hero .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: bounceDown 2s infinite;
+      transition: color 0.5s ease;
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+    }
+
+    /* ===== SECCIONES GENERALES ===== */
+    .section-title {
+      text-align: center;
+      padding: 3rem 1rem 0.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-title);
+      letter-spacing: 5px;
+      text-shadow: 0 0 30px var(--accent-glow);
+      transition: color 0.5s ease, text-shadow 0.5s ease;
+    }
+    .section-title i { color: var(--accent-light); margin-right: 12px; transition: color 0.5s ease; }
+    .section-subtitle {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      margin-top: 4px;
+      font-weight: 300;
+      transition: color 0.5s ease;
+    }
+
+    /* ===== QUIÉNES SOMOS ===== */
+    .about-section {
+      padding: 2rem 2rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-section .about-text {
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      max-width: 900px;
+      margin: 1rem auto;
+      text-align: center;
+      transition: color 0.5s ease;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .about-item {
+      background: var(--bg-about);
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-light);
+      text-align: center;
+      transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+      backdrop-filter: blur(4px);
+    }
+    .about-item:hover {
+      border-color: var(--accent-light);
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+    .about-item i {
+      font-size: 2.2rem;
+      color: var(--accent-light);
+      margin-bottom: 10px;
+      transition: color 0.5s ease;
+    }
+    .about-item h4 {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--text-title);
+      font-weight: 700;
+      transition: color 0.5s ease;
+    }
+    .about-item p {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      transition: color 0.5s ease;
+    }
+
+    /* ===== PILARES CON VENTANA FLOTANTE ===== */
+    .pillars-section {
+      padding: 2rem 2rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin-top: 2rem;
+    }
+    .pillar-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      padding: 1.8rem 1.5rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  background 0.5s ease, 
+                  border-color 0.5s ease, 
+                  box-shadow 0.5s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--gradient-border);
+      opacity: 0;
+      transition: 0.4s;
+    }
+    .pillar-card:hover::before { opacity: 1; }
+    .pillar-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-light);
+      box-shadow: 0 20px 45px var(--accent-glow);
+    }
+    .pillar-card .pillar-icon {
+      font-size: 2.2rem;
+      color: var(--accent-light);
+      margin-bottom: 10px;
+      display: inline-block;
+      transition: color 0.5s ease;
+    }
+    .pillar-card .pillar-phase {
+      font-size: 0.5rem;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      transition: color 0.5s ease;
+    }
+    .pillar-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-title);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      transition: color 0.5s ease;
+    }
+    .pillar-card p {
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      opacity: 0.9;
+      transition: color 0.5s ease;
+    }
+    .pillar-card .pillar-click-hint {
+      font-size: 0.5rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+      margin-top: 8px;
+      letter-spacing: 1px;
+      transition: opacity 0.3s ease;
+    }
+    .pillar-card:hover .pillar-click-hint { opacity: 1; }
+
+    /* ===== VENTANA FLOTANTE (MODAL) ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-overlay.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-box {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border-sidebar);
+      border-radius: 24px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 2.5rem 2rem;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-box .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: 0.3s;
+      background: none;
+      border: none;
+      font-family: 'Cinzel', serif;
+    }
+    .modal-box .modal-close:hover {
+      color: var(--accent-light);
+      transform: rotate(90deg);
+    }
+    .modal-box .modal-icon {
+      font-size: 3rem;
+      color: var(--accent-light);
+      margin-bottom: 10px;
+    }
+    .modal-box h2 {
+      font-size: 1.6rem;
+      color: var(--text-title);
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--border-sidebar);
+      padding-bottom: 10px;
+    }
+    .modal-box p {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+    .modal-box .modal-tag {
+      display: inline-block;
+      background: var(--bg-tool);
+      border: 1px solid var(--border-light);
+      border-radius: 40px;
+      padding: 0.2rem 1rem;
+      font-size: 0.5rem;
+      color: var(--text-gold);
+      letter-spacing: 1.5px;
+      margin-top: 8px;
+    }
+    .modal-box .modal-tag i { margin-right: 4px; color: var(--accent-light); }
+
+    /* ===== UPGRADE MODAL ===== */
+    .upgrade-options {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .upgrade-options .btn-upgrade {
+      padding: 0.7rem 2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 0.75rem;
+      transition: 0.3s;
+      font-family: 'Cinzel', serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .upgrade-options .btn-pro {
+      background: var(--accent-light);
+      color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .upgrade-options .btn-pro:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 40px var(--accent-glow);
+    }
+    .upgrade-options .btn-ultra {
+      background: linear-gradient(135deg, #6f2c47, #b34a6b);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(180, 70, 100, 0.4);
+    }
+    .upgrade-options .btn-ultra:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 40px rgba(180, 70, 100, 0.6);
+    }
+
+    /* ===== HERRAMIENTAS ===== */
+    .tools-section {
+      background: var(--bg-secondary);
+      border-top: 2px solid var(--border-color);
+      border-bottom: 2px solid var(--border-color);
+      padding: 3rem 2rem;
+      backdrop-filter: blur(4px);
+      transition: background 0.5s ease, border-color 0.5s ease;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .tool-item {
+      background: var(--bg-tool);
+      border-radius: 14px;
+      padding: 1.2rem 1rem;
+      border: 1px solid var(--border-light);
+      text-align: center;
+      transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+      position: relative;
+    }
+    .tool-item:hover {
+      border-color: var(--accent-light);
+      transform: scale(1.03);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+    .tool-item .tool-icon {
+      font-size: 2rem;
+      color: var(--accent-light);
+      margin-bottom: 6px;
+      transition: color 0.5s ease;
+    }
+    .tool-item h4 {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--text-title);
+      font-weight: 700;
+      transition: color 0.5s ease;
+    }
+    .tool-item p {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+      transition: color 0.5s ease;
+    }
+    .tool-item .tool-lock-badge {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 0.4rem;
+      background: var(--accent-light);
+      color: #fff;
+      padding: 0.05rem 0.4rem;
+      border-radius: 20px;
+      opacity: 0.7;
+    }
+    .tool-item.tool-locked {
+      opacity: 0.6;
+      cursor: pointer;
+    }
+    .tool-item.tool-locked:hover {
+      opacity: 0.9;
+      border-color: #d4af37;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-minimal {
+      border-top: 2px solid var(--border-color);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+    }
+    .footer-minimal .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-minimal .footer-inner .brand-foot {
+      color: var(--accent-light);
+      font-weight: 700;
+      transition: color 0.5s ease;
+    }
+    .footer-minimal .footer-inner a {
+      color: var(--footer-text);
+      text-decoration: none;
+      transition: 0.3s, color 0.5s ease;
+      font-size: 0.55rem;
+      letter-spacing: 1.5px;
+    }
+    .footer-minimal .footer-inner a:hover { color: var(--accent-light); }
+    .footer-minimal .footer-inner .sep {
+      color: var(--border-color);
+      font-size: 0.4rem;
+      transition: color 0.5s ease;
+    }
+    .footer-minimal .copyright {
+      margin-top: 0.6rem;
+      opacity: 0.5;
+      font-size: 0.5rem;
+      letter-spacing: 2px;
+      transition: opacity 0.5s ease;
+    }
+
+    /* ================================================================
+       RESPONSIVE
+       ================================================================ */
+    @media (max-width: 1024px) {
+      .sidebar { width: 64px; }
+      .sidebar:hover { width: 64px; }
+      .sidebar a span,
+      .sidebar .sidebar-logo span,
+      .sidebar .sidebar-section-label span { display: none !important; }
+      .sidebar .sidebar-logo i { font-size: 1.5rem; min-width: 30px; }
+      .sidebar a i { font-size: 1rem; min-width: 30px; }
+      .sidebar a { padding: 0.4rem 0.5rem; justify-content: center; gap: 0; }
+      .sidebar .sidebar-logo { justify-content: center; padding: 0.4rem 0; }
+      .sidebar .sidebar-divider { width: 50%; }
+      .sidebar .sidebar-section-label { display: none; }
+      .sidebar .sidebar-logo .sidebar-logo-img { width: 28px; height: 28px; min-width: 28px; }
+      .sidebar a.tool-locked .lock-badge { display: none; }
+      .main-wrapper { margin-left: 64px; }
+      .modal-box { max-width: 500px; padding: 2rem 1.5rem; }
+      .preloader-logo { width: 120px; height: 120px; padding: 20px; border-radius: 28px; }
+      .preloader-title { font-size: 2rem; letter-spacing: 5px; }
+      .preloader-subtitle { font-size: 0.75rem; letter-spacing: 6px; }
+      .preloader-bar { width: 180px; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { width: 56px; }
+      .sidebar:hover { width: 56px; }
+      .sidebar .sidebar-logo i { font-size: 1.3rem; min-width: 26px; }
+      .sidebar a i { font-size: 0.9rem; min-width: 26px; }
+      .sidebar a { padding: 0.3rem 0.3rem; }
+      .sidebar .sidebar-logo { padding: 0.3rem 0; }
+      .sidebar .sidebar-logo .sidebar-logo-img { width: 24px; height: 24px; min-width: 24px; }
+      .main-wrapper { margin-left: 56px; }
+      .header-hero .hero-content h1 { font-size: 2.5rem; letter-spacing: 6px; }
+      .header-hero .hero-content .slogan { font-size: 0.9rem; letter-spacing: 4px; }
+      .header-hero { min-height: 60vh; }
+      .section-title { font-size: 1.6rem; letter-spacing: 4px; }
+      .about-section { padding: 1.5rem 1rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .pillars-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .pillars-section { padding: 1rem 1rem 2rem; }
+      .tools-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .tools-section { padding: 2rem 1rem; }
+      .footer-minimal .footer-inner { gap: 0.5rem 1.2rem; flex-wrap: wrap; }
+      .footer-minimal { padding: 1rem; font-size: 0.5rem; }
+      .theme-toggle { width: 42px; height: 42px; font-size: 1.1rem; bottom: 14px; right: 14px; }
+      .modal-box { max-width: 95%; padding: 1.5rem 1.2rem; }
+      .modal-box h2 { font-size: 1.3rem; }
+      .upgrade-options { flex-direction: column; align-items: center; }
+      .upgrade-options .btn-upgrade { width: 80%; justify-content: center; }
+      .preloader-logo { width: 100px; height: 100px; padding: 16px; border-radius: 24px; }
+      .preloader-title { font-size: 1.6rem; letter-spacing: 4px; margin-top: 18px; }
+      .preloader-subtitle { font-size: 0.65rem; letter-spacing: 5px; }
+      .preloader-bar { width: 150px; margin-top: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .sidebar { width: 48px; }
+      .sidebar:hover { width: 48px; }
+      .sidebar .sidebar-logo i { font-size: 1.1rem; min-width: 22px; }
+      .sidebar a i { font-size: 0.8rem; min-width: 22px; }
+      .sidebar a { padding: 0.25rem 0.2rem; border-radius: 6px; }
+      .sidebar .sidebar-logo { padding: 0.25rem 0; }
+      .sidebar .sidebar-logo .sidebar-logo-img { width: 20px; height: 20px; min-width: 20px; }
+      .sidebar .sidebar-divider { width: 40%; margin: 0.1rem 0; }
+      .main-wrapper { margin-left: 48px; }
+      .header-hero .hero-content h1 { font-size: 2rem; letter-spacing: 4px; }
+      .header-hero .hero-content h1 small { font-size: 0.25em; letter-spacing: 4px; }
+      .header-hero .hero-content .slogan { font-size: 0.7rem; letter-spacing: 3px; padding-top: 12px; margin-top: 10px; }
+      .header-hero .hero-content .sub-slogan { font-size: 0.6rem; letter-spacing: 2px; margin-top: 8px; }
+      .header-hero .hero-content { padding: 1rem; }
+      .header-hero { min-height: 50vh; }
+      .header-hero .scroll-indicator { bottom: 16px; font-size: 0.5rem; }
+      .header-hero .scroll-indicator i { font-size: 0.8rem; }
+      .section-title { font-size: 1.2rem; letter-spacing: 3px; padding: 1.5rem 0.5rem 0.3rem; }
+      .section-title i { margin-right: 6px; }
+      .section-subtitle { font-size: 0.6rem; letter-spacing: 2px; }
+      .about-section { padding: 1rem 0.8rem; }
+      .about-section .about-text { font-size: 0.7rem; line-height: 1.6; margin: 0.5rem auto; }
+      .about-grid { gap: 0.8rem; }
+      .about-item { padding: 1rem; border-radius: 12px; }
+      .about-item i { font-size: 1.6rem; }
+      .about-item h4 { font-size: 0.65rem; }
+      .about-item p { font-size: 0.55rem; }
+      .pillars-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+      .pillars-section { padding: 0.5rem 0.8rem 1.5rem; }
+      .pillar-card { padding: 1rem 0.8rem; border-radius: 14px; }
+      .pillar-card .pillar-icon { font-size: 1.6rem; margin-bottom: 6px; }
+      .pillar-card h3 { font-size: 0.85rem; }
+      .pillar-card p { font-size: 0.65rem; line-height: 1.5; }
+      .pillar-card .pillar-phase { font-size: 0.4rem; }
+      .pillar-card .pillar-click-hint { font-size: 0.4rem; }
+      .tools-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+      .tools-section { padding: 1.5rem 0.8rem; }
+      .tool-item { padding: 0.8rem 0.6rem; border-radius: 10px; }
+      .tool-item .tool-icon { font-size: 1.4rem; }
+      .tool-item h4 { font-size: 0.6rem; letter-spacing: 1px; }
+      .tool-item p { font-size: 0.5rem; }
+      .tool-item .tool-lock-badge { font-size: 0.3rem; top: 4px; right: 6px; }
+      .footer-minimal { padding: 0.8rem; font-size: 0.45rem; }
+      .footer-minimal .footer-inner { gap: 0.3rem 0.8rem; flex-direction: column; }
+      .footer-minimal .footer-inner .sep { display: none; }
+      .footer-minimal .copyright { font-size: 0.4rem; margin-top: 0.3rem; }
+      .theme-toggle { width: 38px; height: 38px; font-size: 0.9rem; bottom: 10px; right: 10px; }
+      .modal-box { padding: 1.2rem 1rem; }
+      .modal-box h2 { font-size: 1.1rem; }
+      .modal-box .modal-icon { font-size: 2.2rem; }
+      .modal-box p { font-size: 0.75rem; }
+      .upgrade-options .btn-upgrade { font-size: 0.6rem; padding: 0.5rem 1.2rem; width: 100%; }
+      .preloader-logo { width: 85px; height: 85px; padding: 14px; border-radius: 20px; }
+      .preloader-title { font-size: 1.3rem; letter-spacing: 3px; margin-top: 14px; }
+      .preloader-subtitle { font-size: 0.55rem; letter-spacing: 4px; margin-top: 4px; }
+      .preloader-bar { width: 120px; height: 2px; margin-top: 18px; }
+      .preloader-percentage { font-size: 0.5rem; margin-top: 6px; }
+    }
+
+    @media (max-width: 380px) {
+      .sidebar { width: 42px; }
+      .main-wrapper { margin-left: 42px; }
+      .sidebar .sidebar-logo .sidebar-logo-img { width: 18px; height: 18px; min-width: 18px; }
+      .sidebar .sidebar-logo i { font-size: 1rem; min-width: 20px; }
+      .sidebar a i { font-size: 0.7rem; min-width: 20px; }
+      .sidebar a { padding: 0.2rem 0.15rem; }
+      .header-hero .hero-content h1 { font-size: 1.6rem; letter-spacing: 3px; }
+      .section-title { font-size: 1rem; letter-spacing: 2px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr 1fr; }
+      .preloader-logo { width: 70px; height: 70px; padding: 10px; border-radius: 16px; }
+      .preloader-title { font-size: 1.1rem; letter-spacing: 2px; }
+      .preloader-subtitle { font-size: 0.45rem; letter-spacing: 3px; }
+      .preloader-bar { width: 90px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================================================
+       PRELOADER - CENTRADO Y MEJORADO
+       ============================================================== -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">
+        <img src="imagenes y videos/logo.png" alt="AVI Logo">
+      </div>
+      <div class="preloader-title">Bienvenido a <span>AVI CONNECTION</span></div>
+      <div class="preloader-subtitle">Conectando ideas, creando realidades</div>
+      <div class="preloader-bar"><div class="fill"></div></div>
+      <div class="preloader-percentage" id="loaderPercentage">0%</div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       CONTENIDO PRINCIPAL
+       ============================================================== -->
+  <div id="main-content">
+
+    <!-- ============================================================
+         SIDEBAR IZQUIERDO
+         ============================================================ -->
+    <nav class="sidebar" id="sidebarNav">
+      <div class="sidebar-logo">
+        <img src="imagenes y videos/logo.png" alt="AVI Logo" class="sidebar-logo-img">
+        <span>AVI</span>
+      </div>
+      <div class="sidebar-divider"></div>
+
+      <!-- HERRAMIENTAS GRATUITAS (FREE) -->
+      <div class="sidebar-section-label"><span>🟢 Gratuitas</span></div>
+      <a href="avi id.html"><i class="fas fa-id-card"></i><span>ID</span></a>
+      <a href="avi fix.html"><i class="fas fa-tools"></i><span>FIX</span></a>
+      <a href="avi app.html"><i class="fas fa-mobile-alt"></i><span>APP</span></a>
+
+      <!-- HERRAMIENTAS BLOQUEADAS (PRO) -->
+      <div class="sidebar-section-label"><span>🔒 Desbloquea con PRO</span></div>
+      <a href="#" class="tool-locked" onclick="showUpgradeModal('PRO'); return false;">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <span>NEST <span class="lock-badge">PRO</span></span>
+      </a>
+      <a href="#" class="tool-locked" onclick="showUpgradeModal('PRO'); return false;">
+        <i class="fas fa-credit-card"></i>
+        <span>PAY <span class="lock-badge">PRO</span></span>
+      </a>
+      <a href="#" class="tool-locked" onclick="showUpgradeModal('PRO'); return false;">
+        <i class="fas fa-star"></i>
+        <span>POINTS <span class="lock-badge">PRO</span></span>
+      </a>
+      <a href="#" class="tool-locked" onclick="showUpgradeModal('PRO'); return false;">
+        <i class="fas fa-truck"></i>
+        <span>GO <span class="lock-badge">PRO</span></span>
+      </a>
+      <a href="#" class="tool-locked" onclick="showUpgradeModal('PRO'); return false;">
+        <i class="fas fa-comment-dots"></i>
+        <span>IA <span class="lock-badge">PRO</span></span>
+      </a>
+
+      <!-- PILARES (SIEMPRE VISIBLES) -->
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section-label"><span>🏛️ Pilares</span></div>
+      <a href="index.html"><i class="fas fa-home"></i><span>Web</span></a>
+      <a href="Labs web.html"><i class="fas fa-flask"></i><span>Labs</span></a>
+      <a href="Pixel web.html"><i class="fas fa-paint-brush"></i><span>Pixel</span></a>
+      <a href="Life web.html"><i class="fas fa-heartbeat"></i><span>Life</span></a>
+      <a href="Commerce web.html"><i class="fas fa-cart-plus"></i><span>Commerce</span></a>
+      <a href="Home web.html"><i class="fas fa-home-lg"></i><span>Home</span></a>
+      <a href="Motors web.html"><i class="fas fa-car"></i><span>Motors</span></a>
+      <a href="Space web.html"><i class="fas fa-rocket"></i><span>Space</span></a>
+    </nav>
+
+    <!-- ============================================================
+         WRAPPER PRINCIPAL
+         ============================================================ -->
+    <div class="main-wrapper">
+
+      <!-- ===== HERO SECTION ===== -->
+      <header class="header-hero">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="imagenes y videos/header.mp4" type="video/mp4">
+        </video>
+        <div class="bg-overlay"></div>
+        <div class="hero-content">
+          <div class="badge"><i class="fas fa-rocket"></i> Holding Tecnológico</div>
+          <h1>AVI <small>connection</small></h1>
+          <div class="slogan">Conectando ideas, creando realidades</div>
+          <div class="sub-slogan">
+            Un holding tecnológico de alta escalabilidad diseñado para erradicar la fragmentación de servicios, digitalizar la economía y descentralizar la innovación global desde el corazón de los Andes.
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <i class="fas fa-chevron-down"></i>
+          <span>SCROLL</span>
+        </div>
+      </header>
+
+      <!-- ===== QUIÉNES SOMOS ===== -->
+      <h2 class="section-title"><i class="fas fa-building"></i> Quiénes Somos</h2>
+      <div class="about-section">
+        <p class="about-text">
+          <strong>El Origen de una Nueva Era Tecnológica</strong><br>
+          Fundada oficialmente el 15 de enero de 2025 en la histórica ciudad de Cusco, Perú, <strong>AVI CONNECTION S.A.C.</strong> nace como una startup disruptiva orientada a demostrar al mercado internacional que el desarrollo de software de élite y la alta ingeniería no dependen de la ubicación geográfica.
+        </p>
+        <p class="about-text">
+          No somos una agencia convencional; operamos como un <strong>ecosistema unificado</strong> bajo un modelo de <strong>Autonomía Quirúrgica</strong>. Esto significa que cada uno de nuestros frentes comerciales e industriales opera con especialización absoluta, pero todos se sincronizan, comparten datos y se potencian a través de la misma infraestructura en la nube y la gobernanza inteligente de nuestra inteligencia artificial central: <strong>AVI IA</strong>.
+        </p>
+
+        <h4 style="text-align:center; color:var(--text-title); letter-spacing:3px; margin:1.5rem 0 0.5rem; font-size:0.9rem; transition:color 0.5s ease;">
+          <i class="fas fa-gem" style="color:var(--accent-light);"></i> Nuestros Tres Pilares Innegociables
+        </h4>
+        <div class="about-grid">
+          <div class="about-item">
+            <i class="fas fa-code"></i>
+            <h4>Código Puro</h4>
+            <p>Rechazamos categóricamente el uso de plantillas genéricas. Desarrollamos cada línea de código desde cero utilizando arquitecturas nativas avanzadas (Astro, Tailwind CSS, C++).</p>
+          </div>
+          <div class="about-item">
+            <i class="fas fa-shield-alt"></i>
+            <h4>Zero-Trust</h4>
+            <p>Cada módulo, base de datos e interfaz opera bajo los más altos estándares de cifrado (SSL/HTTPS), garantizando la seguridad de los activos financieros y creativos.</p>
+          </div>
+          <div class="about-item">
+            <i class="fas fa-handshake"></i>
+            <h4>Regla del 50/50</h4>
+            <p>Ningún proyecto inicia sin la previa validación automatizada y emisión fiscal del 50% de adelanto obligatorio. Confianza respaldada con procesos financieros serios.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LOS 7 PILARES ===== -->
+      <h2 class="section-title"><i class="fas fa-layer-group"></i> Los 7 Pilares</h2>
+      <p class="section-subtitle">Haz clic en cada pilar para conocer más</p>
+      <section class="pillars-section">
+        <div class="pillars-grid">
+          <div class="pillar-card" data-pillar="pixel">
+            <span class="pillar-phase"><i class="fas fa-check-circle"></i> Fundacional</span>
+            <div class="pillar-icon"><i class="fas fa-paint-brush"></i></div>
+            <h3>Connection Pixel</h3>
+            <p>El Hub Creativo y Tecnológico O2O. Unifica el entorno digital y el mundo físico mediante un modelo Online-to-Offline.</p>
+            <div class="pillar-click-hint"><i class="fas fa-hand-pointer"></i> Haz clic para saber más</div>
+          </div>
+          <div class="pillar-card" data-pillar="labs">
+            <span class="pillar-phase"><i class="fas fa-check-circle"></i> Fundacional</span>
+            <div class="pillar-icon"><i class="fas fa-flask"></i></div>
+            <h3>Connection Labs</h3>
+            <p>El núcleo de investigación pura. Diseño de algoritmos complejos, auditorías de sistemas y entrenamiento de modelos de IA.</p>
+            <div class="pillar-click-hint"><i class="fas fa-hand-pointer"></i> Haz clic para saber más</div>
+          </div>
+          <div class="pillar-card" data-pillar="commerce">
+            <span class="pillar-phase"><i class="fas fa-check-circle"></i> Fundacional</span>
+            <div class="pillar-icon"><i class="fas fa-cart-plus"></i></div>
+            <h3>Connection Commerce</h3>
+            <p>El Motor Transaccional Global. E-commerce Suite y Marketplace descentralizado que conecta el comercio con el mercado digital.</p>
+            <div class="pillar-click-hint"><i class="fas fa-hand-pointer"></i> Haz clic para saber más</div>
+          </div>
+          <div class="pillar-card" data-pillar="life">
+            <span class="pillar-phase"><i class="fas fa-check-circle"></i> Fundacional</span>
+            <div class="pillar-icon"><i class="fas fa-heartbeat"></i></div>
+            <h3>Connection Life</h3>
+            <p>Bienestar y Optimización del Estilo de Vida. Soluciones en telemedicina, educación interactiva y turismo inteligente.</p>
+            <div class="pillar-click-hint"><i class="fas fa-hand-pointer"></i> Haz clic para saber más</div>
+          </div>
+          <div class="pillar-card" data-pillar="home">
+            <span class="pillar-phase"><i class="fas fa-rocket"></i> Expansión 2030</span>
+            <div class="pillar-icon"><i class="fas fa-home-lg"></i></div>
+            <h3>Connection Home</h3>
+            <p>Domótica e Ingeniería Civil Inteligente. Diseño de espacios habitacionales automatizados integrados con IoT.</p>
+            <div class="pillar-click-hint"><i class="fas fa-hand-pointer"></i> Haz clic para saber más</div>
+          </div>
+          <div class="pillar-card" data-pillar="motors">
+            <span class="pillar-phase"><i class="fas fa-rocket"></i> Expansión 2030</span>
+            <div class="pillar-icon"><i class="fas fa-car"></i></div>
+            <h3>Connection Motors</h3>
+            <p>Logística y Movilidad Avanzada. Innovación automotriz, optimización predictiva de rutas y transporte automatizado.</p>
+            <div class="pillar-click-hint"><i class="fas fa-hand-pointer"></i> Haz clic para saber más</div>
+          </div>
+          <div class="pillar-card" data-pillar="space">
+            <span class="pillar-phase"><i class="fas fa-rocket"></i> Expansión 2030</span>
+            <div class="pillar-icon"><i class="fas fa-rocket"></i></div>
+            <h3>Connection Space</h3>
+            <p>Telecomunicaciones e Ingeniería Aeroespacial. Investigación en redes satelitales y software de exploración científica.</p>
+            <div class="pillar-click-hint"><i class="fas fa-hand-pointer"></i> Haz clic para saber más</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MODAL / VENTANA FLOTANTE PARA PILARES ===== -->
+      <div class="modal-overlay" id="pillarModal">
+        <div class="modal-box">
+          <button class="modal-close" id="modalClose">&times;</button>
+          <div class="modal-icon" id="modalIcon"><i class="fas fa-paint-brush"></i></div>
+          <div class="modal-phase" id="modalPhase">Fundacional</div>
+          <h2 id="modalTitle">Connection Pixel</h2>
+          <div id="modalContent">
+            <p>Connection Pixel es el Hub Creativo y Tecnológico O2O (Online-to-Offline) del ecosistema AVI CONNECTION. Unifica el entorno digital y el mundo físico mediante un modelo que integra la imprenta automatizada de alto tonelaje con el desarrollo de plataformas web corporativas, aplicaciones móviles a medida y diseño de marcas de alto impacto.</p>
+            <p>Nuestra filosofía se basa en el <strong>Código Puro</strong>, rechazando plantillas genéricas para construir cada línea de código desde cero con arquitecturas nativas avanzadas (Astro, Tailwind CSS, C++), garantizando velocidad extrema, SEO impecable y escalabilidad sin límites.</p>
+            <span class="modal-tag"><i class="fas fa-cube"></i> O2O · Código Puro</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== UPGRADE MODAL ===== -->
+      <div class="modal-overlay" id="upgradeModal">
+        <div class="modal-box" style="text-align:center;">
+          <button class="modal-close" onclick="closeUpgradeModal()">&times;</button>
+          <div style="font-size:4rem; margin-bottom:10px;">🚀</div>
+          <h2 id="upgradeTitle">Desbloquea el Plan PRO</h2>
+          <p id="upgradeDesc" style="font-size:0.85rem; line-height:1.8; color:var(--text-secondary);">
+            Con el Plan PRO obtienes acceso a <strong>todas las herramientas</strong> del ecosistema AVI: NEST, PAY, POINTS, GO e IA.
+            <br><br>
+            🎁 <strong>5 AVI POINTS</strong> de regalo por tu registro.
+            <br><br>
+            <span style="font-size:0.7rem; color:var(--text-muted);">
+              <i class="fas fa-check-circle" style="color:#4caf50;"></i> Regístrate con Google, Microsoft, Apple o GitHub
+            </span>
+          </p>
+          <div class="upgrade-options">
+            <a href="index pro.html" class="btn-upgrade btn-pro">
+              <i class="fas fa-crown"></i> Plan PRO
+            </a>
+            <a href="index ultra.html" class="btn-upgrade btn-ultra">
+              <i class="fas fa-gem"></i> Plan ULTRA
+            </a>
+          </div>
+          <p style="font-size:0.55rem; color:var(--text-muted); margin-top:1.2rem; letter-spacing:1px;">
+            <i class="fas fa-shield-alt"></i> Registro seguro · Sin compromisos
+          </p>
+        </div>
+      </div>
+
+      <!-- ===== SUITE DE HERRAMIENTAS (VERSIÓN FREE) ===== -->
+      <section class="tools-section">
+        <h2 class="section-title" style="padding-top:0.5rem;"><i class="fas fa-tools"></i> Suite de Herramientas</h2>
+        <p class="section-subtitle">Herramientas gratuitas · <span style="color:var(--accent-light);">Desbloquea todas con PRO</span></p>
+        <div class="tools-grid" style="margin-top:1.5rem;">
+
+          <!-- Gratuitas -->
+          <a href="avi id.html" class="tool-item">
+            <div class="tool-icon"><i class="fas fa-id-card"></i></div>
+            <h4>AVI ID</h4>
+            <p>Autenticación única (SSO)</p>
+          </a>
+          <a href="avi fix.html" class="tool-item">
+            <div class="tool-icon"><i class="fas fa-tools"></i></div>
+            <h4>AVI FIX</h4>
+            <p>Soporte post-venta</p>
+          </a>
+          <a href="avi app.html" class="tool-item">
+            <div class="tool-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h4>AVI APP</h4>
+            <p>App móvil del ecosistema</p>
+          </a>
+
+          <!-- Bloqueadas (PRO) -->
+          <div class="tool-item tool-locked" onclick="showUpgradeModal('PRO')">
+            <span class="tool-lock-badge">PRO</span>
+            <div class="tool-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <h4>AVI NEST</h4>
+            <p>Almacenamiento en la nube <i class="fas fa-lock" style="font-size:0.4rem;color:#d4af37;margin-left:4px;"></i></p>
+          </div>
+          <div class="tool-item tool-locked" onclick="showUpgradeModal('PRO')">
+            <span class="tool-lock-badge">PRO</span>
+            <div class="tool-icon"><i class="fas fa-credit-card"></i></div>
+            <h4>AVI PAY</h4>
+            <p>Procesamiento de pagos <i class="fas fa-lock" style="font-size:0.4rem;color:#d4af37;margin-left:4px;"></i></p>
+          </div>
+          <div class="tool-item tool-locked" onclick="showUpgradeModal('PRO')">
+            <span class="tool-lock-badge">PRO</span>
+            <div class="tool-icon"><i class="fas fa-star"></i></div>
+            <h4>AVI POINTS</h4>
+            <p>Lealtad y economía circular <i class="fas fa-lock" style="font-size:0.4rem;color:#d4af37;margin-left:4px;"></i></p>
+          </div>
+          <div class="tool-item tool-locked" onclick="showUpgradeModal('PRO')">
+            <span class="tool-lock-badge">PRO</span>
+            <div class="tool-icon"><i class="fas fa-truck"></i></div>
+            <h4>AVI GO</h4>
+            <p>Logística de última milla <i class="fas fa-lock" style="font-size:0.4rem;color:#d4af37;margin-left:4px;"></i></p>
+          </div>
+          <div class="tool-item tool-locked" onclick="showUpgradeModal('PRO')">
+            <span class="tool-lock-badge">PRO</span>
+            <div class="tool-icon"><i class="fas fa-comment-dots"></i></div>
+            <h4>AVI IA</h4>
+            <p>Asistente conversacional <i class="fas fa-lock" style="font-size:0.4rem;color:#d4af37;margin-left:4px;"></i></p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== FOOTER ===== -->
+      <footer class="footer-minimal">
+        <div class="footer-inner">
+          <span class="brand-foot">AVI CONNECTION S.A.C.</span>
+          <span class="sep">|</span>
+          <span style="color:var(--footer-text); font-size:0.55rem; transition:color 0.5s ease;">Sociedad Anónima Cerrada · Cusco, Perú</span>
+          <span class="sep">|</span>
+          <a href="#"><i class="fas fa-envelope"></i> contacto@aviconnection.pe</a>
+          <span class="sep">|</span>
+          <a href="#"><i class="fas fa-shield-alt"></i> Privacidad</a>
+        </div>
+        <div class="copyright">
+          © 2026 AVI CONNECTION S.A.C. Todos los derechos reservados.
+        </div>
+      </footer>
+
+    </div><!-- /main-wrapper -->
+  </div><!-- /main-content -->
+
+  <!-- ===== BOTÓN CAMBIO DE TEMA ===== -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </button>
+
+  <!-- ==============================================================
+       SCRIPTS
+       ============================================================== -->
+  <script>
+    (function() {
+      // ============================================================
+      // PRELOADER - CONTADOR DE PORCENTAJE
+      // ============================================================
+      const percentageEl = document.getElementById('loaderPercentage');
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 2.5 + 0.5;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+        }
+        percentageEl.textContent = Math.floor(progress) + '%';
+      }, 50);
+
+      // ============================================================
+      // PRELOADER - REVELAR CONTENIDO
+      // ============================================================
+      const preloader = document.getElementById('preloader');
+      const mainContent = document.getElementById('main-content');
+      let startTime = Date.now();
+
+      function reveal() {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, 2600 - elapsed);
+        setTimeout(() => {
+          preloader.classList.add('hide');
+          mainContent.classList.add('show');
+          setTimeout(() => { preloader.style.display = 'none'; }, 900);
+        }, remaining);
+      }
+
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('load', reveal);
+      }
+
+      // ============================================================
+      // CAMBIO DE TEMA
+      // ============================================================
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+
+      let currentTheme = localStorage.getItem('avi-theme') || 'dark';
+      applyTheme(currentTheme);
+
+      themeToggle.addEventListener('click', function() {
+        const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+        applyTheme(newTheme);
+        localStorage.setItem('avi-theme', newTheme);
+      });
+
+      function applyTheme(theme) {
+        if (theme === 'light') {
+          document.body.classList.add('light-mode');
+          themeIcon.className = 'fas fa-sun';
+        } else {
+          document.body.classList.remove('light-mode');
+          themeIcon.className = 'fas fa-moon';
+        }
+      }
+
+      // ============================================================
+      // MODAL PARA PILARES
+      // ============================================================
+      const modal = document.getElementById('pillarModal');
+      const modalClose = document.getElementById('modalClose');
+      const modalIcon = document.getElementById('modalIcon');
+      const modalPhase = document.getElementById('modalPhase');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalContent = document.getElementById('modalContent');
+
+      const pillarData = {
+        pixel: {
+          icon: 'fa-paint-brush',
+          phase: 'Fundacional',
+          title: 'Connection Pixel',
+          content: `
+            <p><strong>Connection Pixel</strong> es el Hub Creativo y Tecnológico O2O (Online-to-Offline) del ecosistema AVI CONNECTION. Unifica el entorno digital y el mundo físico mediante un modelo que integra la imprenta automatizada de alto tonelaje con el desarrollo de plataformas web corporativas, aplicaciones móviles a medida y diseño de marcas de alto impacto.</p>
+            <p>Nuestra filosofía se basa en el <strong>Código Puro</strong>, rechazando plantillas genéricas para construir cada línea de código desde cero con arquitecturas nativas avanzadas (Astro, Tailwind CSS, C++), garantizando velocidad extrema, SEO impecable y escalabilidad sin límites.</p>
+            <p>Operamos bajo un modelo <strong>Online-to-Offline (O2O)</strong> que materializa lo digital en el mundo físico, fusionando la capacidad industrial de un taller de imprenta de alto tonelaje con el desarrollo web de vanguardia.</p>
+            <span class="modal-tag"><i class="fas fa-cube"></i> O2O · Código Puro · Imprenta Digital</span>
+          `
+        },
+        labs: {
+          icon: 'fa-flask',
+          phase: 'Fundacional',
+          title: 'Connection Labs',
+          content: `
+            <p><strong>Connection Labs</strong> es el núcleo de investigación pura y desarrollo de software de alto rendimiento del holding. Dedicado al diseño de algoritmos complejos, auditorías de sistemas, optimización de arquitecturas de bases de datos y el entrenamiento de modelos de inteligencia artificial personalizados para grandes infraestructuras productivas.</p>
+            <p>Nuestra filosofía técnica se basa en el <strong>Código Puro</strong> y la <strong>Arquitectura Zero-Trust</strong>. Desarrollamos plataformas corporativas, SaaS (Software as a Service) y sistemas de gestión (ERPs, CRMs) utilizando tecnologías de vanguardia (Astro, React, Tailwind CSS, C++ y FlutterFlow).</p>
+            <p>Integramos asistentes virtuales inteligentes capaces de procesar lenguaje natural (texto y voz) utilizando APIs de última generación (OpenAI, Google Gemini) orquestadas mediante flujos de n8n y Make.com.</p>
+            <span class="modal-tag"><i class="fas fa-code"></i> IA · Cloud · Ciberseguridad</span>
+          `
+        },
+        commerce: {
+          icon: 'fa-cart-plus',
+          phase: 'Fundacional',
+          title: 'Connection Commerce',
+          content: `
+            <p><strong>Connection Commerce</strong> es el Motor Transaccional Global del ecosistema. Una E-commerce Suite y Marketplace descentralizado encargado de procesar cobros, automatizar la facturación electrónica ante entidades regulatorias (SUNAT) y conectar el comercio formal e informal con el mercado digital.</p>
+            <p>Nuestra plataforma implementa mecanismos avanzados como <strong>Split Payment</strong> (fraccionamiento atómico del pago), <strong>Viralidad Inversa</strong> (sistema de auditoría ciudadana) y <strong>Ecosystem Lock-In</strong> (economía circular inquebrantable).</p>
+            <p>Integramos pasarelas de pago globales (Stripe, Kushki, Mercado Pago) y billeteras digitales locales (Yape, Plin) bajo un modelo de <strong>Event Sourcing + CQRS</strong> que garantiza inmunidad a desajustes contables.</p>
+            <span class="modal-tag"><i class="fas fa-credit-card"></i> Split Payment · CQRS · Facturación Automática</span>
+          `
+        },
+        life: {
+          icon: 'fa-heartbeat',
+          phase: 'Fundacional',
+          title: 'Connection Life',
+          content: `
+            <p><strong>Connection Life</strong> es el pilar estratégico enfocado en la optimización de la experiencia humana mediante la convergencia del Turismo de Vanguardia y la Ingeniería Médica Avanzada (MedTech).</p>
+            <p>Desde nuestra sede en Cusco, Perú, rediseñamos el concepto tradicional de asistencia al viajero y telemedicina, proveyendo una <strong>infraestructura tecnológica integral en la nube</strong> que resguarda la salud del usuario y enriquece su exploración cultural.</p>
+            <p>Nuestro módulo <strong>"Compass"</strong> ofrece guía predictiva y geolocalizada con itinerarios optimizados en tiempo real, integrando <strong>Realidad Aumentada (AR Points)</strong> para reconstrucciones históricas 3D de fortalezas incas. Nuestro sistema de <strong>Monitoreo Biométrico Predictivo</strong> se sincroniza con wearables para rastrear SpO₂ y frecuencia cardíaca.</p>
+            <span class="modal-tag"><i class="fas fa-map-marked-alt"></i> MedTech · AR · Telemedicina</span>
+          `
+        },
+        home: {
+          icon: 'fa-home-lg',
+          phase: 'Expansión 2030',
+          title: 'Connection Home',
+          content: `
+            <p><strong>Connection Home</strong> representa la evolución del hábitat humano. Nuestra visión es democratizar el acceso a la domótica (automatización del hogar) e integrar arquitectura sostenible con tecnología de punta. Diseñamos <strong>"Entornos Inteligentes"</strong> que se adaptan automáticamente a los hábitos, salud y necesidades energéticas de sus habitantes.</p>
+            <p>Operamos bajo el concepto de <strong>Arquitectura Sensible</strong>: espacios que, mediante sensores y algoritmos de IA, gestionan su propia eficiencia, seguridad y confort, reduciendo drásticamente la huella de carbono y maximizando la calidad de vida del usuario.</p>
+            <p>Nuestras líneas de innovación incluyen <strong>Gestión Energética Autónoma</strong> (Smart Grid Local), <strong>Seguridad Predictiva por IA</strong> (Vision Hub) y <strong>Construcción Modular Sostenible</strong> (Andean Bio-Tech).</p>
+            <span class="modal-tag"><i class="fas fa-home"></i> Domótica · IoT · Sostenibilidad</span>
+          `
+        },
+        motors: {
+          icon: 'fa-car',
+          phase: 'Expansión 2030',
+          title: 'Connection Motors',
+          content: `
+            <p><strong>Connection Motors</strong> es el pilar de expansión a largo plazo enfocado en la disrupción de la industria automotriz, la movilidad inteligente y la logística de flotas. Nuestra visión es transformar los vehículos de simples máquinas de transporte a <strong>Nodos de Datos Rodantes</strong> interconectados con la nube.</p>
+            <p>Desarrollamos <strong>escáneres OBD2 y microcontroladores propietarios</strong> que se conectan a la computadora del vehículo, enviando reportes de salud en tiempo real. El sistema no espera a que el auto se descomponga; avisa al conductor y reserva automáticamente una cita en el taller cuando detecta una anomalía estadística.</p>
+            <p>Nuestro software <strong>Andean EV Grid</strong> gestiona baterías adaptadas a las condiciones extremas de altura y frío de la cordillera de los Andes, calculando rutas topográficas por consumo energético exacto en pendientes pronunciadas.</p>
+            <span class="modal-tag"><i class="fas fa-chart-line"></i> IoT · Telemetría · EV Grid</span>
+          `
+        },
+        space: {
+          icon: 'fa-rocket',
+          phase: 'Expansión 2030',
+          title: 'Connection Space',
+          content: `
+            <p><strong>Connection Space</strong> es el pilar de máxima proyección técnica de la matriz. Su objetivo es convertir a AVI CONNECTION en un proveedor global de conectividad de alta frecuencia y tecnología aeroespacial. Somos una empresa de <strong>infraestructura crítica</strong> que busca resolver la latencia, la soberanía de datos y la conectividad en zonas remotas.</p>
+            <p>Nuestra <strong>Red Mesh Satelital (AVI-Link)</strong> es una constelación de satélites en órbita baja (LEO) destinada a crear una red privada de datos de alta frecuencia, permitiendo que la Súper App AVI tenga conectividad global sin importar ubicación.</p>
+            <p>Desarrollamos <strong>hardware aeroespacial para observación terrestre</strong> con sensores remotos que analizan imágenes multiespectrales para predecir desastres naturales, optimizar la agricultura y mejorar la eficiencia logística.</p>
+            <span class="modal-tag"><i class="fas fa-satellite"></i> Satélites · LEO · Telemetría</span>
+          `
+        }
+      };
+
+      document.querySelectorAll('.pillar-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const pillar = this.dataset.pillar;
+          const data = pillarData[pillar];
+          if (data) {
+            modalIcon.innerHTML = `<i class="fas ${data.icon}"></i>`;
+            modalPhase.textContent = data.phase;
+            modalTitle.textContent = data.title;
+            modalContent.innerHTML = data.content;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      function closePillarModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closePillarModal);
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) closePillarModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closePillarModal();
+      });
+
+      // ============================================================
+      // MODAL DE UPGRADE
+      // ============================================================
+      const upgradeModal = document.getElementById('upgradeModal');
+      const upgradeTitle = document.getElementById('upgradeTitle');
+      const upgradeDesc = document.getElementById('upgradeDesc');
+
+      window.showUpgradeModal = function(plan) {
+        if (plan === 'PRO') {
+          upgradeTitle.textContent = '🌟 Desbloquea el Plan PRO';
+          upgradeDesc.innerHTML = `
+            Con el Plan PRO obtienes acceso a <strong>todas las herramientas</strong> del ecosistema AVI:
+            NEST, PAY, POINTS, GO e IA.
+            <br><br>
+            🎁 <strong>5 AVI POINTS</strong> de regalo por tu registro.
+            <br><br>
+            <span style="font-size:0.7rem; color:var(--text-muted);">
+              <i class="fas fa-check-circle" style="color:#4caf50;"></i> Regístrate con Google, Microsoft, Apple o GitHub
+            </span>
+          `;
+        } else if (plan === 'ULTRA') {
+          upgradeTitle.textContent = '💎 Plan ULTRA · Acceso Total';
+          upgradeDesc.innerHTML = `
+            <strong>Todo lo que incluye PRO</strong> + beneficios exclusivos:
+            <br><br>
+            📦 <strong>Más límites:</strong> Mayor almacenamiento, más transacciones y más puntos.
+            <br>
+            🎫 <strong>Descuentos exclusivos:</strong> en servicios de los pilares.
+            <br>
+            🏆 <strong>Badge ULTRA</strong> visible en tu perfil.
+            <br>
+            🌐 <strong>Eventos exclusivos</strong> para miembros ULTRA.
+            <br><br>
+            🎁 <strong>10 AVI POINTS</strong> de regalo por tu registro.
+            <br><br>
+            <span style="font-size:0.7rem; color:var(--text-muted);">
+              <i class="fas fa-check-circle" style="color:#4caf50;"></i> Registro exclusivo con cuenta AVI (@connection.net)
+            </span>
+          `;
+        }
+        upgradeModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+
+      window.closeUpgradeModal = function() {
+        upgradeModal.classList.remove('active');
+        document.body.style.overflow = '';
+      };
+
+      upgradeModal.addEventListener('click', function(e) {
+        if (e.target === this) closeUpgradeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeUpgradeModal();
+      });
+
+      // ============================================================
+      // DETECCIÓN DE DISPOSITIVO MÓVIL
+      // ============================================================
+      function isMobileDevice() {
+        return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|webOS/i.test(navigator.userAgent) || 
+               window.innerWidth <= 768;
+      }
+
+      if (isMobileDevice() && !window.location.pathname.includes('indexmovil.html')) {
+        setTimeout(() => {
+          window.location.href = 'indexmovil.html';
+        }, 100);
+      }
+
+    })();
+  </script>
+
+</body>
+</html>

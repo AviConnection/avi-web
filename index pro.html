@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>AVI CONNECTION PRO · Ecosistema Premium</title>
+    <!-- Google Font: Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET Y BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        /* ===== VARIABLES CSS PRO ===== */
+        :root {
+            --bg-primary: #0a0815;
+            --bg-secondary: #100e20;
+            --bg-card: rgba(18, 14, 38, 0.88);
+            --bg-card-hover: rgba(26, 20, 50, 0.94);
+            --bg-tool: rgba(20, 16, 44, 0.5);
+            --bg-about: rgba(18, 14, 38, 0.7);
+            --bg-sidebar: rgba(10, 8, 20, 0.96);
+            --bg-sidebar-hover: rgba(0, 200, 255, 0.06);
+            --border-color: #1a2a5a;
+            --border-light: #0e1a42;
+            --border-sidebar: #2a4a8a;
+            --text-primary: #d0d8f0;
+            --text-secondary: #b0b8d8;
+            --text-muted: #7080b0;
+            --text-title: #d0d8f0;
+            --text-gold: #80c0f0;
+            --accent-1: #00e5ff;
+            --accent-2: #b388ff;
+            --accent-3: #00e676;
+            --accent-4: #ffd740;
+            --accent-glow: rgba(0, 200, 255, 0.08);
+            --shadow-card: 0 12px 30px rgba(0,0,0,0.7);
+            --shadow-sidebar: 4px 0 40px rgba(0, 200, 255, 0.04);
+            --gradient-hero: linear-gradient(135deg, rgba(10, 8, 20, 0.3) 0%, rgba(16, 14, 32, 0.15) 100%);
+            --gradient-border: linear-gradient(90deg, #00e5ff, #b388ff, #00e676, #ffd740);
+            --bg-radial: radial-gradient(ellipse at 20% 30%, rgba(0, 200, 255, 0.05) 0%, transparent 60%),
+                          radial-gradient(ellipse at 80% 70%, rgba(179, 136, 255, 0.04) 0%, transparent 50%),
+                          linear-gradient(180deg, #0a0815 0%, #100e20 100%);
+            --video-opacity: 0.9;
+            --video-filter: saturate(1.1) contrast(1.05) brightness(0.95);
+            --scrollbar-thumb: linear-gradient(180deg, #00e5ff, #b388ff);
+            --footer-bg: #0a0815;
+            --footer-text: #7080b0;
+            --badge-bg: rgba(0, 200, 255, 0.06);
+            --paper-bg: rgba(16, 14, 38, 0.85);
+            --paper-border: rgba(0, 200, 255, 0.05);
+            --pro-glow: rgba(0, 229, 255, 0.15);
+            --success: #00e676;
+            --warning: #ffd740;
+        }
+
+        body.light-mode {
+            --bg-primary: #e8ecf8;
+            --bg-secondary: #dce0f0;
+            --bg-card: rgba(255, 255, 255, 0.92);
+            --bg-card-hover: rgba(255, 255, 255, 0.98);
+            --bg-tool: rgba(240, 242, 250, 0.75);
+            --bg-about: rgba(242, 244, 252, 0.85);
+            --bg-sidebar: rgba(240, 242, 250, 0.96);
+            --bg-sidebar-hover: rgba(0, 200, 255, 0.04);
+            --border-color: #c0c8d8;
+            --border-light: #d0d8e8;
+            --border-sidebar: #a0b0c8;
+            --text-primary: #1a2035;
+            --text-secondary: #2a3448;
+            --text-muted: #6a7a90;
+            --text-title: #1a2035;
+            --text-gold: #3a6a8a;
+            --accent-1: #0097a7;
+            --accent-2: #7c4dff;
+            --accent-3: #00c853;
+            --accent-4: #ffab00;
+            --accent-glow: rgba(0, 200, 255, 0.04);
+            --shadow-card: 0 12px 30px rgba(0,0,0,0.04);
+            --shadow-sidebar: 4px 0 40px rgba(0,0,0,0.03);
+            --gradient-hero: linear-gradient(135deg, rgba(232, 236, 248, 0.3) 0%, rgba(220, 224, 240, 0.15) 100%);
+            --gradient-border: linear-gradient(90deg, #0097a7, #7c4dff, #00c853, #ffab00);
+            --bg-radial: radial-gradient(ellipse at 20% 30%, rgba(0, 200, 255, 0.02) 0%, transparent 60%),
+                          radial-gradient(ellipse at 80% 70%, rgba(179, 136, 255, 0.02) 0%, transparent 50%),
+                          linear-gradient(180deg, #e8ecf8 0%, #dce0f0 100%);
+            --video-opacity: 0.75;
+            --video-filter: saturate(0.95) contrast(1.05) brightness(1.0);
+            --scrollbar-thumb: linear-gradient(180deg, #0097a7, #7c4dff);
+            --footer-bg: #dce0f0;
+            --footer-text: #6a7a90;
+            --badge-bg: rgba(0, 200, 255, 0.03);
+            --paper-bg: rgba(255, 255, 255, 0.9);
+            --paper-border: rgba(0, 200, 255, 0.03);
+            --pro-glow: rgba(0, 151, 167, 0.12);
+            --success: #00c853;
+            --warning: #ffab00;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: var(--bg-primary);
+            background-image: var(--bg-radial);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }
+
+        /* ===== ANIMACIONES ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 40px rgba(0, 200, 255, 0.06), inset 0 0 20px rgba(0, 200, 255, 0.02); }
+            100% { box-shadow: 0 0 80px rgba(0, 229, 255, 0.2), inset 0 0 40px rgba(0, 200, 255, 0.06); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+            50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+        }
+        @keyframes cardGlow {
+            0% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+            50% { box-shadow: 0 0 40px rgba(0, 229, 255, 0.12); }
+            100% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        }
+
+        /* ===== BOTÓN MODO CLARO/OSCURO ===== */
+        .theme-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 300;
+            background: var(--paper-bg);
+            border: 1px solid var(--paper-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--accent-1);
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(16px);
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 40px var(--accent-glow);
+        }
+
+        /* ===== USER BADGE (sesión) ===== */
+        .user-badge {
+            position: fixed;
+            top: 20px;
+            right: 80px;
+            z-index: 300;
+            background: var(--paper-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--paper-border);
+            border-radius: 40px;
+            padding: 0.4rem 1.2rem 0.4rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            font-size: 0.6rem;
+            color: var(--text-primary);
+        }
+        .user-badge .avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        .user-badge .user-name {
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .user-badge .user-plan {
+            font-size: 0.45rem;
+            color: var(--accent-1);
+            background: var(--accent-glow);
+            padding: 0.05rem 0.6rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent-1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .user-badge .user-points {
+            font-size: 0.45rem;
+            color: var(--warning);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .user-badge .user-points i {
+            font-size: 0.5rem;
+        }
+        .user-badge .logout-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: 0.3s;
+            padding: 0 4px;
+        }
+        .user-badge .logout-btn:hover {
+            color: var(--accent-1);
+            transform: scale(1.1);
+        }
+
+        /* ===== PRELOADER PRO ===== */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        #preloader.hide {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+        #preloader .loader-logo {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(145deg, #0e0a1a, #1a1030);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 60px var(--accent-glow);
+            animation: pulseGlow 1.6s infinite alternate;
+            border: 1px solid rgba(0, 200, 255, 0.08);
+        }
+        #preloader .loader-logo svg { width: 90px; height: 90px; }
+        .loader-text {
+            margin-top: 28px;
+            font-size: 1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #8090b0;
+            font-weight: 600;
+        }
+        .loader-bar {
+            margin-top: 20px;
+            width: 200px;
+            height: 3px;
+            background: #1a1822;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .loader-bar .fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00e5ff, #b388ff, #00e676, #ffd740);
+            border-radius: 10px;
+            animation: loadFill 2s ease forwards;
+        }
+        @keyframes loadFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        #main-content.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 72px;
+            height: 100vh;
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(20px);
+            border-right: 2px solid var(--border-sidebar);
+            box-shadow: var(--shadow-sidebar);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.8rem 0;
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        background 0.5s ease,
+                        border-color 0.5s ease,
+                        box-shadow 0.5s ease;
+            overflow: hidden;
+        }
+        .sidebar:hover { width: 220px; }
+        .sidebar .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            padding: 0.5rem 0.8rem;
+            width: 100%;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border-sidebar);
+            margin-bottom: 0.5rem;
+            transition: color 0.5s ease, border-color 0.5s ease;
+        }
+        .sidebar .sidebar-logo i {
+            font-size: 1.8rem;
+            color: var(--accent-1);
+            filter: drop-shadow(0 0 12px #00e5ff);
+            min-width: 36px;
+            text-align: center;
+            animation: float 4s ease-in-out infinite;
+        }
+        .sidebar .sidebar-logo span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .sidebar:hover .sidebar-logo span { opacity: 1; }
+        .sidebar .sidebar-divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-sidebar), transparent);
+            margin: 0.2rem 0;
+            transition: background 0.5s ease;
+        }
+        .sidebar a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+            white-space: nowrap;
+            width: 100%;
+            border-left: 3px solid transparent;
+        }
+        .sidebar a i {
+            font-size: 1.1rem;
+            color: var(--accent-2);
+            min-width: 36px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .sidebar a span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            font-size: 0.55rem;
+        }
+        .sidebar:hover a span { opacity: 1; }
+        .sidebar a:hover {
+            background: var(--bg-sidebar-hover);
+            color: var(--text-gold);
+            border-left-color: var(--accent-1);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateX(4px);
+        }
+        .sidebar a:hover i { color: var(--accent-1); transform: scale(1.1); }
+        .sidebar .sidebar-section-label {
+            font-size: 0.45rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding: 0.4rem 0.8rem;
+            width: 100%;
+            white-space: nowrap;
+            border-top: 1px solid var(--border-sidebar);
+            margin-top: 0.2rem;
+            padding-top: 0.6rem;
+            transition: color 0.5s ease, border-color 0.5s ease;
+        }
+        .sidebar .sidebar-section-label span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .sidebar:hover .sidebar-section-label span { opacity: 1; }
+
+        /* Badge PRO en sidebar */
+        .sidebar a .pro-side-badge {
+            font-size: 0.35rem;
+            background: var(--accent-1);
+            color: #0a0815;
+            padding: 0.05rem 0.4rem;
+            border-radius: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: 0.3s;
+            margin-left: 4px;
+        }
+        .sidebar:hover a .pro-side-badge {
+            opacity: 1;
+        }
+
+        /* ===== MAIN WRAPPER ===== */
+        .main-wrapper {
+            margin-left: 72px;
+            transition: margin-left 0.35s ease;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .header-hero {
+            position: relative;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 4px solid var(--border-sidebar);
+            background: var(--bg-secondary);
+            transition: border-color 0.5s ease, background 0.5s ease;
+        }
+        .header-hero .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+            z-index: 1;
+            filter: var(--video-filter);
+            transition: opacity 0.5s ease, filter 0.5s ease;
+        }
+        .header-hero .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-hero);
+            z-index: 2;
+            transition: background 0.5s ease;
+        }
+        .header-hero .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+        .header-hero .hero-content .badge {
+            display: inline-block;
+            background: var(--badge-bg);
+            border: 1px solid var(--border-sidebar);
+            border-radius: 40px;
+            padding: 0.3rem 2rem;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--text-gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            transition: border-color 0.5s ease, background 0.5s ease, color 0.5s ease;
+        }
+        .header-hero .hero-content h1 {
+            font-size: clamp(3rem, 12vw, 6rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            text-shadow: 0 0 40px rgba(0, 229, 255, 0.15), 0 0 100px rgba(0, 229, 255, 0.05);
+            letter-spacing: 10px;
+            line-height: 1.1;
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+        }
+        .header-hero .hero-content h1 small {
+            display: block;
+            font-size: 0.2em;
+            font-weight: 400;
+            letter-spacing: 8px;
+            color: var(--accent-1);
+            text-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+            margin-top: 2px;
+        }
+        .header-hero .hero-content .slogan {
+            font-size: 1.3rem;
+            letter-spacing: 8px;
+            color: var(--text-primary);
+            border-top: 2px solid var(--border-sidebar);
+            padding-top: 20px;
+            margin-top: 16px;
+            font-weight: 400;
+            text-transform: uppercase;
+            transition: color 0.5s ease, border-color 0.5s ease;
+        }
+        .header-hero .hero-content .sub-slogan {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            transition: color 0.5s ease;
+        }
+        .header-hero .hero-content .pro-badge-hero {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 0.3rem 2rem;
+            border-radius: 40px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #0a0815;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            box-shadow: 0 0 40px var(--pro-glow);
+        }
+        .header-hero .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: bounceDown 2s infinite;
+            transition: color 0.5s ease;
+        }
+        .header-hero .scroll-indicator i {
+            font-size: 1.2rem;
+            color: var(--accent-1);
+        }
+
+        /* ===== SECCIONES GENERALES ===== */
+        .section-title {
+            text-align: center;
+            padding: 3rem 1rem 0.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-title);
+            letter-spacing: 6px;
+            text-shadow: 0 0 30px var(--accent-glow);
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+        }
+        .section-title i { color: var(--accent-1); margin-right: 12px; transition: color 0.5s ease; }
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-top: 4px;
+            font-weight: 300;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== QUIÉNES SOMOS ===== */
+        .about-section {
+            padding: 2rem 2rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-section .about-text {
+            font-size: 0.85rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 1rem auto;
+            text-align: center;
+            transition: color 0.5s ease;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .about-item {
+            background: var(--bg-about);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+            backdrop-filter: blur(4px);
+        }
+        .about-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+        .about-item i {
+            font-size: 2.2rem;
+            color: var(--accent-1);
+            margin-bottom: 10px;
+            transition: color 0.5s ease;
+        }
+        .about-item h4 {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--text-title);
+            font-weight: 700;
+            transition: color 0.5s ease;
+        }
+        .about-item p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== PILARES PRO ===== */
+        .pillars-section {
+            padding: 2rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .pillar-card {
+            background: var(--paper-bg);
+            backdrop-filter: blur(12px);
+            padding: 2rem 1.8rem;
+            border-radius: 24px;
+            border: 1px solid var(--paper-border);
+            box-shadow: var(--shadow-card);
+            transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        background 0.5s ease,
+                        border-color 0.5s ease,
+                        box-shadow 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: cardGlow 3s ease-in-out infinite;
+        }
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-border);
+            background-size: 300% 100%;
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .pillar-card:hover::before {
+            opacity: 1;
+            animation: shimmer 3s ease infinite;
+        }
+        .pillar-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-1);
+            box-shadow: 0 25px 50px var(--accent-glow);
+        }
+        .pillar-card .pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: inline-block;
+            transition: all 0.5s ease;
+        }
+        .pillar-card:nth-child(1) .pillar-icon { color: var(--accent-1); }
+        .pillar-card:nth-child(2) .pillar-icon { color: var(--accent-2); }
+        .pillar-card:nth-child(3) .pillar-icon { color: var(--accent-3); }
+        .pillar-card:nth-child(4) .pillar-icon { color: var(--accent-4); }
+        .pillar-card:nth-child(5) .pillar-icon { color: var(--accent-1); }
+        .pillar-card:nth-child(6) .pillar-icon { color: var(--accent-2); }
+        .pillar-card:nth-child(7) .pillar-icon { color: var(--accent-3); }
+        .pillar-card:hover .pillar-icon { transform: scale(1.15) rotate(-5deg); }
+        .pillar-card .pillar-phase {
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            transition: color 0.5s ease;
+        }
+        .pillar-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-title);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            transition: color 0.5s ease;
+        }
+        .pillar-card p {
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            opacity: 0.9;
+            transition: color 0.5s ease;
+        }
+        .pillar-card .premium-tag {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 0.15rem 1rem;
+            border-radius: 40px;
+            font-size: 0.45rem;
+            letter-spacing: 2px;
+            color: var(--accent-1);
+            border: 1px solid var(--accent-1);
+            background: var(--accent-glow);
+        }
+
+        /* ===== HERRAMIENTAS PRO ===== */
+        .tools-section {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            padding: 3rem 2rem;
+            backdrop-filter: blur(4px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .tool-item {
+            background: var(--bg-tool);
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .tool-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.03);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+        .tool-item .tool-icon {
+            font-size: 2rem;
+            color: var(--accent-1);
+            margin-bottom: 6px;
+            transition: color 0.5s ease;
+        }
+        .tool-item h4 {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--text-title);
+            font-weight: 700;
+            transition: color 0.5s ease;
+        }
+        .tool-item p {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+            transition: color 0.5s ease;
+        }
+        .tool-item .pro-badge {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 0.1rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.4rem;
+            letter-spacing: 1.5px;
+            color: var(--accent-1);
+            border: 1px solid var(--accent-1);
+            background: var(--accent-glow);
+        }
+
+        /* ===== SUPER APP ===== */
+        .superapp-section {
+            padding: 3rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .superapp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .superapp-item {
+            background: var(--bg-about);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+            backdrop-filter: blur(4px);
+        }
+        .superapp-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+        .superapp-item i {
+            font-size: 2.5rem;
+            color: var(--accent-1);
+            margin-bottom: 10px;
+            transition: color 0.5s ease;
+        }
+        .superapp-item h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--text-title);
+            font-weight: 700;
+            transition: color 0.5s ease;
+        }
+        .superapp-item p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.6;
+            transition: color 0.5s ease;
+        }
+        .superapp-item .tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 0.15rem 1rem;
+            border-radius: 40px;
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            color: var(--text-gold);
+            border: 1px solid var(--border-color);
+            background: var(--bg-tool);
+            transition: color 0.5s ease, border-color 0.5s ease, background 0.5s ease;
+        }
+
+        /* ===== UPGRADE TO ULTRA ===== */
+        .upgrade-section {
+            padding: 3rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+        .upgrade-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .upgrade-container h2 {
+            font-size: 2rem;
+            color: var(--text-title);
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+            transition: color 0.5s ease;
+        }
+        .upgrade-container h2 i {
+            color: var(--accent-2);
+        }
+        .upgrade-container .upgrade-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            transition: color 0.5s ease;
+        }
+        .upgrade-container .upgrade-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .upgrade-container .upgrade-features span {
+            background: var(--bg-tool);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid var(--border-light);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+        .upgrade-container .upgrade-features span i {
+            color: var(--accent-4);
+            margin-right: 4px;
+        }
+        .upgrade-container .btn-upgrade-ultra {
+            display: inline-block;
+            padding: 0.8rem 3rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--accent-2), #6d28d9);
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .upgrade-container .btn-upgrade-ultra:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(124, 58, 237, 0.4);
+        }
+        .upgrade-container .small-text {
+            margin-top: 1rem;
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-minimal {
+            border-top: 2px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+        }
+        .footer-minimal .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-minimal .footer-inner .brand-foot {
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .footer-minimal .footer-inner a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.55rem;
+            letter-spacing: 1.5px;
+        }
+        .footer-minimal .footer-inner a:hover { color: var(--accent-1); transform: scale(1.05); }
+        .footer-minimal .footer-inner .sep {
+            color: var(--border-color);
+            font-size: 0.4rem;
+            transition: color 0.5s ease;
+        }
+        .footer-minimal .copyright {
+            margin-top: 0.6rem;
+            opacity: 0.5;
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 0.7rem 2rem;
+            border-radius: 16px;
+            background: var(--paper-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--paper-border);
+            color: var(--text-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 40px var(--glass-shadow);
+            max-width: 90%;
+            text-align: center;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success { border-color: var(--success); }
+        .toast.error { border-color: #ef4444; }
+        .toast.info { border-color: var(--warning); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .sidebar { width: 64px; }
+            .sidebar:hover { width: 64px; }
+            .sidebar a span,
+            .sidebar .sidebar-logo span,
+            .sidebar .sidebar-section-label span { display: none !important; }
+            .sidebar .sidebar-logo i { font-size: 1.5rem; min-width: 30px; }
+            .sidebar a i { font-size: 1rem; min-width: 30px; }
+            .sidebar a { padding: 0.4rem 0.5rem; justify-content: center; gap: 0; }
+            .sidebar .sidebar-logo { justify-content: center; padding: 0.4rem 0; }
+            .sidebar .sidebar-divider { width: 50%; }
+            .sidebar .sidebar-section-label { display: none; }
+            .sidebar a .pro-side-badge { display: none; }
+            .main-wrapper { margin-left: 64px; }
+            .header-hero { min-height: 70vh; }
+        }
+
+        @media (max-width: 992px) {
+            .header-hero { min-height: 60vh; }
+            .pillars-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .tools-grid { grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+            .about-grid { grid-template-columns: 1fr 1fr; }
+            .superapp-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .user-badge { top: 16px; right: 70px; padding: 0.3rem 0.8rem; font-size: 0.5rem; }
+            .user-badge .avatar { width: 22px; height: 22px; font-size: 0.6rem; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 56px; }
+            .sidebar:hover { width: 56px; }
+            .sidebar .sidebar-logo i { font-size: 1.3rem; min-width: 26px; }
+            .sidebar a i { font-size: 0.9rem; min-width: 26px; }
+            .sidebar a { padding: 0.3rem 0.3rem; }
+            .sidebar .sidebar-logo { padding: 0.3rem 0; }
+            .main-wrapper { margin-left: 56px; }
+            .header-hero { min-height: 50vh; }
+            .header-hero .scroll-indicator { bottom: 20px; font-size: 0.6rem; }
+            .header-hero .scroll-indicator i { font-size: 1rem; }
+            .section-title { font-size: 1.8rem; letter-spacing: 4px; }
+            .about-section { padding: 1.5rem 1rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .pillars-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .pillars-section { padding: 1.5rem 1rem 2.5rem; }
+            .tools-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .tools-section { padding: 2rem 1rem; }
+            .superapp-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .superapp-section { padding: 2rem 1rem 3rem; }
+            .upgrade-container h2 { font-size: 1.6rem; }
+            .upgrade-container .upgrade-features { gap: 0.5rem; }
+            .upgrade-container .upgrade-features span { font-size: 0.5rem; padding: 0.2rem 0.8rem; }
+            .upgrade-container .btn-upgrade-ultra { padding: 0.7rem 2rem; font-size: 0.7rem; }
+            .footer-minimal .footer-inner { gap: 0.5rem 1.2rem; flex-wrap: wrap; }
+            .footer-minimal { padding: 1rem; font-size: 0.5rem; }
+            .theme-toggle { width: 44px; height: 44px; font-size: 1.2rem; bottom: 16px; right: 16px; }
+            .user-badge { top: 14px; right: 60px; padding: 0.2rem 0.6rem; font-size: 0.45rem; }
+            .user-badge .avatar { width: 20px; height: 20px; font-size: 0.5rem; }
+            .user-badge .user-points { font-size: 0.4rem; }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar { width: 48px; }
+            .main-wrapper { margin-left: 48px; }
+            .sidebar .sidebar-logo i { font-size: 1.2rem; min-width: 24px; }
+            .sidebar a i { font-size: 0.85rem; min-width: 24px; }
+            .sidebar a { padding: 0.25rem 0.2rem; border-radius: 6px; }
+            .sidebar .sidebar-logo { padding: 0.25rem 0; }
+            .sidebar .sidebar-divider { width: 40%; margin: 0.1rem 0; }
+            .header-hero { min-height: 40vh; }
+            .header-hero .hero-content h1 { font-size: 2rem; letter-spacing: 4px; }
+            .header-hero .hero-content h1 small { font-size: 0.2em; letter-spacing: 4px; }
+            .header-hero .hero-content .slogan { font-size: 0.8rem; letter-spacing: 3px; padding-top: 12px; margin-top: 10px; }
+            .header-hero .hero-content .sub-slogan { font-size: 0.65rem; letter-spacing: 2px; }
+            .header-hero .hero-content { padding: 1rem; }
+            .header-hero .hero-content .pro-badge-hero { font-size: 0.55rem; padding: 0.2rem 1.2rem; }
+            .header-hero .scroll-indicator { bottom: 14px; font-size: 0.5rem; letter-spacing: 2px; }
+            .header-hero .scroll-indicator i { font-size: 0.8rem; }
+            .section-title { font-size: 1.4rem; letter-spacing: 3px; padding: 2rem 0.8rem 0.3rem; }
+            .section-title i { margin-right: 6px; }
+            .section-subtitle { font-size: 0.65rem; letter-spacing: 2px; }
+            .about-section { padding: 1rem 0.8rem; }
+            .about-section .about-text { font-size: 0.7rem; line-height: 1.6; margin: 0.5rem auto; }
+            .about-grid { gap: 0.8rem; }
+            .about-item { padding: 1rem; border-radius: 12px; }
+            .about-item i { font-size: 1.6rem; }
+            .about-item h4 { font-size: 0.65rem; }
+            .about-item p { font-size: 0.55rem; }
+            .pillars-grid { gap: 0.8rem; }
+            .pillars-section { padding: 0.5rem 0.8rem 1.5rem; }
+            .pillar-card { padding: 1.2rem 0.8rem; border-radius: 16px; }
+            .pillar-card .pillar-icon { font-size: 1.8rem; margin-bottom: 6px; }
+            .pillar-card h3 { font-size: 0.9rem; }
+            .pillar-card p { font-size: 0.65rem; line-height: 1.5; }
+            .pillar-card .pillar-phase { font-size: 0.4rem; }
+            .pillar-card .premium-tag { font-size: 0.4rem; padding: 0.1rem 0.6rem; }
+            .tools-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .tools-section { padding: 1.5rem 0.8rem; }
+            .tool-item { padding: 0.8rem 0.6rem; border-radius: 10px; }
+            .tool-item .tool-icon { font-size: 1.4rem; }
+            .tool-item h4 { font-size: 0.6rem; letter-spacing: 1px; }
+            .tool-item p { font-size: 0.5rem; }
+            .superapp-grid { gap: 0.8rem; }
+            .superapp-section { padding: 1.5rem 0.8rem 2rem; }
+            .superapp-item { padding: 1rem 0.8rem; border-radius: 12px; }
+            .superapp-item i { font-size: 1.8rem; }
+            .superapp-item h4 { font-size: 0.7rem; }
+            .superapp-item p { font-size: 0.6rem; }
+            .superapp-item .tag { font-size: 0.4rem; padding: 0.1rem 0.6rem; }
+            .upgrade-container h2 { font-size: 1.3rem; }
+            .upgrade-container .upgrade-text { font-size: 0.7rem; }
+            .upgrade-container .btn-upgrade-ultra { padding: 0.6rem 1.5rem; font-size: 0.6rem; letter-spacing: 2px; }
+            .footer-minimal { padding: 0.8rem; font-size: 0.45rem; }
+            .footer-minimal .footer-inner { gap: 0.3rem 0.8rem; flex-direction: column; }
+            .footer-minimal .footer-inner .sep { display: none; }
+            .footer-minimal .copyright { font-size: 0.4rem; margin-top: 0.3rem; }
+            .theme-toggle { width: 38px; height: 38px; font-size: 0.9rem; bottom: 10px; right: 10px; }
+            .user-badge { top: 10px; right: 50px; padding: 0.15rem 0.4rem; font-size: 0.4rem; gap: 4px; }
+            .user-badge .avatar { width: 16px; height: 16px; font-size: 0.4rem; }
+            .user-badge .user-name { display: none; }
+            .user-badge .user-plan { font-size: 0.35rem; padding: 0.02rem 0.4rem; }
+            .user-badge .user-points { font-size: 0.35rem; }
+            .user-badge .logout-btn { font-size: 0.5rem; }
+            .toast { font-size: 0.55rem; padding: 0.5rem 1.2rem; bottom: 70px; }
+        }
+
+        @media (max-width: 380px) {
+            .sidebar { width: 42px; }
+            .main-wrapper { margin-left: 42px; }
+            .sidebar .sidebar-logo i { font-size: 1rem; min-width: 20px; }
+            .sidebar a i { font-size: 0.7rem; min-width: 20px; }
+            .sidebar a { padding: 0.2rem 0.15rem; }
+            .header-hero { min-height: 35vh; }
+            .section-title { font-size: 1.1rem; letter-spacing: 2px; }
+            .pillars-grid { grid-template-columns: 1fr; }
+            .tools-grid { grid-template-columns: 1fr 1fr; }
+            .superapp-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PRELOADER PRO ===== -->
+    <div id="preloader">
+        <div class="loader-logo">
+            <svg viewBox="0 0 200 200" fill="none">
+                <rect width="200" height="200" rx="40" fill="#0a0812"/>
+                <path d="M100 30 L130 80 L185 90 L145 135 L155 190 L100 165 L45 190 L55 135 L15 90 L70 80 L100 30" fill="#00e5ff" opacity="0.9"/>
+                <text x="100" y="130" font-family="Cinzel" font-size="34" fill="#f0d6c0" text-anchor="middle" font-weight="700">PRO</text>
+            </svg>
+        </div>
+        <div class="loader-text">Experiencia Premium</div>
+        <div class="loader-bar"><div class="fill"></div></div>
+    </div>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <div id="main-content">
+
+        <!-- ===== USER BADGE ===== -->
+        <div class="user-badge" id="userBadge">
+            <div class="avatar" id="userAvatar">U</div>
+            <span class="user-name" id="userName">Usuario</span>
+            <span class="user-plan" id="userPlan">PRO</span>
+            <span class="user-points"><i class="fas fa-star"></i> <span id="userPoints">0</span></span>
+            <button class="logout-btn" id="logoutBtn" title="Cerrar sesión"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="sidebar" id="sidebarNav">
+            <div class="sidebar-logo">
+                <i class="fas fa-crown"></i>
+                <span>PRO</span>
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section-label"><span>Herramientas</span></div>
+            <a href="avi id.html"><i class="fas fa-id-card"></i><span>ID <span class="pro-side-badge">PRO</span></span></a>
+            <a href="avi fix.html"><i class="fas fa-tools"></i><span>FIX <span class="pro-side-badge">PRO</span></span></a>
+            <a href="avi nest.html"><i class="fas fa-cloud-upload-alt"></i><span>NEST <span class="pro-side-badge">PRO</span></span></a>
+            <a href="avi pay.html"><i class="fas fa-credit-card"></i><span>PAY <span class="pro-side-badge">PRO</span></span></a>
+            <a href="avi points.html"><i class="fas fa-star"></i><span>POINTS <span class="pro-side-badge">PRO</span></span></a>
+            <a href="avi go.html"><i class="fas fa-truck"></i><span>GO <span class="pro-side-badge">PRO</span></span></a>
+            <a href="avi app.html"><i class="fas fa-mobile-alt"></i><span>APP <span class="pro-side-badge">PRO</span></span></a>
+            <a href="avi ia.html"><i class="fas fa-comment-dots"></i><span>IA <span class="pro-side-badge">PRO</span></span></a>
+            <a href="avi business.html"><i class="fas fa-briefcase"></i><span>BUSINESS <span class="pro-side-badge">PRO</span></span></a>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section-label"><span>Pilares</span></div>
+            <a href="index.html"><i class="fas fa-home"></i><span>Web</span></a>
+            <a href="Labs web.html"><i class="fas fa-flask"></i><span>Labs</span></a>
+            <a href="Pixel web.html"><i class="fas fa-paint-brush"></i><span>Pixel</span></a>
+            <a href="Life web.html"><i class="fas fa-heartbeat"></i><span>Life</span></a>
+            <a href="Commerce web.html"><i class="fas fa-cart-plus"></i><span>Commerce</span></a>
+            <a href="Home web.html"><i class="fas fa-home-lg"></i><span>Home</span></a>
+            <a href="Motors web.html"><i class="fas fa-car"></i><span>Motors</span></a>
+            <a href="Space web.html"><i class="fas fa-rocket"></i><span>Space</span></a>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section-label"><span>Versión</span></div>
+            <a href="index.html"><i class="fas fa-home"></i><span>Gratuita</span></a>
+            <a href="index ultra.html"><i class="fas fa-gem"></i><span>ULTRA</span></a>
+        </nav>
+
+        <!-- ===== WRAPPER PRINCIPAL ===== -->
+        <div class="main-wrapper">
+
+            <!-- ===== HERO SECTION ===== -->
+            <header class="header-hero">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="imagenes y videos/header pro.mp4" type="video/mp4">
+                </video>
+                <div class="bg-overlay"></div>
+                <div class="hero-content">
+                    <div class="badge"><i class="fas fa-crown"></i> Experiencia Premium</div>
+                    <h1>AVI <small>connection PRO</small></h1>
+                    <div class="slogan">Conectando ideas, creando realidades</div>
+                    <div class="sub-slogan">
+                        La versión premium del ecosistema tecnológico más avanzado de los Andes. Acceso ilimitado a todas las herramientas, almacenamiento sin restricciones y soporte prioritario 24/7.
+                    </div>
+                    <div class="pro-badge-hero">
+                        <i class="fas fa-crown"></i> PLAN PRO ACTIVO
+                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>SCROLL</span>
+                </div>
+            </header>
+
+            <!-- ===== QUIÉNES SOMOS ===== -->
+            <h2 class="section-title"><i class="fas fa-crown"></i> Experiencia Premium PRO</h2>
+            <div class="about-section">
+                <p class="about-text">
+                    <strong>AVI CONNECTION PRO</strong> es la versión de pago del ecosistema tecnológico más avanzado de los Andes. Diseñado para empresas y emprendedores que necesitan <strong>escalar sin límites</strong>, con acceso ilimitado a todas las herramientas, almacenamiento en la nube sin restricciones y soporte prioritario 24/7.
+                </p>
+                <p class="about-text">
+                    Por solo <strong>S/. 10 mensuales</strong>, desbloqueas el poder completo del ecosistema AVI CONNECTION. Sin límites, sin restricciones, sin compromisos.
+                </p>
+
+                <h4 style="text-align:center; color:var(--text-title); letter-spacing:3px; margin:1.5rem 0 0.5rem; font-size:0.9rem; transition:color 0.5s ease;">
+                    <i class="fas fa-gem" style="color:var(--accent-1);"></i> Beneficios Exclusivos PRO
+                </h4>
+                <div class="about-grid">
+                    <div class="about-item">
+                        <i class="fas fa-infinity"></i>
+                        <h4>Ilimitado</h4>
+                        <p>Almacenamiento en la nube sin límites · Transacciones ilimitadas · Usuarios ilimitados</p>
+                    </div>
+                    <div class="about-item">
+                        <i class="fas fa-headset"></i>
+                        <h4>Soporte 24/7</h4>
+                        <p>Atención prioritaria con asesores dedicados · Resolución en minutos · Chat en vivo</p>
+                    </div>
+                    <div class="about-item">
+                        <i class="fas fa-star"></i>
+                        <h4>Ventajas Exclusivas</h4>
+                        <p>Descuentos del 20% en todos los pilares · Acceso anticipado a nuevas herramientas · Sin comisiones</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== LOS 7 PILARES PRO ===== -->
+            <h2 class="section-title"><i class="fas fa-layer-group"></i> Los 7 Pilares PRO</h2>
+            <p class="section-subtitle">Acceso completo a todas las unidades estratégicas</p>
+            <section class="pillars-section">
+                <div class="pillars-grid">
+
+                    <div class="pillar-card">
+                        <span class="pillar-phase"><i class="fas fa-check-circle"></i> Fundacional</span>
+                        <div class="pillar-icon"><i class="fas fa-paint-brush"></i></div>
+                        <h3>Connection Pixel PRO</h3>
+                        <p>Hub Creativo O2O con imprenta de alto tonelaje, desarrollo web nativo y diseño de marcas ilimitado.</p>
+                        <span class="premium-tag"><i class="fas fa-crown"></i> PRO</span>
+                    </div>
+
+                    <div class="pillar-card">
+                        <span class="pillar-phase"><i class="fas fa-check-circle"></i> Fundacional</span>
+                        <div class="pillar-icon"><i class="fas fa-flask"></i></div>
+                        <h3>Connection Labs PRO</h3>
+                        <p>Investigación pura, algoritmos complejos, IA personalizada y arquitecturas Zero-Trust sin límites.</p>
+                        <span class="premium-tag"><i class="fas fa-crown"></i> PRO</span>
+                    </div>
+
+                    <div class="pillar-card">
+                        <span class="pillar-phase"><i class="fas fa-check-circle"></i> Fundacional</span>
+                        <div class="pillar-icon"><i class="fas fa-cart-plus"></i></div>
+                        <h3>Connection Commerce PRO</h3>
+                        <p>E-commerce Suite y Marketplace descentralizado con procesamiento de pagos ilimitado y 0% comisión.</p>
+                        <span class="premium-tag"><i class="fas fa-crown"></i> PRO</span>
+                    </div>
+
+                    <div class="pillar-card">
+                        <span class="pillar-phase"><i class="fas fa-check-circle"></i> Fundacional</span>
+                        <div class="pillar-icon"><i class="fas fa-heartbeat"></i></div>
+                        <h3>Connection Life PRO</h3>
+                        <p>Telemedicina avanzada, turismo inteligente y monitoreo biométrico predictivo sin restricciones.</p>
+                        <span class="premium-tag"><i class="fas fa-crown"></i> PRO</span>
+                    </div>
+
+                    <div class="pillar-card">
+                        <span class="pillar-phase"><i class="fas fa-rocket"></i> Expansión 2030</span>
+                        <div class="pillar-icon"><i class="fas fa-home-lg"></i></div>
+                        <h3>Connection Home PRO</h3>
+                        <p>Domótica avanzada, arquitectura sensible y construcción de espacios inteligentes con IoT ilimitado.</p>
+                        <span class="premium-tag"><i class="fas fa-crown"></i> PRO</span>
+                    </div>
+
+                    <div class="pillar-card">
+                        <span class="pillar-phase"><i class="fas fa-rocket"></i> Expansión 2030</span>
+                        <div class="pillar-icon"><i class="fas fa-car"></i></div>
+                        <h3>Connection Motors PRO</h3>
+                        <p>Logística predictiva, telemetría vehicular y flota inteligente con monitoreo en tiempo real ilimitado.</p>
+                        <span class="premium-tag"><i class="fas fa-crown"></i> PRO</span>
+                    </div>
+
+                    <div class="pillar-card">
+                        <span class="pillar-phase"><i class="fas fa-rocket"></i> Expansión 2030</span>
+                        <div class="pillar-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Connection Space PRO</h3>
+                        <p>Red Mesh satelital, telecomunicaciones de alta frecuencia y exploración científica sin límites.</p>
+                        <span class="premium-tag"><i class="fas fa-crown"></i> PRO</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===== SUITE DE HERRAMIENTAS PRO ===== -->
+            <section class="tools-section">
+                <h2 class="section-title" style="padding-top:0.5rem;"><i class="fas fa-tools"></i> Suite PRO</h2>
+                <p class="section-subtitle">Todas las herramientas sin restricciones</p>
+                <div class="tools-grid" style="margin-top:1.5rem;">
+                    <a href="avi id.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-id-card"></i></div>
+                        <h4>AVI ID PRO</h4>
+                        <p>SSO avanzado · Múltiples perfiles · Autenticación biométrica</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                    <a href="avi fix.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-tools"></i></div>
+                        <h4>AVI FIX PRO</h4>
+                        <p>Soporte 24/7 · Resolución en minutos · Chat en vivo</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                    <a href="avi nest.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <h4>AVI NEST PRO</h4>
+                        <p>Almacenamiento ilimitado · Backups automáticos · Encriptación avanzada</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                    <a href="avi pay.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-credit-card"></i></div>
+                        <h4>AVI PAY PRO</h4>
+                        <p>0% comisión · Split avanzado · Integración API ilimitada</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                    <a href="avi points.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-star"></i></div>
+                        <h4>AVI POINTS PRO</h4>
+                        <p>Doble acumulación · Canje prioritario · Beneficios exclusivos</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                    <a href="avi go.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-truck"></i></div>
+                        <h4>AVI GO PRO</h4>
+                        <p>Delivery prioritario · Seguimiento en tiempo real · Flota dedicada</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                    <a href="avi app.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h4>AVI APP PRO</h4>
+                        <p>Acceso anticipado · Funcionalidades exclusivas · Beta tester</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                    <a href="avi ia.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-comment-dots"></i></div>
+                        <h4>AVI IA PRO</h4>
+                        <p>IA avanzada · Automatizaciones · Integración con tus sistemas</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                    <a href="avi business.html" class="tool-item">
+                        <div class="tool-icon"><i class="fas fa-briefcase"></i></div>
+                        <h4>AVI BUSINESS PRO</h4>
+                        <p>Análisis avanzado · API ilimitada · Múltiples negocios</p>
+                        <span class="pro-badge">PRO</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- ===== SUPER APP PRO ===== -->
+            <section class="superapp-section">
+                <h2 class="section-title" style="padding-top:0.5rem;"><i class="fas fa-mobile-alt"></i> Súper App PRO</h2>
+                <p class="section-subtitle">La experiencia completa del ecosistema</p>
+                <div class="superapp-grid">
+                    <div class="superapp-item">
+                        <i class="fas fa-moon"></i>
+                        <h4>AVI ONE PRO</h4>
+                        <p>Entorno inmersivo con funcionalidades exclusivas, geolocalización avanzada y recompensas premium.</p>
+                        <span class="tag"><i class="fas fa-users"></i> B2C PRO</span>
+                    </div>
+                    <div class="superapp-item">
+                        <i class="fas fa-sun"></i>
+                        <h4>AVI BUSINESS PRO</h4>
+                        <p>Panel de control avanzado con análisis en tiempo real, múltiples negocios y Voice-to-Store ilimitado.</p>
+                        <span class="tag"><i class="fas fa-store"></i> B2B PRO</span>
+                    </div>
+                    <div class="superapp-item">
+                        <i class="fas fa-microphone"></i>
+                        <h4>Voice-to-Store PRO</h4>
+                        <p>Reconocimiento de voz avanzado, procesamiento en tiempo real y gestión de inventarios ilimitada.</p>
+                        <span class="tag"><i class="fas fa-robot"></i> EVI IA PRO</span>
+                    </div>
+                    <div class="superapp-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Trust Score PRO</h4>
+                        <p>Historial crediticio avanzado, acceso a microcréditos y beneficios exclusivos para comerciantes.</p>
+                        <span class="tag"><i class="fas fa-star"></i> Reputación PRO</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== UPGRADE TO ULTRA ===== -->
+            <section class="upgrade-section">
+                <div class="upgrade-container">
+                    <h2><i class="fas fa-gem"></i> ¿Quieres más poder?</h2>
+                    <p class="upgrade-text">
+                        Actualiza a <strong>AVI CONNECTION ULTRA</strong> y desbloquea beneficios exclusivos:
+                    </p>
+                    <div class="upgrade-features">
+                        <span><i class="fas fa-check"></i> 200 AVI POINTS de regalo</span>
+                        <span><i class="fas fa-check"></i> Mayor almacenamiento</span>
+                        <span><i class="fas fa-check"></i> Descuentos exclusivos</span>
+                        <span><i class="fas fa-check"></i> Badge ULTRA</span>
+                        <span><i class="fas fa-check"></i> Eventos exclusivos</span>
+                    </div>
+                    <a href="index ultra.html" class="btn-upgrade-ultra">
+                        <i class="fas fa-gem"></i> Actualizar a ULTRA
+                    </a>
+                    <p class="small-text">S/ 20 mensuales · Cancelación en cualquier momento</p>
+                </div>
+            </section>
+
+            <!-- ===== FOOTER ===== -->
+            <footer class="footer-minimal">
+                <div class="footer-inner">
+                    <span class="brand-foot">AVI CONNECTION PRO</span>
+                    <span class="sep">|</span>
+                    <span style="color:var(--footer-text); font-size:0.55rem; transition:color 0.5s ease;">Ecosistema Premium · S/. 10/mes</span>
+                    <span class="sep">|</span>
+                    <a href="#"><i class="fas fa-envelope"></i> pro@aviconnection.pe</a>
+                    <span class="sep">|</span>
+                    <a href="#"><i class="fas fa-shield-alt"></i> Privacidad</a>
+                </div>
+                <div class="copyright">
+                    © 2026 AVI CONNECTION S.A.C. · Versión PRO · Todos los derechos reservados
+                </div>
+            </footer>
+
+        </div><!-- /main-wrapper -->
+    </div><!-- /main-content -->
+
+    <!-- ===== BOTÓN CAMBIO DE TEMA ===== -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            // ===== TOAST =====
+            const toast = document.getElementById('toast');
+            let toastTimeout;
+
+            function showToast(message, type = 'success') {
+                toast.textContent = message;
+                toast.className = 'toast ' + type + ' show';
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+
+            // ===== PRELOADER =====
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
+            let startTime = Date.now();
+
+            function reveal() {
+                const elapsed = Date.now() - startTime;
+                const remaining = Math.max(0, 2200 - elapsed);
+                setTimeout(() => {
+                    preloader.classList.add('hide');
+                    mainContent.classList.add('show');
+                    setTimeout(() => { preloader.style.display = 'none'; }, 900);
+                }, remaining);
+            }
+
+            if (document.readyState === 'complete') {
+                reveal();
+            } else {
+                window.addEventListener('load', reveal);
+            }
+
+            // ===== CAMBIO DE TEMA =====
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+
+            let currentTheme = localStorage.getItem('avi-theme-pro') || 'dark';
+            applyTheme(currentTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+                applyTheme(newTheme);
+                localStorage.setItem('avi-theme-pro', newTheme);
+            });
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    document.body.classList.remove('light-mode');
+                    themeIcon.className = 'fas fa-moon';
+                }
+            }
+
+            // ===== SESIÓN Y USER BADGE =====
+            function loadSession() {
+                const session = localStorage.getItem('avi_session');
+                if (session) {
+                    try {
+                        const data = JSON.parse(session);
+                        const avatar = document.getElementById('userAvatar');
+                        const userName = document.getElementById('userName');
+                        const userPlan = document.getElementById('userPlan');
+                        const userPoints = document.getElementById('userPoints');
+
+                        avatar.textContent = data.name ? data.name.charAt(0).toUpperCase() : 'U';
+                        userName.textContent = data.name || 'Usuario';
+                        userPlan.textContent = data.isUltra ? 'ULTRA' : (data.isPro ? 'PRO' : 'FREE');
+                        userPoints.textContent = data.points || 0;
+
+                        // Si no es PRO o ULTRA, redirigir a versión gratuita
+                        if (!data.isPro && !data.isUltra) {
+                            showToast('⚠️ Esta página es exclusiva para usuarios PRO. Serás redirigido.', 'error');
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 2000);
+                        }
+
+                        // Si es ULTRA, redirigir a la versión ULTRA
+                        if (data.isUltra) {
+                            showToast('💎 Esta es la versión PRO. Redirigiendo a tu versión ULTRA...', 'info');
+                            setTimeout(() => {
+                                window.location.href = 'index ultra.html';
+                            }, 2000);
+                        }
+
+                        return data;
+                    } catch (e) {
+                        return null;
+                    }
+                } else {
+                    // Sin sesión, redirigir a login
+                    showToast('🔐 Debes iniciar sesión para acceder a PRO.', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'avi id.html';
+                    }, 2000);
+                    return null;
+                }
+            }
+
+            const sessionData = loadSession();
+
+            // ===== LOGOUT =====
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('avi_session');
+                showToast('👋 Sesión cerrada correctamente.', 'success');
+                setTimeout(() => {
+                    window.location.href = 'avi id.html';
+                }, 1000);
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

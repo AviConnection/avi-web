@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVI SHOP · Marketplace Inclusivo</title>
+    <!-- Google Font: Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== VARIABLES Y RESET ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cinzel', serif;
+            background: #0a080e;
+            color: #e8dce8;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ===== HEADER AVI SHOP ===== */
+        .shop-header {
+            background: rgba(10, 8, 14, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid #4a2a5a;
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .shop-header .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .shop-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #d4a060;
+        }
+        .shop-header .logo i { font-size: 2rem; }
+        .shop-header .search-box {
+            flex: 1;
+            max-width: 500px;
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            border-radius: 40px;
+            border: 1px solid #4a2a5a;
+            overflow: hidden;
+        }
+        .shop-header .search-box input {
+            flex: 1;
+            padding: 0.6rem 1.2rem;
+            background: transparent;
+            border: none;
+            color: #e8dce8;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            outline: none;
+        }
+        .shop-header .search-box button {
+            padding: 0.6rem 1.2rem;
+            background: #d4a060;
+            border: none;
+            color: #0a080e;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .shop-header .search-box button:hover { background: #c9a84c; }
+        .shop-header .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .shop-header .user-actions a {
+            color: #d0c4d8;
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .shop-header .user-actions a:hover { color: #d4a060; }
+        .shop-header .user-actions .points-badge {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #d4a060;
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            color: #d4a060;
+            font-weight: 700;
+        }
+
+        /* ===== NAV CATEGORÍAS ===== */
+        .categories-nav {
+            background: rgba(15, 11, 22, 0.8);
+            border-bottom: 1px solid #2a1a3a;
+            padding: 0.5rem 0;
+            overflow-x: auto;
+        }
+        .categories-nav .categories-list {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .categories-nav a {
+            color: #9a8aaa;
+            text-decoration: none;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s;
+        }
+        .categories-nav a:hover { color: #d4a060; border-bottom-color: #d4a060; }
+        .categories-nav a i { margin-right: 6px; }
+
+        /* ===== HERO BANNER ===== */
+        .shop-hero {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(212, 160, 96, 0.05), rgba(45, 143, 111, 0.05));
+            border-bottom: 1px solid #2a1a3a;
+        }
+        .shop-hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #d4a060, #2d8f6f, #4a7ab5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .shop-hero p {
+            color: #9a8aaa;
+            font-size: 1rem;
+            margin-top: 8px;
+            letter-spacing: 2px;
+        }
+        .shop-hero .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .shop-hero .btn-primary {
+            padding: 0.6rem 2rem;
+            background: linear-gradient(135deg, #d4a060, #c9a84c);
+            border: none;
+            border-radius: 40px;
+            color: #0a080e;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .shop-hero .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+        .shop-hero .btn-secondary {
+            padding: 0.6rem 2rem;
+            background: transparent;
+            border: 2px solid #d4a060;
+            border-radius: 40px;
+            color: #d4a060;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .shop-hero .btn-secondary:hover { background: rgba(212, 175, 55, 0.1); }
+
+        /* ===== TIENDAS DESTACADAS ===== */
+        .section-title {
+            font-size: 1.8rem;
+            color: #e8dce8;
+            margin: 2rem 0 1rem;
+            letter-spacing: 4px;
+        }
+        .section-title i { color: #d4a060; margin-right: 12px; }
+
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .store-card {
+            background: rgba(18, 12, 28, 0.9);
+            border-radius: 16px;
+            border: 1px solid #2a1a3a;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        .store-card:hover {
+            transform: translateY(-8px);
+            border-color: #d4a060;
+            box-shadow: 0 20px 45px rgba(212, 175, 55, 0.1);
+        }
+        .store-card .store-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2d1830, #4a2a5a);
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #d4a060;
+            border: 2px solid #4a2a5a;
+        }
+        .store-card .store-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e8dce8;
+        }
+        .store-card .store-category {
+            font-size: 0.6rem;
+            color: #9a8aaa;
+            letter-spacing: 2px;
+            margin: 4px 0;
+        }
+        .store-card .store-rating {
+            color: #d4a060;
+            font-size: 0.8rem;
+        }
+        .store-card .store-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #d4a060;
+            border-radius: 40px;
+            padding: 0.1rem 0.8rem;
+            font-size: 0.4rem;
+            color: #d4a060;
+            letter-spacing: 2px;
+            margin-top: 6px;
+        }
+
+        /* ===== PRODUCTOS ===== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .product-card {
+            background: rgba(18, 12, 28, 0.9);
+            border-radius: 16px;
+            border: 1px solid #2a1a3a;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: #d4a060;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.08);
+        }
+        .product-card .product-image {
+            height: 180px;
+            background: linear-gradient(135deg, #1a1030, #2d1830);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #4a2a5a;
+        }
+        .product-card .product-info {
+            padding: 1rem;
+        }
+        .product-card .product-info .product-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #e8dce8;
+        }
+        .product-card .product-info .product-price {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #d4a060;
+            margin: 4px 0;
+        }
+        .product-card .product-info .product-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            color: #9a8aaa;
+        }
+        .product-card .product-info .product-meta i { color: #d4a060; }
+        .product-card .btn-buy {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            background: linear-gradient(135deg, #d4a060, #c9a84c);
+            color: #0a080e;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .product-card .btn-buy:hover { background: linear-gradient(135deg, #c9a84c, #d4a060); }
+
+        /* ===== MODAL TIENDA ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: #0f0b16;
+            border-radius: 24px;
+            border: 1px solid #4a2a5a;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        .modal-content .modal-close {
+            float: right;
+            background: none;
+            border: none;
+            color: #9a8aaa;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .modal-content .modal-close:hover { color: #d4a060; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .shop-header .header-content { flex-direction: column; }
+            .shop-header .search-box { max-width: 100%; }
+            .shop-header .user-actions { flex-wrap: wrap; justify-content: center; }
+            .shop-hero h1 { font-size: 2rem; }
+            .stores-grid { grid-template-columns: 1fr 1fr; }
+            .products-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .stores-grid { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: 1fr; }
+            .shop-hero .cta-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER AVI SHOP ===== -->
+<header class="shop-header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>AVI SHOP</span>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Buscar productos, tiendas, categorías...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <a href="#"><i class="fas fa-user"></i> Mi Perfil</a>
+                <a href="#"><i class="fas fa-shopping-cart"></i> Carrito</a>
+                <a href="#" class="points-badge"><i class="fas fa-star"></i> 1,250 pts</a>
+                <a href="#" style="color:#d4a060; font-weight:700;"><i class="fas fa-store-alt"></i> Vender</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== CATEGORÍAS ===== -->
+<nav class="categories-nav">
+    <div class="categories-list">
+        <a href="#"><i class="fas fa-tshirt"></i> Ropa</a>
+        <a href="#"><i class="fas fa-laptop"></i> Electrónica</a>
+        <a href="#"><i class="fas fa-couch"></i> Hogar</a>
+        <a href="#"><i class="fas fa-utensils"></i> Alimentos</a>
+        <a href="#"><i class="fas fa-paint-brush"></i> Artesanía</a>
+        <a href="#"><i class="fas fa-robot"></i> Juguetes</a>
+        <a href="#"><i class="fas fa-spa"></i> Belleza</a>
+        <a href="#"><i class="fas fa-futbol"></i> Deportes</a>
+        <a href="#"><i class="fas fa-book"></i> Libros</a>
+        <a href="#"><i class="fas fa-box"></i> Otros</a>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="shop-hero">
+    <h1>🏪 AVI SHOP</h1>
+    <p>El marketplace inclusivo donde los emprendedores peruanos conectan con el mundo</p>
+    <div class="cta-buttons">
+        <button class="btn-primary" onclick="openModal('seller')"><i class="fas fa-store-alt"></i> CREAR MI TIENDA</button>
+        <button class="btn-secondary" onclick="openModal('buyer')"><i class="fas fa-shopping-bag"></i> COMPRAR PRODUCTOS</button>
+    </div>
+</section>
+
+<div class="container">
+
+    <!-- ===== TIENDAS DESTACADAS ===== -->
+    <h2 class="section-title"><i class="fas fa-crown"></i> Tiendas Destacadas</h2>
+    <div class="stores-grid" id="storesGrid">
+        <!-- Generado por JavaScript -->
+    </div>
+
+    <!-- ===== PRODUCTOS DESTACADOS ===== -->
+    <h2 class="section-title"><i class="fas fa-fire"></i> Productos Destacados</h2>
+    <div class="products-grid" id="productsGrid">
+        <!-- Generado por JavaScript -->
+    </div>
+
+    <!-- ===== CÓMO FUNCIONA ===== -->
+    <section style="background: rgba(18,12,28,0.7); border-radius: 20px; padding: 2rem; margin: 2rem 0; border: 1px solid #2a1a3a;">
+        <h2 style="text-align:center; color:#d4a060; margin-bottom:1.5rem;"><i class="fas fa-info-circle"></i> ¿Cómo funciona AVI SHOP?</h2>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:1.5rem;">
+            <div style="text-align:center;">
+                <div style="font-size:2.5rem; color:#d4a060;"><i class="fas fa-id-card"></i></div>
+                <h3 style="color:#e8dce8; font-size:0.9rem;">1. Regístrate</h3>
+                <p style="color:#9a8aaa; font-size:0.7rem;">Usa tu AVI ID para crear tu perfil de vendedor o comprador</p>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-size:2.5rem; color:#2d8f6f;"><i class="fas fa-store-alt"></i></div>
+                <h3 style="color:#e8dce8; font-size:0.9rem;">2. Crea tu Tienda</h3>
+                <p style="color:#9a8aaa; font-size:0.7rem;">Personaliza tu tienda, sube productos y establece precios</p>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-size:2.5rem; color:#4a7ab5;"><i class="fas fa-handshake"></i></div>
+                <h3 style="color:#e8dce8; font-size:0.9rem;">3. Vende y Compra</h3>
+                <p style="color:#9a8aaa; font-size:0.7rem;">Conecta con miles de clientes. AVI PAY procesa los pagos</p>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-size:2.5rem; color:#c9a84c;"><i class="fas fa-star"></i></div>
+                <h3 style="color:#e8dce8; font-size:0.9rem;">4. Gana Puntos</h3>
+                <p style="color:#9a8aaa; font-size:0.7rem;">Acumula AVI POINTS y canjea descuentos en tus compras</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- ===== MODAL REGISTRO VENDEDOR ===== -->
+<div class="modal-overlay" id="sellerModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('sellerModal')">✕</button>
+        <h2 style="color:#d4a060; margin-bottom:1.5rem;"><i class="fas fa-store-alt"></i> Crear Mi Tienda AVI SHOP</h2>
+        <form id="sellerForm" onsubmit="registerStore(event)">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div>
+                    <label style="color:#9a8aaa; font-size:0.7rem;">Nombre de la Tienda *</label>
+                    <input type="text" id="storeName" required style="width:100%; padding:0.6rem; border-radius:10px; border:1px solid #2a1a3a; background:rgba(255,255,255,0.05); color:#e8dce8;">
+                </div>
+                <div>
+                    <label style="color:#9a8aaa; font-size:0.7rem;">Categoría Principal *</label>
+                    <select id="storeCategory" style="width:100%; padding:0.6rem; border-radius:10px; border:1px solid #2a1a3a; background:rgba(255,255,255,0.05); color:#e8dce8;">
+                        <option value="ropa">Ropa</option>
+                        <option value="electronica">Electrónica</option>
+                        <option value="hogar">Hogar</option>
+                        <option value="alimentos">Alimentos</option>
+                        <option value="artesania">Artesanía</option>
+                        <option value="juguetes">Juguetes</option>
+                        <option value="belleza">Belleza</option>
+                        <option value="deportes">Deportes</option>
+                        <option value="libros">Libros</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+            </div>
+            <div style="margin-top:1rem;">
+                <label style="color:#9a8aaa; font-size:0.7rem;">Descripción de la Tienda</label>
+                <textarea id="storeDescription" rows="3" style="width:100%; padding:0.6rem; border-radius:10px; border:1px solid #2a1a3a; background:rgba(255,255,255,0.05); color:#e8dce8;"></textarea>
+            </div>
+            <div style="margin-top:1rem;">
+                <label style="color:#9a8aaa; font-size:0.7rem;">Dirección (para AVI GO)</label>
+                <input type="text" id="storeAddress" placeholder="Av. Ejemplo 123, Cusco" style="width:100%; padding:0.6rem; border-radius:10px; border:1px solid #2a1a3a; background:rgba(255,255,255,0.05); color:#e8dce8;">
+            </div>
+            <div style="margin-top:1.5rem; display:flex; gap:1rem;">
+                <button type="submit" style="flex:1; padding:0.8rem; background:linear-gradient(135deg, #d4a060, #c9a84c); border:none; border-radius:12px; color:#0a080e; font-weight:700; font-family:'Cinzel'; cursor:pointer;">CREAR TIENDA</button>
+                <button type="button" onclick="closeModal('sellerModal')" style="flex:1; padding:0.8rem; background:transparent; border:1px solid #4a2a5a; border-radius:12px; color:#9a8aaa; font-family:'Cinzel'; cursor:pointer;">CANCELAR</button>
+            </div>
+            <p style="color:#9a8aaa; font-size:0.6rem; margin-top:1rem; text-align:center;">
+                <i class="fas fa-check-circle" style="color:#2d8f6f;"></i> Registro gratuito · Comisión del 2% por venta · Conectado con AVI PAY, AVI POINTS y AVI GO
+            </p>
+        </form>
+    </div>
+</div>
+
+<!-- ===== MODAL COMPRADOR ===== -->
+<div class="modal-overlay" id="buyerModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('buyerModal')">✕</button>
+        <h2 style="color:#d4a060; margin-bottom:1.5rem;"><i class="fas fa-shopping-bag"></i> Bienvenido a AVI SHOP</h2>
+        <p style="color:#9a8aaa;">Explora miles de productos de emprendedores peruanos. Cada compra te da <strong style="color:#d4a060;">AVI POINTS</strong> que puedes canjear por descuentos.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem;">
+            <div style="background:rgba(45,143,111,0.05); border-radius:12px; padding:1rem; border:1px solid #2d8f6f;">
+                <h4 style="color:#2d8f6f;"><i class="fas fa-gift"></i> 5% OFF</h4>
+                <p style="color:#9a8aaa; font-size:0.7rem;">Canjea 5 AVI POINTS</p>
+            </div>
+            <div style="background:rgba(212,160,96,0.05); border-radius:12px; padding:1rem; border:1px solid #d4a060;">
+                <h4 style="color:#d4a060;"><i class="fas fa-star"></i> 10% OFF</h4>
+                <p style="color:#9a8aaa; font-size:0.7rem;">Canjea 10 AVI POINTS</p>
+            </div>
+        </div>
+        <button onclick="closeModal('buyerModal')" style="width:100%; margin-top:1.5rem; padding:0.8rem; background:linear-gradient(135deg, #d4a060, #c9a84c); border:none; border-radius:12px; color:#0a080e; font-weight:700; font-family:'Cinzel'; cursor:pointer;">
+            <i class="fas fa-store"></i> EXPLORAR TIENDAS
+        </button>
+    </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+    // ===== DATOS DE EJEMPLO =====
+    const stores = [
+        { id: 1, name: 'Artesanías Andinas', category: 'Artesanía', rating: 4.8, sales: 234, logo: '🎨', badge: 'Verificado' },
+        { id: 2, name: 'Moda Ayacuchana', category: 'Ropa', rating: 4.6, sales: 189, logo: '👕', badge: 'Verificado' },
+        { id: 3, name: 'Tecno Cusco', category: 'Electrónica', rating: 4.5, sales: 312, logo: '💻', badge: 'Top Seller' },
+        { id: 4, name: 'Sabor Peruano', category: 'Alimentos', rating: 4.9, sales: 456, logo: '🍲', badge: 'Verificado' },
+        { id: 5, name: 'Joyas del Inca', category: 'Artesanía', rating: 4.7, sales: 178, logo: '💎', badge: '' },
+        { id: 6, name: 'Hogar Natural', category: 'Hogar', rating: 4.3, sales: 95, logo: '🏠', badge: '' },
+    ];
+
+    const products = [
+        { id: 1, name: 'Poncho Andino Tejido', price: 45, store: 'Artesanías Andinas', rating: 4.8, sales: 23, emoji: '🧣' },
+        { id: 2, name: 'Chullo de Lana de Alpaca', price: 35, store: 'Artesanías Andinas', rating: 4.9, sales: 45, emoji: '🧶' },
+        { id: 3, name: 'Camisa Bordada a Mano', price: 55, store: 'Moda Ayacuchana', rating: 4.6, sales: 12, emoji: '👔' },
+        { id: 4, name: 'Smartphone Samsung A54', price: 250, store: 'Tecno Cusco', rating: 4.5, sales: 8, emoji: '📱' },
+        { id: 5, name: 'Chocolate Artesanal 70%', price: 15, store: 'Sabor Peruano', rating: 4.9, sales: 67, emoji: '🍫' },
+        { id: 6, name: 'Pulsera de Plata 925', price: 28, store: 'Joyas del Inca', rating: 4.7, sales: 34, emoji: '📿' },
+        { id: 7, name: 'Cojín de Alpaca', price: 40, store: 'Hogar Natural', rating: 4.3, sales: 15, emoji: '🛋️' },
+        { id: 8, name: 'Auriculares Bluetooth', price: 60, store: 'Tecno Cusco', rating: 4.4, sales: 22, emoji: '🎧' },
+    ];
+
+    // ===== RENDER TIENDAS =====
+    function renderStores() {
+        const grid = document.getElementById('storesGrid');
+        grid.innerHTML = stores.map(store => `
+            <div class="store-card" onclick="openStore(${store.id})">
+                <div class="store-logo">${store.logo}</div>
+                <div class="store-name">${store.name}</div>
+                <div class="store-category">${store.category}</div>
+                <div class="store-rating">⭐ ${store.rating} · ${store.sales} ventas</div>
+                ${store.badge ? `<div class="store-badge">${store.badge}</div>` : ''}
+            </div>
+        `).join('');
+    }
+
+    // ===== RENDER PRODUCTOS =====
+    function renderProducts() {
+        const grid = document.getElementById('productsGrid');
+        grid.innerHTML = products.map(product => `
+            <div class="product-card" onclick="openProduct(${product.id})">
+                <div class="product-image">${product.emoji}</div>
+                <div class="product-info">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">S/ ${product.price.toFixed(2)}</div>
+                    <div class="product-meta">
+                        <span><i class="fas fa-star"></i> ${product.rating}</span>
+                        <span>${product.store}</span>
+                        <span><i class="fas fa-shopping-bag"></i> ${product.sales}</span>
+                    </div>
+                    <button class="btn-buy" onclick="event.stopPropagation(); addToCart(${product.id})">
+                        <i class="fas fa-cart-plus"></i> COMPRAR
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ===== FUNCIONES DE INTERACCIÓN =====
+    function openModal(type) {
+        if (type === 'seller') {
+            document.getElementById('sellerModal').classList.add('active');
+        } else {
+            document.getElementById('buyerModal').classList.add('active');
+        }
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('active');
+    }
+
+    function registerStore(e) {
+        e.preventDefault();
+        const name = document.getElementById('storeName').value;
+        const category = document.getElementById('storeCategory').value;
+        const description = document.getElementById('storeDescription').value;
+        const address = document.getElementById('storeAddress').value;
+
+        // Aquí iría la lógica de registro
+        alert(`✅ ¡Tienda "${name}" creada exitosamente!\n\nCategoría: ${category}\nDirección: ${address || 'No especificada'}\n\n📢 Tu tienda ya está en AVI SHOP. Comienza a subir productos.`);
+        closeModal('sellerModal');
+    }
+
+    function openStore(id) {
+        const store = stores.find(s => s.id === id);
+        alert(`🏪 ${store.name}\n📂 ${store.category}\n⭐ ${store.rating} estrellas\n🛒 ${store.sales} ventas\n\n💡 Visita la tienda para ver todos los productos.`);
+    }
+
+    function openProduct(id) {
+        const product = products.find(p => p.id === id);
+        alert(`🛍️ ${product.name}\n💰 S/ ${product.price.toFixed(2)}\n🏪 ${product.store}\n⭐ ${product.rating} estrellas\n📦 ${product.sales} vendidos\n\n🎯 Gana 1 AVI POINT por cada S/ 50 gastados.`);
+    }
+
+    function addToCart(id) {
+        const product = products.find(p => p.id === id);
+        alert(`🛒 "${product.name}" agregado al carrito\n\n💰 Total: S/ ${product.price.toFixed(2)}\n⭐ Ganas 1 AVI POINT por esta compra.`);
+    }
+
+    // ===== INICIALIZAR =====
+    renderStores();
+    renderProducts();
+
+    // Cerrar modales con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        }
+    });
+
+    // Cerrar modales haciendo click fuera
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

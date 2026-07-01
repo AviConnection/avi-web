@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>AVI ID · Identidad Digital Unificada</title>
+    <!-- Google Font: Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET Y BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            height: 100%;
+            font-family: 'Cinzel', serif;
+            overflow: hidden;
+        }
+
+        /* ===== VARIABLES CSS ===== */
+        :root {
+            --text-primary: #ffffff;
+            --text-secondary: #e0e8f0;
+            --text-muted: #b0c0d8;
+            --text-gold: #80d4ff;
+            --accent-1: #00d4ff;
+            --accent-2: #7c3aed;
+            --accent-3: #10b981;
+            --accent-4: #f59e0b;
+            --accent-5: #d4af37;
+            --accent-glow: rgba(0, 200, 255, 0.15);
+            --glass-bg: rgba(8, 10, 25, 0.45);
+            --glass-border: rgba(0, 200, 255, 0.08);
+            --glass-shadow: rgba(0, 0, 0, 0.4);
+            --input-bg: rgba(255, 255, 255, 0.06);
+            --input-border: rgba(255, 255, 255, 0.08);
+            --input-focus: #00d4ff;
+            --card-bg: rgba(8, 10, 25, 0.5);
+            --pro-glow: rgba(0, 212, 255, 0.25);
+            --ultra-glow: rgba(124, 58, 237, 0.25);
+            --business-glow: rgba(212, 175, 55, 0.25);
+            --success: #10b981;
+            --error: #ef4444;
+            --scrollbar-track: rgba(255, 255, 255, 0.06);
+            --scrollbar-thumb: linear-gradient(180deg, #00d4ff, #7c3aed, #10b981);
+            --text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        body.light-mode {
+            --text-primary: #0a0a1a;
+            --text-secondary: #1a1a3a;
+            --text-muted: #4a4a6a;
+            --text-gold: #0a6a8a;
+            --accent-1: #0891b2;
+            --accent-2: #6d28d9;
+            --accent-3: #059669;
+            --accent-4: #d97706;
+            --accent-5: #b89420;
+            --accent-glow: rgba(0, 180, 255, 0.06);
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(0, 180, 255, 0.04);
+            --glass-shadow: rgba(0, 0, 0, 0.06);
+            --input-bg: rgba(0, 0, 0, 0.02);
+            --input-border: rgba(0, 0, 0, 0.04);
+            --input-focus: #0891b2;
+            --card-bg: rgba(255, 255, 255, 0.4);
+            --pro-glow: rgba(8, 145, 178, 0.15);
+            --ultra-glow: rgba(109, 40, 217, 0.15);
+            --business-glow: rgba(212, 175, 55, 0.12);
+            --scrollbar-track: rgba(0, 0, 0, 0.05);
+            --scrollbar-thumb: linear-gradient(180deg, #0891b2, #6d28d9, #059669);
+            --text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== VIDEO DE FONDO ===== */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: saturate(0.5) brightness(0.35) contrast(1.2);
+            transition: filter 0.5s ease;
+        }
+        body.light-mode .video-background video {
+            filter: saturate(0.7) brightness(0.65) contrast(1.1);
+        }
+
+        /* ===== OVERLAY ===== */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+            transition: background 0.5s ease;
+        }
+        body.light-mode .overlay {
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.08) 100%);
+        }
+
+        /* ===== ESTRELLAS ===== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.8; }
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .auth-wrapper {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 1rem;
+        }
+
+        /* ===== BOTÓN MODO CLARO/OSCURO ===== */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 10;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px var(--glass-shadow);
+            text-shadow: var(--text-shadow);
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            border-color: var(--accent-1);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        /* ===== BOTÓN VOLVER ===== */
+        .back-button {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 10;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px var(--glass-shadow);
+            text-decoration: none;
+            text-shadow: var(--text-shadow);
+        }
+        .back-button:hover {
+            transform: scale(1.1) rotate(-5deg);
+            border-color: var(--accent-1);
+            box-shadow: 0 0 40px var(--accent-glow);
+            color: var(--accent-1);
+        }
+
+        /* ===== TOGGLE TABS ===== */
+        .auth-tabs {
+            display: flex;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+        }
+        .auth-tabs button {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: var(--text-shadow);
+        }
+        .auth-tabs button.active {
+            background: var(--accent-glow);
+            color: var(--accent-1);
+            box-shadow: inset 0 -2px 0 var(--accent-1);
+            text-shadow: 0 0 30px rgba(0, 200, 255, 0.2);
+        }
+        .auth-tabs button:hover {
+            color: var(--text-primary);
+        }
+
+        /* ===== AUTH CARD ===== */
+        .auth-card {
+            width: 100%;
+            max-width: 560px;
+            max-height: 94vh;
+            overflow-y: auto;
+            padding: 2.2rem 2.5rem 2.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            box-shadow: 0 30px 80px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.04);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        /* ===== SCROLLBAR PERSONALIZADA ===== */
+        .auth-card::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .auth-card::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 10px;
+            margin: 10px 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        .auth-card::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            background-size: 100% 200%;
+            animation: scrollGlow 4s ease infinite;
+            transition: all 0.3s ease;
+        }
+        .auth-card::-webkit-scrollbar-thumb:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Firefox scrollbar */
+        .auth-card {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-1) var(--scrollbar-track);
+        }
+
+        @keyframes scrollGlow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed, #10b981, #f59e0b);
+            background-size: 300% 100%;
+            animation: shimmer 4s ease infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== LOGO ===== */
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .auth-logo .logo-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 8px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.12), rgba(124, 58, 237, 0.12));
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 0 60px var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+        .auth-logo .logo-icon i {
+            font-size: 2.4rem;
+            color: var(--accent-1);
+            filter: drop-shadow(0 0 30px var(--accent-glow));
+            text-shadow: 0 0 40px rgba(0, 200, 255, 0.2);
+        }
+        .auth-logo h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            letter-spacing: 5px;
+            transition: color 0.5s ease;
+            text-shadow: var(--text-shadow);
+        }
+        .auth-logo h1 span {
+            background: linear-gradient(135deg, #00d4ff, #7c3aed, #10b981, #f59e0b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 6s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .auth-logo p {
+            font-size: 0.6rem;
+            letter-spacing: 5px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-transform: uppercase;
+            transition: color 0.5s ease;
+            text-shadow: var(--text-shadow);
+        }
+
+        /* ===== PLAN SELECTOR ===== */
+        .plan-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .plan-option {
+            padding: 0.7rem 0.3rem;
+            border-radius: 14px;
+            border: 2px solid var(--glass-border);
+            background: var(--input-bg);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(4px);
+        }
+        .plan-option:hover {
+            border-color: var(--accent-1);
+            transform: translateY(-2px);
+        }
+        .plan-option.selected {
+            border-color: var(--accent-1);
+            background: var(--accent-glow);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+        .plan-option.selected.business-selected {
+            border-color: var(--accent-5);
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 30px var(--business-glow);
+        }
+        .plan-option .plan-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .plan-option .plan-name {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            transition: color 0.5s ease;
+            text-shadow: var(--text-shadow);
+        }
+        .plan-option .plan-price {
+            font-size: 0.55rem;
+            color: var(--accent-1);
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(0, 200, 255, 0.1);
+        }
+        .plan-option .plan-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            font-size: 0.4rem;
+            padding: 0.05rem 0.6rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        .plan-option .plan-badge.pro {
+            background: var(--accent-1);
+            color: #fff;
+        }
+        .plan-option .plan-badge.ultra {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: #fff;
+        }
+        .plan-option .plan-badge.business {
+            background: linear-gradient(135deg, #d4af37, #b89420);
+            color: #0a0806;
+        }
+        .plan-option .plan-features {
+            font-size: 0.45rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            letter-spacing: 0.5px;
+            text-shadow: var(--text-shadow);
+        }
+
+        /* ===== FORMULARIO ===== */
+        .auth-form {
+            display: none;
+        }
+        .auth-form.active {
+            display: block;
+            animation: fadeSlideIn 0.4s ease;
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 0.9rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.5rem;
+            letter-spacing: 2.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            transition: color 0.5s ease;
+            text-shadow: var(--text-shadow);
+            font-weight: 600;
+        }
+        .form-group label i {
+            margin-right: 6px;
+            color: var(--accent-1);
+        }
+        .form-group label .required {
+            color: var(--error);
+            margin-left: 2px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: var(--input-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--input-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+            outline: none;
+            text-shadow: var(--text-shadow);
+        }
+        .form-group select {
+            appearance: none;
+            cursor: pointer;
+        }
+        .form-group select option {
+            background: #0a0815;
+            color: #d0d8e8;
+        }
+        body.light-mode .form-group select option {
+            background: #f0ecf8;
+            color: #1a1030;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+            max-height: 120px;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+            opacity: 0.4;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+        .form-group .input-hint {
+            font-size: 0.45rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            text-shadow: var(--text-shadow);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.7rem;
+        }
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.7rem;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0.8rem 0 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.5s ease;
+            text-shadow: var(--text-shadow);
+        }
+        .form-options label input[type="checkbox"] {
+            accent-color: var(--accent-1);
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+        }
+        .form-options a {
+            font-size: 0.5rem;
+            color: var(--accent-1);
+            text-decoration: none;
+            transition: 0.3s;
+            text-shadow: 0 0 20px rgba(0, 200, 255, 0.1);
+        }
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== MÉTODOS DE PAGO ===== */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .payment-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0.3rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            background: var(--input-bg);
+            backdrop-filter: blur(8px);
+            color: var(--text-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 0.45rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 3px;
+            text-shadow: var(--text-shadow);
+        }
+        .payment-btn:hover {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        .payment-btn i {
+            font-size: 1.3rem;
+        }
+        .payment-btn .pay-label {
+            font-size: 0.38rem;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        .payment-btn .fa-google-pay { color: #4285f4; }
+        .payment-btn .fa-apple-pay { color: var(--text-primary); }
+        .payment-btn .fa-y { color: #00a859; }
+        .payment-btn .fa-p { color: #0047ab; }
+        .payment-btn .fa-lemon { color: #f7c13b; }
+        .payment-btn .fa-credit-card { color: #1a73e8; }
+        .payment-btn .fa-paypal { color: #003087; }
+
+        .payment-btn.paypal-btn i { color: #003087; }
+        .payment-btn.yape-btn i { color: #00a859; font-weight: 900; }
+        .payment-btn.plin-btn i { color: #0047ab; font-weight: 900; }
+        .payment-btn.lemon-btn i { color: #f7c13b; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 40px var(--accent-glow);
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        .btn-submit:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 0 60px var(--accent-glow);
+        }
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-submit.ultra-btn {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            box-shadow: 0 0 40px var(--ultra-glow);
+        }
+        .btn-submit.ultra-btn:hover {
+            box-shadow: 0 0 60px var(--ultra-glow);
+        }
+        .btn-submit.business-btn {
+            background: linear-gradient(135deg, #d4af37, #b89420);
+            box-shadow: 0 0 40px var(--business-glow);
+            color: #0a0806;
+            text-shadow: 0 2px 20px rgba(212, 175, 55, 0.3);
+        }
+        .btn-submit.business-btn:hover {
+            box-shadow: 0 0 60px var(--business-glow);
+        }
+
+        /* ===== DIVISOR ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.2rem 0 1rem;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--glass-border);
+            transition: background 0.5s ease;
+        }
+        .divider span {
+            font-size: 0.45rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            transition: color 0.5s ease;
+            text-shadow: var(--text-shadow);
+        }
+
+        /* ===== PRO HINT ===== */
+        .pro-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 0.8rem;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            background: var(--accent-glow);
+            border: 1px solid var(--glass-border);
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-shadow: var(--text-shadow);
+        }
+        .pro-hint i {
+            color: var(--accent-4);
+            font-size: 0.8rem;
+        }
+        .pro-hint strong {
+            color: var(--accent-1);
+        }
+        .pro-hint.business-hint {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+        .pro-hint.business-hint strong {
+            color: var(--accent-5);
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 0.8rem 2rem;
+            border-radius: 16px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 40px var(--glass-shadow);
+            max-width: 90%;
+            text-align: center;
+            text-shadow: var(--text-shadow);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success { border-color: var(--success); }
+        .toast.error { border-color: var(--error); }
+        .toast.info { border-color: var(--accent-4); }
+
+        /* ===== LINK A INDEX ===== */
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            transition: color 0.5s ease;
+            text-shadow: var(--text-shadow);
+        }
+        .back-link a {
+            color: var(--accent-1);
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+            color: var(--accent-2);
+        }
+        .back-link i {
+            margin-right: 4px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 700px) {
+            .plan-selector { grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem; }
+            .plan-option { padding: 0.4rem 0.2rem; }
+            .plan-option .plan-icon { font-size: 1rem; }
+            .plan-option .plan-name { font-size: 0.5rem; }
+            .plan-option .plan-price { font-size: 0.45rem; }
+            .plan-option .plan-features { font-size: 0.35rem; }
+            .back-button { top: 16px; left: 16px; width: 42px; height: 42px; font-size: 1rem; }
+            .theme-toggle { top: 16px; right: 16px; width: 42px; height: 42px; font-size: 1.1rem; }
+            .auth-card::-webkit-scrollbar { width: 6px; }
+            .auth-card { padding: 1.5rem 1.2rem 1.8rem; }
+            .auth-logo h1 { font-size: 1.4rem; }
+        }
+        @media (max-width: 600px) {
+            .auth-card { padding: 1.5rem 1.2rem 1.8rem; border-radius: 24px; max-width: 100%; margin: 0 0.5rem; max-height: 90vh; }
+            .auth-logo .logo-icon { width: 50px; height: 50px; }
+            .auth-logo .logo-icon i { font-size: 1.8rem; }
+            .auth-logo h1 { font-size: 1.3rem; }
+            .payment-methods { grid-template-columns: repeat(4, 1fr); gap: 0.3rem; }
+            .payment-btn { padding: 0.4rem 0.2rem; font-size: 0.4rem; }
+            .payment-btn i { font-size: 1rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .form-row-3 { grid-template-columns: 1fr 1fr; }
+            .auth-tabs button { font-size: 0.5rem; padding: 0.4rem; }
+            .plan-selector { gap: 0.4rem; }
+            .plan-option { padding: 0.4rem 0.2rem; }
+            .plan-option .plan-icon { font-size: 1.1rem; }
+            .plan-option .plan-name { font-size: 0.5rem; }
+            .plan-option .plan-price { font-size: 0.45rem; }
+            .back-button { top: 14px; left: 14px; width: 38px; height: 38px; font-size: 0.9rem; }
+            .theme-toggle { top: 14px; right: 14px; width: 38px; height: 38px; font-size: 0.9rem; }
+            .auth-card::-webkit-scrollbar { width: 5px; }
+        }
+        @media (max-width: 450px) {
+            .auth-card { padding: 1rem 0.8rem 1.2rem; }
+            .payment-methods { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
+            .form-options { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+            .plan-selector { grid-template-columns: 1fr 1fr; }
+            .form-row-3 { grid-template-columns: 1fr 1fr; }
+            .back-button { top: 12px; left: 12px; width: 34px; height: 34px; font-size: 0.8rem; }
+            .theme-toggle { top: 12px; right: 12px; width: 34px; height: 34px; font-size: 0.8rem; }
+            .auth-card::-webkit-scrollbar { width: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== VIDEO DE FONDO ===== -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="imagenes y videos/header id.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- ===== BOTÓN VOLVER A INDEX ===== -->
+    <a href="index.html" class="back-button" title="Volver a la página principal">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- ===== BOTÓN MODO CLARO/OSCURO ===== -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== AUTH WRAPPER ===== -->
+    <div class="auth-wrapper">
+
+        <div class="auth-card" id="authCard">
+            <!-- Logo -->
+            <div class="auth-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-id-card"></i>
+                </div>
+                <h1><span>AVI</span> ID</h1>
+                <p>Identidad Digital Unificada</p>
+            </div>
+
+            <!-- ===== SELECTOR DE PLAN ===== -->
+            <div class="plan-selector" id="planSelector">
+                <div class="plan-option selected" data-plan="pro" id="planPro">
+                    <span class="plan-badge pro">PRO</span>
+                    <span class="plan-icon">👑</span>
+                    <div class="plan-name">PRO</div>
+                    <div class="plan-price">S/ 10 / mes</div>
+                    <div class="plan-features">Todas las herramientas</div>
+                </div>
+                <div class="plan-option" data-plan="ultra" id="planUltra">
+                    <span class="plan-badge ultra">ULTRA</span>
+                    <span class="plan-icon">💎</span>
+                    <div class="plan-name">ULTRA</div>
+                    <div class="plan-price">S/ 20 / mes</div>
+                    <div class="plan-features">Todo PRO + beneficios exclusivos</div>
+                </div>
+                <div class="plan-option" data-plan="business" id="planBusiness">
+                    <span class="plan-badge business">BUSINESS</span>
+                    <span class="plan-icon">🏪</span>
+                    <div class="plan-name">BUSINESS</div>
+                    <div class="plan-price">S/ 19.99 / mes</div>
+                    <div class="plan-features">Para emprendedores y comerciantes</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <button class="active" data-tab="login" id="tabLogin">Iniciar Sesión</button>
+                <button data-tab="register" id="tabRegister">Crear Cuenta</button>
+            </div>
+
+            <!-- ===== FORMULARIO LOGIN ===== -->
+            <div class="auth-form active" id="formLogin">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Correo Electrónico</label>
+                        <input type="email" id="loginEmail" placeholder="correo@ejemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Contraseña</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox" id="rememberMe" checked> Recordarme
+                        </label>
+                        <a href="#" id="forgotPassword">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <button type="submit" class="btn-submit" id="loginBtn">
+                        <i class="fas fa-rocket"></i> Iniciar Sesión
+                    </button>
+                </form>
+
+                <div class="divider"><span>O continuar con</span></div>
+                <div class="payment-methods">
+                    <button class="payment-btn" data-method="googlepay"><i class="fab fa-google-pay"></i><span class="pay-label">Google Pay</span></button>
+                    <button class="payment-btn" data-method="applepay"><i class="fab fa-apple-pay"></i><span class="pay-label">Apple Pay</span></button>
+                    <button class="payment-btn yape-btn" data-method="yape"><i class="fas fa-y"></i><span class="pay-label">Yape</span></button>
+                    <button class="payment-btn plin-btn" data-method="plin"><i class="fas fa-p"></i><span class="pay-label">Plin</span></button>
+                    <button class="payment-btn lemon-btn" data-method="lemon"><i class="fas fa-lemon"></i><span class="pay-label">Lemon Cash</span></button>
+                    <button class="payment-btn" data-method="visa"><i class="fas fa-credit-card"></i><span class="pay-label">VISA</span></button>
+                    <button class="payment-btn paypal-btn" data-method="paypal"><i class="fab fa-paypal"></i><span class="pay-label">PayPal</span></button>
+                    <button class="payment-btn" data-method="mastercard"><i class="fas fa-credit-card"></i><span class="pay-label">Mastercard</span></button>
+                </div>
+
+                <div style="text-align:center; margin-top:0.8rem; font-size:0.55rem; color:var(--text-muted); text-shadow:var(--text-shadow);">
+                    ¿No tienes cuenta? <a id="switchToRegister" style="color:var(--accent-1); text-decoration:none; cursor:pointer; font-weight:600;">Crear cuenta AVI ID</a>
+                </div>
+
+                <div class="back-link">
+                    <i class="fas fa-home"></i> <a href="index.html">Volver a la página principal</a>
+                </div>
+            </div>
+
+            <!-- ===== FORMULARIO REGISTRO ===== -->
+            <div class="auth-form" id="formRegister">
+                <form id="registerForm">
+                    <!-- ===== DATOS PERSONALES ===== -->
+                    <div style="margin-bottom:0.8rem;">
+                        <label style="font-size:0.5rem; letter-spacing:2.5px; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:4px; text-shadow:var(--text-shadow);">
+                            <i class="fas fa-user"></i> Datos Personales
+                        </label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nombre <span class="required">*</span></label>
+                                <input type="text" id="regName" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido <span class="required">*</span></label>
+                                <input type="text" id="regLastName" placeholder="Tu apellido" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== DATOS DE CONTACTO ===== -->
+                    <div style="margin-bottom:0.8rem;">
+                        <label style="font-size:0.5rem; letter-spacing:2.5px; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:4px; text-shadow:var(--text-shadow);">
+                            <i class="fas fa-address-card"></i> Datos de Contacto
+                        </label>
+                        <div class="form-group">
+                            <label>Correo Electrónico <span class="required">*</span></label>
+                            <input type="email" id="regEmail" placeholder="correo@ejemplo.com" required>
+                            <div class="input-hint" id="emailHint"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Teléfono / Celular <span class="required">*</span></label>
+                                <input type="tel" id="regPhone" placeholder="+51 984 123 456" required>
+                            </div>
+                            <div class="form-group">
+                                <label>País</label>
+                                <select id="regCountry">
+                                    <option value="PE" selected>Perú</option>
+                                    <option value="BO">Bolivia</option>
+                                    <option value="EC">Ecuador</option>
+                                    <option value="CO">Colombia</option>
+                                    <option value="CL">Chile</option>
+                                    <option value="AR">Argentina</option>
+                                    <option value="MX">México</option>
+                                    <option value="ES">España</option>
+                                    <option value="US">Estados Unidos</option>
+                                    <option value="OT">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== DATOS DE LA EMPRESA / NEGOCIO (BUSINESS) ===== -->
+                    <div id="businessFields" style="display:none; margin-bottom:0.8rem; border-top:1px solid var(--glass-border); padding-top:0.8rem;">
+                        <label style="font-size:0.5rem; letter-spacing:2.5px; color:var(--accent-5); text-transform:uppercase; display:block; margin-bottom:4px; text-shadow:var(--text-shadow);">
+                            <i class="fas fa-store"></i> Datos del Negocio / Empresa
+                        </label>
+                        <div class="form-group">
+                            <label>Nombre del Negocio / Empresa <span class="required">*</span></label>
+                            <input type="text" id="regBusinessName" placeholder="Ej: Artesanías Los Andes">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Tipo de Documento</label>
+                                <select id="regDocType">
+                                    <option value="ruc">RUC</option>
+                                    <option value="dni">DNI</option>
+                                    <option value="ce">Carnet de Extranjería</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Número de Documento <span class="required">*</span></label>
+                                <input type="text" id="regDocNumber" placeholder="Ej: 20512345678">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Razón Social (opcional)</label>
+                            <input type="text" id="regBusinessLegal" placeholder="Nombre legal de la empresa">
+                        </div>
+                        <div class="form-group">
+                            <label>Dirección del Negocio <span class="required">*</span></label>
+                            <input type="text" id="regBusinessAddress" placeholder="Av. Principal 123, Cusco">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Rubro / Categoría</label>
+                                <select id="regCategory">
+                                    <option value="">Selecciona una categoría</option>
+                                    <option value="artesania">Artesanía</option>
+                                    <option value="gastronomia">Gastronomía</option>
+                                    <option value="moda">Moda / Textil</option>
+                                    <option value="tecnologia">Tecnología</option>
+                                    <option value="servicios">Servicios</option>
+                                    <option value="salud">Salud / Bienestar</option>
+                                    <option value="educacion">Educación</option>
+                                    <option value="turismo">Turismo</option>
+                                    <option value="construccion">Construcción</option>
+                                    <option value="transporte">Transporte</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Años en el mercado</label>
+                                <input type="number" id="regBusinessYears" placeholder="Ej: 3" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción del Negocio (opcional)</label>
+                            <textarea id="regBusinessDesc" placeholder="Cuéntanos sobre tu negocio..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-link"></i> Sitio Web / Redes Sociales (opcional)</label>
+                            <input type="text" id="regBusinessWeb" placeholder="https://www.instagram.com/tuemprendimiento">
+                        </div>
+                    </div>
+
+                    <!-- ===== CONTRASEÑA ===== -->
+                    <div style="margin-bottom:0.8rem; border-top:1px solid var(--glass-border); padding-top:0.8rem;">
+                        <label style="font-size:0.5rem; letter-spacing:2.5px; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:4px; text-shadow:var(--text-shadow);">
+                            <i class="fas fa-lock"></i> Seguridad
+                        </label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Contraseña <span class="required">*</span></label>
+                                <input type="password" id="regPassword" placeholder="Mínimo 8 caracteres" required minlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirmar Contraseña <span class="required">*</span></label>
+                                <input type="password" id="regConfirmPassword" placeholder="Repite tu contraseña" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox" id="acceptTerms" required> Acepto los <a href="#" style="color:var(--accent-1); font-size:0.5rem;">términos y condiciones</a>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="acceptNewsletter"> <span style="font-size:0.45rem; color:var(--text-muted);">Recibir novedades</span>
+                        </label>
+                    </div>
+
+                    <!-- ===== MÉTODOS DE PAGO PARA REGISTRO ===== -->
+                    <div style="margin:0.8rem 0;">
+                        <label style="font-size:0.5rem; letter-spacing:2.5px; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:6px; text-shadow:var(--text-shadow);">
+                            <i class="fas fa-credit-card"></i> Selecciona tu método de pago <span class="required">*</span>
+                        </label>
+                        <div class="payment-methods">
+                            <button type="button" class="payment-btn" data-method="googlepay"><i class="fab fa-google-pay"></i><span class="pay-label">Google Pay</span></button>
+                            <button type="button" class="payment-btn" data-method="applepay"><i class="fab fa-apple-pay"></i><span class="pay-label">Apple Pay</span></button>
+                            <button type="button" class="payment-btn yape-btn" data-method="yape"><i class="fas fa-y"></i><span class="pay-label">Yape</span></button>
+                            <button type="button" class="payment-btn plin-btn" data-method="plin"><i class="fas fa-p"></i><span class="pay-label">Plin</span></button>
+                            <button type="button" class="payment-btn lemon-btn" data-method="lemon"><i class="fas fa-lemon"></i><span class="pay-label">Lemon Cash</span></button>
+                            <button type="button" class="payment-btn" data-method="visa"><i class="fas fa-credit-card"></i><span class="pay-label">VISA</span></button>
+                            <button type="button" class="payment-btn paypal-btn" data-method="paypal"><i class="fab fa-paypal"></i><span class="pay-label">PayPal</span></button>
+                            <button type="button" class="payment-btn" data-method="mastercard"><i class="fas fa-credit-card"></i><span class="pay-label">Mastercard</span></button>
+                        </div>
+                        <div id="selectedPayment" style="text-align:center; font-size:0.45rem; color:var(--accent-1); margin-top:4px; letter-spacing:1px; opacity:0; transition:0.3s; text-shadow:var(--text-shadow);"></div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="registerBtn">
+                        <i class="fas fa-user-plus"></i> Suscribirse y Crear Cuenta
+                    </button>
+                </form>
+
+                <div class="pro-hint" id="planHint">
+                    <i class="fas fa-crown"></i>
+                    <span>Plan <strong id="planHintText">PRO</strong> · <strong id="planPriceText">S/ 10</strong>/mes · Incluye <strong id="planPointsText">100 AVI POINTS</strong> de regalo</span>
+                </div>
+
+                <div style="text-align:center; margin-top:0.8rem; font-size:0.55rem; color:var(--text-muted); text-shadow:var(--text-shadow);">
+                    ¿Ya tienes cuenta? <a id="switchToLogin" style="color:var(--accent-1); text-decoration:none; cursor:pointer; font-weight:600;">Iniciar sesión aquí</a>
+                </div>
+
+                <div class="back-link">
+                    <i class="fas fa-home"></i> <a href="index.html">Volver a la página principal</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            // ===== GENERAR ESTRELLAS =====
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                star.style.animationDuration = (Math.random() * 4 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+
+            // ===== CAMBIO DE TEMA =====
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+
+            let currentTheme = localStorage.getItem('avi-theme-login') || 'dark';
+            applyTheme(currentTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+                applyTheme(newTheme);
+                localStorage.setItem('avi-theme-login', newTheme);
+            });
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    document.body.classList.remove('light-mode');
+                    themeIcon.className = 'fas fa-moon';
+                }
+            }
+
+            // ===== TOAST =====
+            const toast = document.getElementById('toast');
+            let toastTimeout;
+
+            function showToast(message, type = 'success') {
+                toast.textContent = message;
+                toast.className = 'toast ' + type + ' show';
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+
+            // ===== PLAN SELECTOR =====
+            let selectedPlan = 'pro';
+            let selectedPayment = null;
+            const planPro = document.getElementById('planPro');
+            const planUltra = document.getElementById('planUltra');
+            const planBusiness = document.getElementById('planBusiness');
+            const planHintText = document.getElementById('planHintText');
+            const planPriceText = document.getElementById('planPriceText');
+            const planPointsText = document.getElementById('planPointsText');
+            const registerBtn = document.getElementById('registerBtn');
+            const emailHint = document.getElementById('emailHint');
+            const selectedPaymentDisplay = document.getElementById('selectedPayment');
+            const businessFields = document.getElementById('businessFields');
+            const planHint = document.getElementById('planHint');
+
+            function selectPlan(plan) {
+                selectedPlan = plan;
+                planPro.classList.toggle('selected', plan === 'pro');
+                planUltra.classList.toggle('selected', plan === 'ultra');
+                planBusiness.classList.toggle('selected', plan === 'business');
+                planBusiness.classList.toggle('business-selected', plan === 'business');
+
+                businessFields.style.display = plan === 'business' ? 'block' : 'none';
+
+                if (plan === 'pro') {
+                    planHintText.textContent = 'PRO';
+                    planPriceText.textContent = 'S/ 10';
+                    planPointsText.textContent = '100 AVI POINTS';
+                    registerBtn.innerHTML = '<i class="fas fa-user-plus"></i> Suscribirse PRO · S/ 10/mes';
+                    registerBtn.className = 'btn-submit';
+                    emailHint.textContent = 'Registro con Google, Microsoft, Apple o GitHub';
+                    emailHint.style.color = 'var(--accent-1)';
+                    planHint.className = 'pro-hint';
+                    planHint.querySelector('i').className = 'fas fa-crown';
+                } else if (plan === 'ultra') {
+                    planHintText.textContent = 'ULTRA';
+                    planPriceText.textContent = 'S/ 20';
+                    planPointsText.textContent = '200 AVI POINTS';
+                    registerBtn.innerHTML = '<i class="fas fa-gem"></i> Suscribirse ULTRA · S/ 20/mes';
+                    registerBtn.className = 'btn-submit ultra-btn';
+                    emailHint.textContent = 'Registro exclusivo con cuenta @connection.net';
+                    emailHint.style.color = 'var(--accent-2)';
+                    planHint.className = 'pro-hint';
+                    planHint.querySelector('i').className = 'fas fa-gem';
+                } else {
+                    planHintText.textContent = 'BUSINESS';
+                    planPriceText.textContent = 'S/ 19.99';
+                    planPointsText.textContent = '15 AVI POINTS';
+                    registerBtn.innerHTML = '<i class="fas fa-store"></i> Suscribirse BUSINESS · S/ 19.99/mes';
+                    registerBtn.className = 'btn-submit business-btn';
+                    emailHint.textContent = 'Registro para emprendedores y comerciantes';
+                    emailHint.style.color = 'var(--accent-5)';
+                    planHint.className = 'pro-hint business-hint';
+                    planHint.querySelector('i').className = 'fas fa-store';
+                }
+                updatePaymentHint();
+            }
+
+            function updatePaymentHint() {
+                if (selectedPayment) {
+                    selectedPaymentDisplay.textContent = '💳 Pagando con ' + selectedPayment.toUpperCase();
+                    selectedPaymentDisplay.style.opacity = '1';
+                } else {
+                    selectedPaymentDisplay.textContent = '';
+                    selectedPaymentDisplay.style.opacity = '0';
+                }
+            }
+
+            planPro.addEventListener('click', () => selectPlan('pro'));
+            planUltra.addEventListener('click', () => selectPlan('ultra'));
+            planBusiness.addEventListener('click', () => selectPlan('business'));
+            selectPlan('pro');
+
+            // ===== SELECCIÓN DE MÉTODO DE PAGO =====
+            document.querySelectorAll('.payment-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const method = this.dataset.method;
+                    selectedPayment = method;
+
+                    document.querySelectorAll('.payment-btn').forEach(b => {
+                        b.style.borderColor = 'var(--glass-border)';
+                        b.style.background = 'var(--input-bg)';
+                    });
+
+                    this.style.borderColor = 'var(--accent-1)';
+                    this.style.background = 'var(--accent-glow)';
+                    this.style.boxShadow = '0 0 30px var(--accent-glow)';
+
+                    updatePaymentHint();
+                    showToast('✅ Método de pago seleccionado: ' + method.toUpperCase(), 'success');
+                });
+            });
+
+            // ===== SWITCH TABS =====
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const formLogin = document.getElementById('formLogin');
+            const formRegister = document.getElementById('formRegister');
+
+            function switchTab(tab) {
+                if (tab === 'login') {
+                    tabLogin.classList.add('active');
+                    tabRegister.classList.remove('active');
+                    formLogin.classList.add('active');
+                    formRegister.classList.remove('active');
+                } else {
+                    tabRegister.classList.add('active');
+                    tabLogin.classList.remove('active');
+                    formRegister.classList.add('active');
+                    formLogin.classList.remove('active');
+                }
+            }
+
+            tabLogin.addEventListener('click', () => switchTab('login'));
+            tabRegister.addEventListener('click', () => switchTab('register'));
+
+            document.getElementById('switchToRegister').addEventListener('click', () => switchTab('register'));
+            document.getElementById('switchToLogin').addEventListener('click', () => switchTab('login'));
+
+            // ================================================================
+            // BASE DE DATOS (localStorage)
+            // ================================================================
+            function getUsers() {
+                try {
+                    return JSON.parse(localStorage.getItem('avi_users')) || [];
+                } catch {
+                    return [];
+                }
+            }
+
+            function saveUsers(users) {
+                localStorage.setItem('avi_users', JSON.stringify(users));
+            }
+
+            function getUserByEmail(email) {
+                const users = getUsers();
+                return users.find(u => u.email.toLowerCase() === email.toLowerCase());
+            }
+
+            // ================================================================
+            // FUNCIÓN PARA CREAR DATOS BUSINESS
+            // ================================================================
+            function createBusinessData(email, businessName) {
+                const initialData = {
+                    products: [],
+                    reels: [],
+                    profile: {
+                        name: businessName || 'Mi Negocio',
+                        description: 'Descubre nuestros productos y servicios.',
+                        themeColor: '#d4af37',
+                        notificationSound: 'default',
+                        category: 'artesania',
+                        rating: 4.8,
+                        reviews: 120
+                    }
+                };
+                localStorage.setItem('avi_business_data_' + email, JSON.stringify(initialData));
+            }
+
+            // ================================================================
+            // REGISTRO CON PAGO INTELIGENTE
+            // ================================================================
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (!selectedPayment) {
+                    showToast('❌ Selecciona un método de pago antes de continuar.', 'error');
+                    return;
+                }
+
+                const btn = document.getElementById('registerBtn');
+                const originalText = btn.innerHTML;
+
+                const name = document.getElementById('regName').value.trim();
+                const lastName = document.getElementById('regLastName').value.trim();
+                const email = document.getElementById('regEmail').value.trim();
+                const phone = document.getElementById('regPhone').value.trim();
+                const country = document.getElementById('regCountry').value;
+                const password = document.getElementById('regPassword').value;
+                const confirmPassword = document.getElementById('regConfirmPassword').value;
+                const acceptTerms = document.getElementById('acceptTerms').checked;
+
+                const businessName = document.getElementById('regBusinessName').value.trim();
+                const docType = document.getElementById('regDocType').value;
+                const docNumber = document.getElementById('regDocNumber').value.trim();
+                const businessLegal = document.getElementById('regBusinessLegal').value.trim();
+                const businessAddress = document.getElementById('regBusinessAddress').value.trim();
+                const category = document.getElementById('regCategory').value;
+                const businessYears = document.getElementById('regBusinessYears').value.trim();
+                const businessDesc = document.getElementById('regBusinessDesc').value.trim();
+                const businessWeb = document.getElementById('regBusinessWeb').value.trim();
+                const acceptNewsletter = document.getElementById('acceptNewsletter').checked;
+
+                if (!name || !lastName) {
+                    showToast('❌ Por favor ingresa tu nombre y apellido.', 'error');
+                    return;
+                }
+                if (!email || !email.includes('@')) {
+                    showToast('❌ Ingresa un correo electrónico válido.', 'error');
+                    return;
+                }
+                if (!phone) {
+                    showToast('❌ Ingresa tu número de teléfono o celular.', 'error');
+                    return;
+                }
+
+                if (selectedPlan === 'business') {
+                    if (!businessName) {
+                        showToast('❌ Ingresa el nombre de tu negocio o empresa.', 'error');
+                        return;
+                    }
+                    if (!docNumber) {
+                        showToast('❌ Ingresa el número de documento (RUC/DNI).', 'error');
+                        return;
+                    }
+                    if (!businessAddress) {
+                        showToast('❌ Ingresa la dirección de tu negocio.', 'error');
+                        return;
+                    }
+                }
+
+                if (selectedPlan === 'ultra' && !email.toLowerCase().endsWith('@connection.net')) {
+                    showToast('❌ Para el plan ULTRA usa tu cuenta @connection.net', 'error');
+                    return;
+                }
+
+                if (password.length < 8) {
+                    showToast('❌ La contraseña debe tener al menos 8 caracteres.', 'error');
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    showToast('❌ Las contraseñas no coinciden.', 'error');
+                    return;
+                }
+                if (!acceptTerms) {
+                    showToast('❌ Debes aceptar los términos y condiciones.', 'error');
+                    return;
+                }
+
+                if (getUserByEmail(email)) {
+                    showToast('❌ Este correo ya está registrado. Inicia sesión.', 'error');
+                    return;
+                }
+
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando pago con ' + selectedPayment.toUpperCase() +
+                    '...';
+                btn.disabled = true;
+
+                const isUltra = selectedPlan === 'ultra';
+                const isBusiness = selectedPlan === 'business';
+                let points = isUltra ? 200 : (isBusiness ? 15 : 100);
+                let amount = isUltra ? 20 : (isBusiness ? 19.99 : 10);
+
+                let destination = 'index pro.html';
+                if (isUltra) {
+                    destination = 'index ultra.html';
+                } else if (isBusiness) {
+                    destination = 'index business.html';
+                } else {
+                    destination = 'index pro.html';
+                }
+
+                setTimeout(() => {
+                    const users = getUsers();
+
+                    const userData = {
+                        id: 'uid_' + Date.now(),
+                        name: name,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                        phone: phone,
+                        country: country,
+                        createdAt: new Date().toISOString(),
+                        points: points,
+                        storageUsed: 0,
+                        plan: selectedPlan,
+                        isPro: true,
+                        isUltra: isUltra,
+                        isBusiness: isBusiness,
+                        paymentMethod: selectedPayment,
+                        subscriptionAmount: amount,
+                        subscriptionCurrency: 'PEN',
+                        proExpiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                        toolsUnlocked: ['ID', 'FIX', 'NEST', 'PAY', 'POINTS', 'GO', 'APP', 'IA'],
+                        acceptNewsletter: acceptNewsletter
+                    };
+
+                    if (isBusiness) {
+                        userData.business = {
+                            name: businessName,
+                            docType: docType,
+                            docNumber: docNumber,
+                            legalName: businessLegal || '',
+                            address: businessAddress,
+                            category: category || '',
+                            years: businessYears || '',
+                            description: businessDesc || '',
+                            website: businessWeb || ''
+                        };
+                        userData.toolsUnlocked.push('BUSINESS');
+                    }
+
+                    users.push(userData);
+                    saveUsers(users);
+
+                    // Crear datos BUSINESS si es BUSINESS
+                    if (isBusiness) {
+                        createBusinessData(email, businessName);
+                    }
+
+                    localStorage.setItem('avi_session', JSON.stringify({
+                        email: email,
+                        name: name + ' ' + lastName,
+                        businessName: isBusiness ? businessName : null,
+                        loginTime: new Date().toISOString(),
+                        isPro: true,
+                        isUltra: isUltra,
+                        isBusiness: isBusiness,
+                        plan: selectedPlan,
+                        points: points,
+                        paymentMethod: selectedPayment
+                    }));
+
+                    btn.innerHTML = '<i class="fas fa-check"></i> ¡Pago exitoso!';
+                    const planLabel = isUltra ? 'ULTRA' : (isBusiness ? 'BUSINESS' : 'PRO');
+                    const colorClass = isUltra ? 'linear-gradient(135deg, #7c3aed, #6d28d9)' :
+                                     (isBusiness ? 'linear-gradient(135deg, #d4af37, #b89420)' :
+                                     'linear-gradient(135deg, #00e5ff, #b388ff)');
+                    btn.style.background = colorClass;
+
+                    showToast('🎉 ¡Pago de S/ ' + amount + ' recibido! Bienvenido a AVI ' + planLabel +
+                        '. Recibiste ' + points + ' AVI POINTS.', 'success');
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        btn.style.background = '';
+                        window.location.href = destination;
+                    }, 2500);
+                }, 2500);
+            });
+
+            // ================================================================
+            // LOGIN
+            // ================================================================
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = document.getElementById('loginBtn');
+                const originalText = btn.innerHTML;
+
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+
+                if (!email || !password) {
+                    showToast('❌ Ingresa tu correo y contraseña.', 'error');
+                    return;
+                }
+
+                const user = getUserByEmail(email);
+
+                if (!user) {
+                    showToast('❌ No encontramos una cuenta con este correo.', 'error');
+                    return;
+                }
+
+                if (user.password !== password) {
+                    showToast('❌ Contraseña incorrecta. Intenta nuevamente.', 'error');
+                    return;
+                }
+
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    const isUltra = user.isUltra || false;
+                    const isBusiness = user.isBusiness || false;
+
+                    let destination = 'index.html';
+                    if (isUltra) {
+                        destination = 'index ultra.html';
+                    } else if (isBusiness) {
+                        destination = 'index business.html';
+                    } else if (user.isPro) {
+                        destination = 'index pro.html';
+                    }
+
+                    localStorage.setItem('avi_session', JSON.stringify({
+                        email: user.email,
+                        name: user.name + ' ' + user.lastName,
+                        businessName: isBusiness && user.business ? user.business.name : null,
+                        loginTime: new Date().toISOString(),
+                        isPro: user.isPro || false,
+                        isUltra: isUltra,
+                        isBusiness: isBusiness,
+                        plan: user.plan || 'pro',
+                        points: user.points || 0
+                    }));
+
+                    btn.innerHTML = '<i class="fas fa-check"></i> ¡Bienvenido!';
+                    const planLabel = isUltra ? 'ULTRA' : (isBusiness ? 'BUSINESS' : (user.isPro ? 'PRO' : 'FREE'));
+                    const colorClass = isUltra ? 'linear-gradient(135deg, #7c3aed, #6d28d9)' :
+                                     (isBusiness ? 'linear-gradient(135deg, #d4af37, #b89420)' :
+                                     (user.isPro ? 'linear-gradient(135deg, #00e5ff, #b388ff)' :
+                                     'linear-gradient(135deg, #10b981, #059669)'));
+                    btn.style.background = colorClass;
+
+                    const emoji = isUltra ? '💎' : (isBusiness ? '🏪' : (user.isPro ? '👑' : ''));
+                    const msg = emoji + ' Bienvenido de nuevo, usuario ' + planLabel + '.';
+
+                    showToast(msg, 'success');
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        btn.style.background = '';
+                        window.location.href = destination;
+                    }, 2000);
+                }, 1500);
+            });
+
+            // ================================================================
+            // PAGO CON BOTONES SOCIALES
+            // ================================================================
+            document.querySelectorAll('.payment-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    if (this.closest('#formLogin')) {
+                        e.preventDefault();
+                        const method = this.dataset.method;
+                        const fakeUser = {
+                            name: 'Usuario',
+                            lastName: 'Social',
+                            email: 'usuario_' + method + '@example.com'
+                        };
+
+                        showToast('🔐 Procesando pago con ' + method.toUpperCase() + '...', 'info');
+
+                        setTimeout(() => {
+                            if (!getUserByEmail(fakeUser.email)) {
+                                const users = getUsers();
+                                users.push({
+                                    id: 'uid_' + Date.now(),
+                                    name: fakeUser.name,
+                                    lastName: fakeUser.lastName,
+                                    email: fakeUser.email,
+                                    password: 'social_' + Date.now(),
+                                    createdAt: new Date().toISOString(),
+                                    points: 100,
+                                    storageUsed: 0,
+                                    provider: method,
+                                    plan: 'pro',
+                                    isPro: true,
+                                    isUltra: false,
+                                    isBusiness: false,
+                                    paymentMethod: method,
+                                    subscriptionAmount: 10,
+                                    subscriptionCurrency: 'PEN',
+                                    proExpiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                                    toolsUnlocked: ['ID', 'FIX', 'NEST', 'PAY', 'POINTS', 'GO', 'APP', 'IA',
+                                        'BUSINESS'
+                                    ]
+                                });
+                                saveUsers(users);
+                            }
+
+                            localStorage.setItem('avi_session', JSON.stringify({
+                                email: fakeUser.email,
+                                name: fakeUser.name + ' ' + fakeUser.lastName,
+                                loginTime: new Date().toISOString(),
+                                isPro: true,
+                                isUltra: false,
+                                isBusiness: false,
+                                plan: 'pro',
+                                points: 100,
+                                paymentMethod: method
+                            }));
+
+                            showToast('✅ Pago exitoso con ' + method.toUpperCase() + '. ¡Bienvenido a PRO!',
+                                'success');
+
+                            setTimeout(() => {
+                                window.location.href = 'index pro.html';
+                            }, 1500);
+                        }, 1500);
+                    }
+                });
+            });
+
+            // ================================================================
+            // FORGOT PASSWORD
+            // ================================================================
+            document.getElementById('forgotPassword').addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                if (!email) {
+                    showToast('📧 Ingresa tu correo para recuperar tu contraseña.', 'info');
+                    return;
+                }
+                if (!getUserByEmail(email)) {
+                    showToast('❌ No encontramos una cuenta con este correo.', 'error');
+                    return;
+                }
+                showToast('📧 Se ha enviado un enlace de recuperación a ' + email, 'success');
+            });
+
+            // ================================================================
+            // VERIFICAR SESIÓN
+            // ================================================================
+            function checkSession() {
+                const session = localStorage.getItem('avi_session');
+                if (session) {
+                    try {
+                        const data = JSON.parse(session);
+                        const isUltra = data.isUltra || false;
+                        const isBusiness = data.isBusiness || false;
+                        const isPro = data.isPro || false;
+
+                        let destination = 'index.html';
+                        if (isUltra) {
+                            destination = 'index ultra.html';
+                        } else if (isBusiness) {
+                            destination = 'index business.html';
+                        } else if (isPro) {
+                            destination = 'index pro.html';
+                        }
+
+                        const badge = isUltra ? ' 💎 ULTRA' : (isBusiness ? ' 🏪 BUSINESS' : (isPro ? ' 👑 PRO' : ''));
+
+                        if (window.location.pathname.includes('AVI ID.html') || window.location.pathname.includes(
+                                'avi id.html')) {
+                            showToast('👋 Ya tienes una sesión activa como ' + data.name + badge, 'success');
+                            setTimeout(() => {
+                                window.location.href = destination;
+                            }, 2000);
+                        }
+                    } catch (e) {}
+                }
+            }
+
+            setTimeout(checkSession, 500);
+
+            // ================================================================
+            // DETECTAR @connection.net
+            // ================================================================
+            document.getElementById('regEmail').addEventListener('input', function() {
+                const email = this.value.trim();
+                if (email.toLowerCase().endsWith('@connection.net')) {
+                    selectPlan('ultra');
+                    document.getElementById('planUltra').classList.add('selected');
+                    document.getElementById('planPro').classList.remove('selected');
+                    document.getElementById('planBusiness').classList.remove('selected');
+                    document.getElementById('planBusiness').classList.remove('business-selected');
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

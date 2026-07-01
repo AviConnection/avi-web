@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>AVI FIX · Comentarios & Reclamos</title>
+    <!-- Google Font: Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET Y BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        /* ===== VARIABLES CSS ===== */
+        :root {
+            --bg-primary: #0a080e;
+            --bg-secondary: #0f0b16;
+            --bg-card: rgba(18, 12, 28, 0.88);
+            --bg-tool: rgba(24, 16, 36, 0.5);
+            --bg-about: rgba(18, 12, 28, 0.7);
+            --bg-sidebar: rgba(10, 8, 14, 0.96);
+            --bg-sidebar-hover: rgba(0, 200, 255, 0.06);
+            --border-color: #1a2a4a;
+            --border-light: #0e1a32;
+            --border-sidebar: #2a4a7a;
+            --text-primary: #d0d8e8;
+            --text-secondary: #b0b8c8;
+            --text-muted: #7080a0;
+            --text-title: #d0d8e8;
+            --text-gold: #80c0e0;
+            --accent-1: #00d4ff;
+            --accent-2: #7c3aed;
+            --accent-3: #10b981;
+            --accent-4: #f59e0b;
+            --accent-light: #60a5fa;
+            --accent-glow: rgba(0, 200, 255, 0.08);
+            --shadow-card: 0 12px 30px rgba(0,0,0,0.6);
+            --shadow-sidebar: 4px 0 40px rgba(0, 180, 255, 0.04);
+            --gradient-hero: linear-gradient(135deg, rgba(10, 8, 14, 0.7) 0%, rgba(15, 15, 26, 0.6) 100%);
+            --gradient-border: linear-gradient(90deg, #00d4ff, #7c3aed, #10b981, #f59e0b);
+            --bg-radial: radial-gradient(ellipse at 20% 30%, rgba(0, 180, 255, 0.04) 0%, transparent 60%),
+                          radial-gradient(ellipse at 80% 70%, rgba(124, 58, 237, 0.04) 0%, transparent 50%),
+                          linear-gradient(180deg, #0a080e 0%, #0f0b16 100%);
+            --video-opacity: 0.4;
+            --video-filter: saturate(1.1) contrast(1.05) brightness(0.7);
+            --scrollbar-thumb: linear-gradient(180deg, #00d4ff, #7c3aed);
+            --footer-bg: #0a080e;
+            --footer-text: #7080a0;
+            --badge-bg: rgba(0, 180, 255, 0.06);
+            --paper-bg: rgba(20, 20, 40, 0.85);
+            --paper-border: rgba(0, 200, 255, 0.06);
+        }
+
+        body.light-mode {
+            --bg-primary: #eef0f5;
+            --bg-secondary: #e4e6ed;
+            --bg-card: rgba(255, 255, 255, 0.92);
+            --bg-tool: rgba(240, 242, 248, 0.75);
+            --bg-about: rgba(242, 244, 250, 0.85);
+            --bg-sidebar: rgba(240, 242, 248, 0.96);
+            --bg-sidebar-hover: rgba(0, 180, 255, 0.04);
+            --border-color: #c0c8d8;
+            --border-light: #d0d8e8;
+            --border-sidebar: #a0b0c8;
+            --text-primary: #1a2030;
+            --text-secondary: #2a3448;
+            --text-muted: #6a7a90;
+            --text-title: #1a2030;
+            --text-gold: #3a6a8a;
+            --accent-1: #0891b2;
+            --accent-2: #6d28d9;
+            --accent-3: #059669;
+            --accent-4: #d97706;
+            --accent-light: #3b82f6;
+            --accent-glow: rgba(0, 180, 255, 0.04);
+            --shadow-card: 0 12px 30px rgba(0,0,0,0.04);
+            --shadow-sidebar: 4px 0 40px rgba(0,0,0,0.03);
+            --gradient-hero: linear-gradient(135deg, rgba(238, 240, 245, 0.75) 0%, rgba(228, 230, 237, 0.6) 100%);
+            --gradient-border: linear-gradient(90deg, #0891b2, #6d28d9, #059669, #d97706);
+            --bg-radial: radial-gradient(ellipse at 20% 30%, rgba(0, 180, 255, 0.02) 0%, transparent 60%),
+                          radial-gradient(ellipse at 80% 70%, rgba(124, 58, 237, 0.02) 0%, transparent 50%),
+                          linear-gradient(180deg, #eef0f5 0%, #e4e6ed 100%);
+            --video-opacity: 0.15;
+            --video-filter: saturate(0.9) contrast(1.1) brightness(1.0);
+            --scrollbar-thumb: linear-gradient(180deg, #0891b2, #6d28d9);
+            --footer-bg: #e4e6ed;
+            --footer-text: #6a7a90;
+            --badge-bg: rgba(0, 180, 255, 0.03);
+            --paper-bg: rgba(255, 255, 255, 0.9);
+            --paper-border: rgba(0, 180, 255, 0.04);
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: var(--bg-primary);
+            background-image: var(--bg-radial);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+            padding-bottom: 80px;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }
+
+        /* ===== ANIMACIONES ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 40px rgba(0, 180, 255, 0.06); }
+            100% { box-shadow: 0 0 80px rgba(0, 200, 255, 0.15); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+            50% { transform: translateX(-50%) translateY(6px); opacity: 1; }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== BOTÓN MODO CLARO/OSCURO ===== */
+        .theme-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 300;
+            background: var(--bg-card);
+            border: 1px solid var(--border-sidebar);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--accent-1);
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 30px var(--accent-glow);
+        }
+
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        #preloader.hide {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+        #preloader .loader-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(145deg, #0e0a1a, #1a1030);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 60px var(--accent-glow);
+            animation: pulseGlow 1.6s infinite alternate;
+        }
+        #preloader .loader-logo svg { width: 70px; height: 70px; }
+        .loader-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #7080a0;
+            font-weight: 600;
+        }
+        .loader-bar {
+            margin-top: 16px;
+            width: 160px;
+            height: 3px;
+            background: #1a1822;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .loader-bar .fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed, #10b981, #f59e0b);
+            border-radius: 10px;
+            animation: loadFill 2s ease forwards;
+        }
+        @keyframes loadFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        #main-content.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 72px;
+            height: 100vh;
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(16px);
+            border-right: 2px solid var(--border-sidebar);
+            box-shadow: var(--shadow-sidebar);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.8rem 0;
+            transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        background 0.5s ease,
+                        border-color 0.5s ease,
+                        box-shadow 0.5s ease;
+            overflow: hidden;
+        }
+        .sidebar:hover { width: 220px; }
+        .sidebar .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            padding: 0.5rem 0.8rem;
+            width: 100%;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border-sidebar);
+            margin-bottom: 0.5rem;
+            transition: color 0.5s ease, border-color 0.5s ease;
+        }
+        .sidebar .sidebar-logo i {
+            font-size: 1.8rem;
+            color: var(--accent-1);
+            filter: drop-shadow(0 0 12px #00d4ff);
+            min-width: 36px;
+            text-align: center;
+            animation: float 4s ease-in-out infinite;
+        }
+        .sidebar .sidebar-logo span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .sidebar:hover .sidebar-logo span { opacity: 1; }
+        .sidebar .sidebar-divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-sidebar), transparent);
+            margin: 0.2rem 0;
+            transition: background 0.5s ease;
+        }
+        .sidebar a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+            white-space: nowrap;
+            width: 100%;
+            border-left: 3px solid transparent;
+        }
+        .sidebar a i {
+            font-size: 1.1rem;
+            color: var(--accent-2);
+            min-width: 36px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .sidebar a span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            font-size: 0.55rem;
+        }
+        .sidebar:hover a span { opacity: 1; }
+        .sidebar a:hover {
+            background: var(--bg-sidebar-hover);
+            color: var(--text-gold);
+            border-left-color: var(--accent-1);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateX(4px);
+        }
+        .sidebar a:hover i { color: var(--accent-1); transform: scale(1.1); }
+        .sidebar .sidebar-section-label {
+            font-size: 0.45rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding: 0.4rem 0.8rem;
+            width: 100%;
+            white-space: nowrap;
+            border-top: 1px solid var(--border-sidebar);
+            margin-top: 0.2rem;
+            padding-top: 0.6rem;
+            transition: color 0.5s ease, border-color 0.5s ease;
+        }
+        .sidebar .sidebar-section-label span {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .sidebar:hover .sidebar-section-label span { opacity: 1; }
+
+        /* ===== MAIN WRAPPER ===== */
+        .main-wrapper {
+            margin-left: 72px;
+            transition: margin-left 0.35s ease;
+        }
+
+        /* ===== HERO FIX CON VIDEO ===== */
+        .hero-fix {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 4px solid var(--border-sidebar);
+            background: var(--bg-secondary);
+            transition: border-color 0.5s ease, background 0.5s ease;
+        }
+        .hero-fix .bg-video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+            z-index: 1;
+            filter: var(--video-filter);
+            transition: opacity 0.5s ease, filter 0.5s ease;
+        }
+        .hero-fix .bg-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--gradient-hero);
+            z-index: 2;
+            transition: background 0.5s ease;
+        }
+        .hero-fix .bg-particles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-fix .bg-particles span {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: particleFloat 14s infinite linear;
+        }
+        .hero-fix .bg-particles span:nth-child(1) { background: #00d4ff; left: 10%; animation-delay: 0s; }
+        .hero-fix .bg-particles span:nth-child(2) { background: #7c3aed; left: 25%; animation-delay: 2s; width: 7px; height: 7px; }
+        .hero-fix .bg-particles span:nth-child(3) { background: #10b981; left: 40%; animation-delay: 4s; }
+        .hero-fix .bg-particles span:nth-child(4) { background: #f59e0b; left: 55%; animation-delay: 1s; width: 3px; height: 3px; }
+        .hero-fix .bg-particles span:nth-child(5) { background: #00d4ff; left: 70%; animation-delay: 3s; }
+        .hero-fix .bg-particles span:nth-child(6) { background: #7c3aed; left: 85%; animation-delay: 5s; width: 6px; height: 6px; }
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+        .hero-fix .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease forwards;
+        }
+        .hero-fix .hero-content .badge {
+            display: inline-block;
+            background: var(--badge-bg);
+            border: 1px solid var(--border-sidebar);
+            border-radius: 40px;
+            padding: 0.3rem 2rem;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--text-gold);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+            animation: fadeInUp 1.4s ease forwards;
+            opacity: 0;
+        }
+        .hero-fix .hero-content .badge i { margin-right: 8px; color: var(--accent-1); }
+        .hero-fix .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            text-shadow: 0 0 40px rgba(0, 180, 255, 0.1);
+            letter-spacing: 6px;
+            line-height: 1.1;
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+            animation: fadeInUp 1.6s ease forwards;
+            opacity: 0;
+        }
+        .hero-fix .hero-content h1 span {
+            background: linear-gradient(135deg, #00d4ff, #7c3aed, #10b981, #f59e0b, #00d4ff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 10s ease infinite;
+        }
+        .hero-fix .hero-content .slogan {
+            font-size: 1.1rem;
+            letter-spacing: 5px;
+            color: var(--text-primary);
+            border-top: 2px solid var(--border-sidebar);
+            padding-top: 16px;
+            margin-top: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            transition: color 0.5s ease, border-color 0.5s ease;
+            animation: fadeInUp 1.8s ease forwards;
+            opacity: 0;
+        }
+        .hero-fix .hero-content .sub-slogan {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-weight: 300;
+            line-height: 1.6;
+            animation: fadeInUp 2s ease forwards;
+            opacity: 0;
+        }
+        .hero-fix .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: var(--text-muted);
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            animation: bounceDown 2s infinite;
+            transition: color 0.5s ease;
+        }
+        .hero-fix .scroll-indicator i {
+            font-size: 1rem;
+            color: var(--accent-1);
+        }
+
+        /* ===== SECCIONES ===== */
+        .section-title {
+            text-align: center;
+            padding: 2.5rem 1rem 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-title);
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px var(--accent-glow);
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+        }
+        .section-title i { color: var(--accent-1); margin-right: 10px; transition: color 0.5s ease; }
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-top: 2px;
+            font-weight: 300;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .fix-container {
+            max-width: 1000px;
+            margin: 2rem auto 3rem;
+            padding: 0 1.5rem;
+        }
+
+        /* ===== ESTADÍSTICAS ===== */
+        .stats-fix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-fix-item {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+        }
+        .stat-fix-item:hover {
+            border-color: var(--accent-1);
+            transform: translateY(-3px);
+        }
+        .stat-fix-item .number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-1);
+            transition: color 0.5s ease;
+        }
+        .stat-fix-item .label {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 2px;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== FORMULARIO ===== */
+        .fix-form {
+            background: var(--paper-bg);
+            border: 1px solid var(--paper-border);
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(8px);
+            transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        .fix-form::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--gradient-border);
+            background-size: 300% 100%;
+            opacity: 0.6;
+            animation: shimmer 4s ease infinite;
+        }
+        .fix-form .form-title {
+            font-size: 1rem;
+            color: var(--text-title);
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            transition: color 0.5s ease;
+        }
+        .fix-form .form-title i {
+            color: var(--accent-1);
+            margin-right: 8px;
+        }
+
+        .form-group-fix {
+            margin-bottom: 1rem;
+        }
+        .form-group-fix label {
+            display: block;
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            transition: color 0.5s ease;
+        }
+        .form-group-fix label i {
+            margin-right: 4px;
+            color: var(--accent-1);
+        }
+        .form-group-fix input,
+        .form-group-fix select,
+        .form-group-fix textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: var(--bg-tool);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .form-group-fix input:focus,
+        .form-group-fix select:focus,
+        .form-group-fix textarea:focus {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+        .form-group-fix input::placeholder,
+        .form-group-fix textarea::placeholder {
+            color: var(--text-muted);
+            opacity: 0.4;
+        }
+        .form-group-fix textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Cinzel', serif;
+        }
+        .form-group-fix select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .form-row-fix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-fix-submit {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 40px var(--accent-glow);
+            margin-top: 0.5rem;
+        }
+        .btn-fix-submit:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 0 60px var(--accent-glow);
+        }
+
+        /* ===== LISTA DE COMENTARIOS ===== */
+        .comments-section {
+            margin-top: 1.5rem;
+        }
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .comments-header h3 {
+            font-size: 1rem;
+            color: var(--text-title);
+            letter-spacing: 2px;
+            transition: color 0.5s ease;
+        }
+        .comments-header h3 i {
+            color: var(--accent-1);
+            margin-right: 8px;
+        }
+        .comments-header .filter-btns {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .comments-header .filter-btns button {
+            padding: 0.3rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 40px;
+            background: var(--bg-tool);
+            color: var(--text-muted);
+            font-family: 'Cinzel', serif;
+            font-size: 0.5rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .comments-header .filter-btns button:hover,
+        .comments-header .filter-btns button.active {
+            border-color: var(--accent-1);
+            color: var(--text-gold);
+            background: var(--accent-glow);
+        }
+
+        /* ===== TARJETA DE COMENTARIO ===== */
+        .comment-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            animation: slideIn 0.3s ease;
+        }
+        .comment-card:hover {
+            border-color: var(--accent-1);
+            transform: translateX(4px);
+        }
+        .comment-card .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .comment-card .comment-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comment-card .comment-user .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gradient-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.7rem;
+        }
+        .comment-card .comment-user .name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-title);
+            transition: color 0.5s ease;
+        }
+        .comment-card .comment-user .date {
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            transition: color 0.5s ease;
+        }
+        .comment-card .comment-tag {
+            padding: 0.15rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.45rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .comment-card .comment-tag.sugerencia { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .comment-card .comment-tag.reclamo { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .comment-card .comment-tag.consulta { background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .comment-card .comment-text {
+            font-size: 0.75rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin: 8px 0 6px;
+            transition: color 0.5s ease;
+        }
+        .comment-card .comment-footer {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            transition: color 0.5s ease;
+        }
+        .comment-card .comment-footer i {
+            margin-right: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .comment-card .comment-footer i:hover {
+            color: var(--accent-1);
+        }
+        .comment-card .comment-pilar {
+            font-size: 0.5rem;
+            color: var(--accent-1);
+            letter-spacing: 1px;
+        }
+
+        /* ===== SECCIÓN POLÍTICAS ===== */
+        .policies-section {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            padding: 3rem 2rem;
+            backdrop-filter: blur(4px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+        .policies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .policy-item {
+            background: var(--bg-about);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+            backdrop-filter: blur(4px);
+        }
+        .policy-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+        .policy-item i {
+            font-size: 2.5rem;
+            color: var(--accent-1);
+            margin-bottom: 12px;
+            transition: all 0.4s ease;
+        }
+        .policy-item:hover i { transform: scale(1.1) rotate(-5deg); }
+        .policy-item h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--text-title);
+            font-weight: 700;
+            transition: color 0.5s ease;
+        }
+        .policy-item p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+            transition: color 0.5s ease;
+        }
+        .policy-item .policy-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 0.25rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            color: var(--accent-1);
+            border: 1px solid var(--border-color);
+            background: var(--bg-tool);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .policy-item .policy-link:hover {
+            border-color: var(--accent-1);
+            background: var(--accent-glow);
+        }
+
+        /* ===== SECCIÓN IDENTIDAD ===== */
+        .identity-section {
+            padding: 3rem 2rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .identity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .identity-item {
+            background: var(--bg-about);
+            border-radius: 14px;
+            padding: 1.2rem 1rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: 0.3s, background 0.5s ease, border-color 0.5s ease;
+        }
+        .identity-item:hover {
+            border-color: var(--accent-1);
+        }
+        .identity-item i {
+            font-size: 1.8rem;
+            color: var(--accent-1);
+            margin-bottom: 6px;
+        }
+        .identity-item .label {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.5s ease;
+        }
+        .identity-item .value {
+            font-size: 0.75rem;
+            color: var(--text-title);
+            font-weight: 600;
+            margin-top: 4px;
+            transition: color 0.5s ease;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 0.8rem 2rem;
+            border-radius: 16px;
+            background: var(--paper-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--paper-border);
+            color: var(--text-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 40px var(--glass-shadow);
+            max-width: 90%;
+            text-align: center;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success { border-color: var(--accent-3); }
+        .toast.error { border-color: #ef4444; }
+
+        /* ===== FOOTER ===== */
+        .footer-minimal {
+            border-top: 2px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+        }
+        .footer-minimal .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-minimal .footer-inner .brand-foot {
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .footer-minimal .footer-inner a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.55rem;
+            letter-spacing: 1.5px;
+        }
+        .footer-minimal .footer-inner a:hover { color: var(--accent-1); transform: scale(1.05); }
+        .footer-minimal .footer-inner .sep {
+            color: var(--border-color);
+            font-size: 0.4rem;
+            transition: color 0.5s ease;
+        }
+        .footer-minimal .copyright {
+            margin-top: 0.6rem;
+            opacity: 0.5;
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .sidebar { width: 56px; }
+            .sidebar:hover { width: 56px; }
+            .sidebar a span,
+            .sidebar .sidebar-logo span,
+            .sidebar .sidebar-section-label span { display: none !important; }
+            .sidebar .sidebar-logo i { font-size: 1.4rem; min-width: 28px; }
+            .sidebar a i { font-size: 1rem; min-width: 28px; }
+            .sidebar a { padding: 0.35rem 0.4rem; justify-content: center; }
+            .sidebar .sidebar-logo { justify-content: center; padding: 0.3rem 0; }
+            .sidebar .sidebar-divider { width: 60%; }
+            .sidebar .sidebar-section-label { display: none; }
+            .main-wrapper { margin-left: 56px; }
+            .hero-fix .hero-content h1 { font-size: 2.5rem; letter-spacing: 4px; }
+            .fix-container { padding: 0 1rem; }
+            .fix-form { padding: 1.5rem; }
+            .form-row-fix { grid-template-columns: 1fr; }
+            .stats-fix { grid-template-columns: 1fr 1fr; }
+            .policies-grid { grid-template-columns: 1fr 1fr; }
+            .identity-grid { grid-template-columns: 1fr 1fr; }
+            .theme-toggle { width: 44px; height: 44px; font-size: 1.2rem; bottom: 16px; right: 16px; }
+        }
+        @media (max-width: 480px) {
+            .sidebar { width: 48px; }
+            .main-wrapper { margin-left: 48px; }
+            .sidebar .sidebar-logo i { font-size: 1.2rem; min-width: 24px; }
+            .sidebar a i { font-size: 0.85rem; min-width: 24px; }
+            .sidebar a { padding: 0.25rem 0.2rem; }
+            .hero-fix .hero-content h1 { font-size: 2rem; letter-spacing: 4px; }
+            .section-title { font-size: 1.3rem; }
+            .fix-form { padding: 1.2rem; }
+            .fix-form .form-title { font-size: 0.85rem; }
+            .stats-fix { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .stat-fix-item { padding: 0.8rem; }
+            .stat-fix-item .number { font-size: 1.5rem; }
+            .comments-header { flex-direction: column; align-items: flex-start; }
+            .comment-card { padding: 1rem; }
+            .policies-grid { grid-template-columns: 1fr; }
+            .identity-grid { grid-template-columns: 1fr; }
+            .footer-minimal .footer-inner { flex-direction: column; gap: 0.3rem; }
+            .footer-minimal .footer-inner .sep { display: none; }
+            .theme-toggle { width: 40px; height: 40px; font-size: 1rem; bottom: 12px; right: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader-logo">
+            <svg viewBox="0 0 200 200" fill="none">
+                <rect width="200" height="200" rx="40" fill="#0a0812"/>
+                <path d="M100 30 L130 80 L185 90 L145 135 L155 190 L100 165 L45 190 L55 135 L15 90 L70 80 L100 30" fill="#00d4ff" opacity="0.9"/>
+                <text x="100" y="132" font-family="Cinzel" font-size="28" fill="#f0d6c0" text-anchor="middle" font-weight="700">🔧</text>
+            </svg>
+        </div>
+        <div class="loader-text">Escuchando tus comentarios</div>
+        <div class="loader-bar"><div class="fill"></div></div>
+    </div>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <div id="main-content">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="sidebar" id="sidebarNav">
+            <div class="sidebar-logo">
+                <i class="fas fa-tools"></i>
+                <span>FIX</span>
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section-label"><span>Herramientas</span></div>
+            <a href="avi id.html"><i class="fas fa-id-card"></i><span>ID</span></a>
+            <a href="avi fix.html" style="border-left-color: var(--accent-1); background: var(--bg-sidebar-hover);"><i class="fas fa-tools"></i><span>FIX</span></a>
+            <a href="avi nest.html><i class="fas fa-cloud-upload-alt"></i><span>NEST</span></a>
+            <a href="avi pay.html"><i class="fas fa-credit-card"></i><span>PAY</span></a>
+            <a href="avi points.html"><i class="fas fa-star"></i><span>POINTS</span></a>
+            <a href="avi go.html"><i class="fas fa-truck"></i><span>GO</span></a>
+            <a href="avi app.html"><i class="fas fa-mobile-alt"></i><span>APP</span></a>
+            <a href="avi ia.html"><i class="fas fa-comment-dots"></i><span>IA</span></a>
+            <a href="avi bussiness.html"><i class="fas fa-briefcase"></i><span>BUSINESS</span></a>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section-label"><span>Pilares</span></div>
+            <a href="index.html"><i class="fas fa-home"></i><span>Web</span></a>
+            <a href="Labs web.html"><i class="fas fa-flask"></i><span>Labs</span></a>
+            <a href="Pixel web.html"><i class="fas fa-paint-brush"></i><span>Pixel</span></a>
+            <a href="Life web.html"><i class="fas fa-heartbeat"></i><span>Life</span></a>
+            <a href="Commerce web.html"><i class="fas fa-cart-plus"></i><span>Commerce</span></a>
+            <a href="Home web.html"><i class="fas fa-home-lg"></i><span>Home</span></a>
+            <a href="Motors web.html"><i class="fas fa-car"></i><span>Motors</span></a>
+            <a href="Space web.html"><i class="fas fa-rocket"></i><span>Space</span></a>
+        </nav>
+
+        <!-- ===== WRAPPER PRINCIPAL ===== -->
+        <div class="main-wrapper">
+
+            <!-- ===== HERO FIX CON VIDEO ===== -->
+            <header class="hero-fix">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="imagenes y videos/header fix.mp4" type="video/mp4">
+                </video>
+                <div class="bg-overlay"></div>
+                <div class="bg-particles">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span>
+                </div>
+                <div class="hero-content">
+                    <div class="badge"><i class="fas fa-tools"></i> AVI FIX</div>
+                    <h1>Tu voz <span>importa</span></h1>
+                    <div class="slogan">Comentarios · Sugerencias · Reclamos</div>
+                    <div class="sub-slogan">Atención post-venta automatizada · Resolución en tiempo récord · Tu opinión construye el ecosistema</div>
+                </div>
+                <div class="scroll-indicator">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>SCROLL</span>
+                </div>
+            </header>
+
+            <!-- ===== CONTENIDO ===== -->
+            <div class="fix-container">
+
+                <!-- ===== ESTADÍSTICAS ===== -->
+                <div class="stats-fix animate-on-scroll">
+                    <div class="stat-fix-item">
+                        <div class="number" id="totalComments">0</div>
+                        <div class="label">Comentarios Totales</div>
+                    </div>
+                    <div class="stat-fix-item">
+                        <div class="number" id="totalResolved">0</div>
+                        <div class="label">Resueltos</div>
+                    </div>
+                    <div class="stat-fix-item">
+                        <div class="number" id="avgResponse">0</div>
+                        <div class="label">Tiempo Promedio</div>
+                    </div>
+                    <div class="stat-fix-item">
+                        <div class="number">⭐ 4.8</div>
+                        <div class="label">Satisfacción</div>
+                    </div>
+                </div>
+
+                <!-- ===== FORMULARIO ===== -->
+                <div class="fix-form animate-on-scroll">
+                    <div class="form-title"><i class="fas fa-pen"></i> Deja tu comentario o reclamo</div>
+                    <form id="fixForm">
+                        <div class="form-row-fix">
+                            <div class="form-group-fix">
+                                <label><i class="fas fa-user"></i> Nombre</label>
+                                <input type="text" id="fixName" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group-fix">
+                                <label><i class="fas fa-envelope"></i> Correo</label>
+                                <input type="email" id="fixEmail" placeholder="correo@ejemplo.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row-fix">
+                            <div class="form-group-fix">
+                                <label><i class="fas fa-tag"></i> Tipo</label>
+                                <select id="fixType">
+                                    <option value="sugerencia">💡 Sugerencia</option>
+                                    <option value="reclamo">⚠️ Reclamo</option>
+                                    <option value="consulta">❓ Consulta</option>
+                                </select>
+                            </div>
+                            <div class="form-group-fix">
+                                <label><i class="fas fa-layer-group"></i> Pilar relacionado</label>
+                                <select id="fixPilar">
+                                    <option value="general">General</option>
+                                    <option value="pixel">Connection Pixel</option>
+                                    <option value="labs">Connection Labs</option>
+                                    <option value="commerce">Connection Commerce</option>
+                                    <option value="life">Connection Life</option>
+                                    <option value="home">Connection Home</option>
+                                    <option value="motors">Connection Motors</option>
+                                    <option value="space">Connection Space</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group-fix">
+                            <label><i class="fas fa-comment"></i> Mensaje</label>
+                            <textarea id="fixMessage" placeholder="Cuéntanos tu experiencia, sugerencia o reclamo..." required></textarea>
+                        </div>
+                        <div class="form-group-fix" style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
+                            <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:0.5rem;">
+                                <input type="checkbox" id="fixPolicy" required> Acepto las <a href="#" style="color:var(--accent-1);">políticas de privacidad</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-fix-submit" id="fixSubmitBtn">
+                            <i class="fas fa-paper-plane"></i> Enviar comentario
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ===== LISTA DE COMENTARIOS ===== -->
+                <div class="comments-section animate-on-scroll">
+                    <div class="comments-header">
+                        <h3><i class="fas fa-comments"></i> Comentarios recientes</h3>
+                        <div class="filter-btns">
+                            <button class="active" data-filter="all">Todos</button>
+                            <button data-filter="sugerencia">💡 Sugerencias</button>
+                            <button data-filter="reclamo">⚠️ Reclamos</button>
+                            <button data-filter="consulta">❓ Consultas</button>
+                        </div>
+                    </div>
+                    <div id="commentsList">
+                        <!-- Los comentarios se renderizan aquí -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== SECCIÓN POLÍTICAS ===== -->
+            <section class="policies-section">
+                <h2 class="section-title animate-on-scroll"><i class="fas fa-shield-alt"></i> Políticas Corporativas</h2>
+                <p class="section-subtitle animate-on-scroll">Transparencia, seguridad y compromiso con nuestros usuarios</p>
+                <div class="policies-grid" style="margin-top:1.5rem;">
+                    <div class="policy-item animate-on-scroll">
+                        <i class="fas fa-gavel"></i>
+                        <h4>Términos y Condiciones</h4>
+                        <p>Conoce las reglas que rigen el uso de nuestras plataformas, servicios y herramientas digitales.</p>
+                        <a href="#" class="policy-link"><i class="fas fa-file-alt"></i> Leer más</a>
+                    </div>
+                    <div class="policy-item animate-on-scroll">
+                        <i class="fas fa-lock"></i>
+                        <h4>Política de Privacidad</h4>
+                        <p>Te explicamos cómo protegemos tus datos personales y garantizamos tu privacidad en el ecosistema AVI.</p>
+                        <a href="#" class="policy-link"><i class="fas fa-file-alt"></i> Leer más</a>
+                    </div>
+                    <div class="policy-item animate-on-scroll">
+                        <i class="fas fa-database"></i>
+                        <h4>Seguridad de Datos</h4>
+                        <p>Nuestros protocolos de encriptación AES-256 y arquitectura Zero-Trust aseguran tu información.</p>
+                        <a href="#" class="policy-link"><i class="fas fa-file-alt"></i> Leer más</a>
+                    </div>
+                    <div class="policy-item animate-on-scroll">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Código de Ética</h4>
+                        <p>Los principios y valores que guían nuestras operaciones y relaciones con clientes y socios.</p>
+                        <a href="#" class="policy-link"><i class="fas fa-file-alt"></i> Leer más</a>
+                    </div>
+                    <div class="policy-item animate-on-scroll">
+                        <i class="fas fa-file-invoice"></i>
+                        <h4>Política de Reembolsos</h4>
+                        <p>Conoce nuestros plazos y condiciones para solicitar devoluciones y reembolsos de servicios.</p>
+                        <a href="#" class="policy-link"><i class="fas fa-file-alt"></i> Leer más</a>
+                    </div>
+                    <div class="policy-item animate-on-scroll">
+                        <i class="fas fa-users-cog"></i>
+                        <h4>Gobierno Corporativo</h4>
+                        <p>Estructura organizacional, responsabilidades y mecanismos de control de nuestra matriz.</p>
+                        <a href="#" class="policy-link"><i class="fas fa-file-alt"></i> Leer más</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓN IDENTIDAD ===== -->
+            <section class="identity-section">
+                <h2 class="section-title animate-on-scroll"><i class="fas fa-building"></i> Identidad Corporativa</h2>
+                <p class="section-subtitle animate-on-scroll">Conoce quiénes somos y cómo operamos</p>
+                <div class="identity-grid">
+                    <div class="identity-item animate-on-scroll">
+                        <i class="fas fa-building"></i>
+                        <div class="label">Razón Social</div>
+                        <div class="value">AVI CONNECTION S.A.C.</div>
+                    </div>
+                    <div class="identity-item animate-on-scroll">
+                        <i class="fas fa-file-signature"></i>
+                        <div class="label">Tipo de Sociedad</div>
+                        <div class="value">Sociedad Anónima Cerrada</div>
+                    </div>
+                    <div class="identity-item animate-on-scroll">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="label">Fundación</div>
+                        <div class="value">15 de enero de 2025</div>
+                    </div>
+                    <div class="identity-item animate-on-scroll">
+                        <i class="fas fa-map-pin"></i>
+                        <div class="label">Sede Central</div>
+                        <div class="value">Cusco, Perú</div>
+                    </div>
+                    <div class="identity-item animate-on-scroll">
+                        <i class="fas fa-registered"></i>
+                        <div class="label">Registro Público</div>
+                        <div class="value">Inscrita en Registros Públicos del Perú</div>
+                    </div>
+                    <div class="identity-item animate-on-scroll">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="label">Certificaciones</div>
+                        <div class="value">ISO 27001 · PCI DSS</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== FOOTER ===== -->
+            <footer class="footer-minimal">
+                <div class="footer-inner">
+                    <span class="brand-foot">AVI FIX</span>
+                    <span class="sep">|</span>
+                    <span style="color:var(--footer-text); font-size:0.55rem; transition:color 0.5s ease;">Comentarios &amp; Reclamos · Soporte Post-Venta</span>
+                    <span class="sep">|</span>
+                    <a href="#"><i class="fas fa-envelope"></i> soporte@aviconnection.pe</a>
+                    <span class="sep">|</span>
+                    <a href="#"><i class="fas fa-shield-alt"></i> Privacidad</a>
+                </div>
+                <div class="copyright">
+                    © 2026 AVI CONNECTION S.A.C. · Todos los derechos reservados · Tu opinión nos ayuda a mejorar
+                </div>
+            </footer>
+
+        </div><!-- /main-wrapper -->
+    </div><!-- /main-content -->
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== BOTÓN CAMBIO DE TEMA ===== -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            // ===== PRELOADER =====
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
+            let startTime = Date.now();
+
+            function reveal() {
+                const elapsed = Date.now() - startTime;
+                const remaining = Math.max(0, 2000 - elapsed);
+                setTimeout(() => {
+                    preloader.classList.add('hide');
+                    mainContent.classList.add('show');
+                    setTimeout(() => { preloader.style.display = 'none'; }, 800);
+                }, remaining);
+            }
+
+            if (document.readyState === 'complete') {
+                reveal();
+            } else {
+                window.addEventListener('load', reveal);
+            }
+
+            // ===== CAMBIO DE TEMA =====
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+
+            let currentTheme = localStorage.getItem('avi-theme-fix') || 'dark';
+            applyTheme(currentTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+                applyTheme(newTheme);
+                localStorage.setItem('avi-theme-fix', newTheme);
+            });
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    document.body.classList.remove('light-mode');
+                    themeIcon.className = 'fas fa-moon';
+                }
+            }
+
+            // ===== TOAST =====
+            const toast = document.getElementById('toast');
+            let toastTimeout;
+
+            function showToast(message, type = 'success') {
+                toast.textContent = message;
+                toast.className = 'toast ' + type + ' show';
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3500);
+            }
+
+            // ===== BASE DE DATOS (localStorage) =====
+            function getComments() {
+                try {
+                    return JSON.parse(localStorage.getItem('avi_fix_comments')) || [];
+                } catch {
+                    return [];
+                }
+            }
+
+            function saveComments(comments) {
+                localStorage.setItem('avi_fix_comments', JSON.stringify(comments));
+            }
+
+            // ===== COMENTARIOS DE EJEMPLO =====
+            function seedComments() {
+                const existing = getComments();
+                if (existing.length === 0) {
+                    const sample = [
+                        {
+                            id: 'c1',
+                            name: 'Carlos M.',
+                            email: 'carlos@ejemplo.com',
+                            type: 'sugerencia',
+                            pilar: 'commerce',
+                            message: 'Excelente plataforma de pagos. Me encanta el sistema de Split Payment, pero sería genial que añadieran más opciones de billeteras digitales locales.',
+                            date: new Date(Date.now() - 3600000 * 2).toISOString(),
+                            resolved: false,
+                            likes: 5
+                        },
+                        {
+                            id: 'c2',
+                            name: 'Laura P.',
+                            email: 'laura@ejemplo.com',
+                            type: 'reclamo',
+                            pilar: 'pixel',
+                            message: 'El tiempo de entrega de mi pedido de impresión fue más largo de lo esperado. El sistema de seguimiento no actualizaba el estado correctamente.',
+                            date: new Date(Date.now() - 3600000 * 5).toISOString(),
+                            resolved: true,
+                            likes: 2
+                        },
+                        {
+                            id: 'c3',
+                            name: 'Javier R.',
+                            email: 'javier@ejemplo.com',
+                            type: 'consulta',
+                            pilar: 'labs',
+                            message: '¿Cómo puedo integrar la API de AVI IA con mi sistema CRM? Me interesa automatizar la atención al cliente con inteligencia artificial.',
+                            date: new Date(Date.now() - 3600000 * 12).toISOString(),
+                            resolved: false,
+                            likes: 8
+                        }
+                    ];
+                    saveComments(sample);
+                }
+            }
+            seedComments();
+
+            // ===== RENDERIZAR COMENTARIOS =====
+            function renderComments(filter = 'all') {
+                const comments = getComments();
+                const list = document.getElementById('commentsList');
+
+                let filtered = comments;
+                if (filter !== 'all') {
+                    filtered = comments.filter(c => c.type === filter);
+                }
+
+                filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                if (filtered.length === 0) {
+                    list.innerHTML = `
+                        <div style="text-align:center; padding:2rem; color:var(--text-muted);">
+                            <i class="fas fa-comment-slash" style="font-size:2rem; opacity:0.3; margin-bottom:10px; display:block;"></i>
+                            <span style="font-size:0.8rem;">No hay comentarios con este filtro</span>
+                        </div>
+                    `;
+                    return;
+                }
+
+                list.innerHTML = filtered.map(c => {
+                    const date = new Date(c.date);
+                    const formattedDate = date.toLocaleDateString('es-ES', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+
+                    const typeLabels = {
+                        sugerencia: '💡 Sugerencia',
+                        reclamo: '⚠️ Reclamo',
+                        consulta: '❓ Consulta'
+                    };
+
+                    const pilarLabels = {
+                        general: 'General',
+                        pixel: 'Connection Pixel',
+                        labs: 'Connection Labs',
+                        commerce: 'Connection Commerce',
+                        life: 'Connection Life',
+                        home: 'Connection Home',
+                        motors: 'Connection Motors',
+                        space: 'Connection Space'
+                    };
+
+                    const initials = c.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+
+                    return `
+                        <div class="comment-card">
+                            <div class="comment-header">
+                                <div class="comment-user">
+                                    <div class="avatar">${initials}</div>
+                                    <div>
+                                        <div class="name">${c.name}</div>
+                                        <div class="date">${formattedDate}</div>
+                                    </div>
+                                </div>
+                                <span class="comment-tag ${c.type}">${typeLabels[c.type] || c.type}</span>
+                            </div>
+                            <div class="comment-text">${c.message}</div>
+                            <div class="comment-footer">
+                                <span><i class="fas fa-layer-group"></i> ${pilarLabels[c.pilar] || 'General'}</span>
+                                <span><i class="fas fa-check-circle" style="color:${c.resolved ? 'var(--accent-3)' : 'var(--text-muted)'}"></i> ${c.resolved ? 'Resuelto' : 'Pendiente'}</span>
+                                <span><i class="fas fa-heart" onclick="likeComment('${c.id}')" style="cursor:pointer;"></i> <span id="likes-${c.id}">${c.likes || 0}</span></span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                updateStats();
+            }
+
+            // ===== FUNCIÓN DE LIKE =====
+            window.likeComment = function(id) {
+                const comments = getComments();
+                const index = comments.findIndex(c => c.id === id);
+                if (index !== -1) {
+                    comments[index].likes = (comments[index].likes || 0) + 1;
+                    saveComments(comments);
+                    renderComments(document.querySelector('.filter-btns .active')?.dataset.filter || 'all');
+                }
+            };
+
+            // ===== ACTUALIZAR ESTADÍSTICAS =====
+            function updateStats() {
+                const comments = getComments();
+                document.getElementById('totalComments').textContent = comments.length;
+                document.getElementById('totalResolved').textContent = comments.filter(c => c.resolved).length;
+                document.getElementById('avgResponse').textContent = comments.length > 0 ? '2.4h' : '0';
+            }
+
+            // ===== FILTROS =====
+            document.querySelectorAll('.filter-btns button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderComments(this.dataset.filter);
+                });
+            });
+
+            // ===== ENVÍO DEL FORMULARIO =====
+            document.getElementById('fixForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = document.getElementById('fixSubmitBtn');
+                const originalText = btn.innerHTML;
+
+                const name = document.getElementById('fixName').value.trim();
+                const email = document.getElementById('fixEmail').value.trim();
+                const type = document.getElementById('fixType').value;
+                const pilar = document.getElementById('fixPilar').value;
+                const message = document.getElementById('fixMessage').value.trim();
+                const policy = document.getElementById('fixPolicy').checked;
+
+                if (!name || !email || !message) {
+                    showToast('❌ Por favor completa todos los campos.', 'error');
+                    return;
+                }
+                if (!email.includes('@')) {
+                    showToast('❌ Ingresa un correo electrónico válido.', 'error');
+                    return;
+                }
+                if (!policy) {
+                    showToast('❌ Debes aceptar las políticas de privacidad.', 'error');
+                    return;
+                }
+
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    const newComment = {
+                        id: 'c' + Date.now(),
+                        name: name,
+                        email: email,
+                        type: type,
+                        pilar: pilar,
+                        message: message,
+                        date: new Date().toISOString(),
+                        resolved: false,
+                        likes: 0
+                    };
+
+                    const comments = getComments();
+                    comments.unshift(newComment);
+                    saveComments(comments);
+
+                    btn.innerHTML = '<i class="fas fa-check"></i> ¡Enviado!';
+                    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+
+                    showToast('✅ ¡Tu comentario ha sido enviado! Te responderemos pronto.', 'success');
+
+                    document.getElementById('fixForm').reset();
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        btn.style.background = '';
+                        renderComments(document.querySelector('.filter-btns .active')?.dataset.filter || 'all');
+                    }, 1500);
+                }, 1500);
+            });
+
+            // ===== ANIMACIONES AL SCROLL =====
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            animateElements.forEach(el => observer.observe(el));
+
+            // ===== RENDER INICIAL =====
+            renderComments('all');
+
+        })();
+    </script>
+</body>
+</html>
